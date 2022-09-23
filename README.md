@@ -7,10 +7,10 @@ Anggota :
  3. Ryan Samuel Chandra - 13521140
 
 Spesifikasi :
-1. Sistem Persamaaan Linier
-   a. Metode eliminasi Gauss
-   b. Metode eliminasi Gauss-Jordan
-   c. Metode matriks balikan
+1. Sistem Persamaaan Linier  
+   a. Metode eliminasi Gauss  
+   b. Metode eliminasi Gauss-Jordan  
+   c. Metode matriks balikan  
    d. Kaidah Cramer
 3. Determinan
 4. Matriks balikan
