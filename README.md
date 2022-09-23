@@ -19,12 +19,12 @@ Spesifikasi :
 6. Regresi linier berganda
 7. Keluar
 
-a. 1a dan 1b
-b. 1c, 2, 3 (pertama dikerjakan)
-c. 1d
-d. 4
-e. 5
-f. 6
+a. 1a dan 1b  
+b. 1c, 2, 3 (pertama dikerjakan)  
+c. 1d   
+d. 4  
+e. 5  
+f. 6  
 
  1. Nigel Sahl : e, b
  2. Ghazi Akmal Fauzan : d, (f)
