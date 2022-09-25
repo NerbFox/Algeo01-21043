@@ -2,6 +2,9 @@ package VoidMatrix;
 
 import java.util.Scanner;
 
+// import javax.sound.midi.Soundbank;
+// import javax.sound.sampled.SourceDataLine;
+
 public class Main {
     void display() {
         System.out.println("1. Sistem Persamaaan Linier");
@@ -13,10 +16,19 @@ public class Main {
         System.out.println("7. Keluar");
     }
 
+    void displayMenu1() {
+        System.out.println("a. Metode eliminasi Gauss");
+        System.out.println("b. Metode eliminasi Gauss-Jordan");
+        System.out.println("c. Metode matriks balikan");
+        System.out.println("d. Kaidah Cramer");
+
+    }
+
     // NANTI BUAT SATU KELAS BUAT isi, fungsi matriks is square dll.
     // SAMA baca txt atau apa tuh di spek
     public static void main(String[] args) {
         int menu = 1;
+        char menu1 = 'a';
         Main obj = new Main();
         Scanner sc = new Scanner(System.in);
         while (menu != 7) {
@@ -24,32 +36,50 @@ public class Main {
             obj.display();
             menu = sc.nextInt();
             while (menu > 7 || menu < 1) {
-                System.out.println("Invalid Input, try the correct number");
+                System.out.println("Invalid Input, please input the correct number");
                 menu = sc.nextInt();
             }
             switch (menu) {
-                case 1 -> 
-                { 
+                case 1 -> {
                     System.out.println("Menu 1");
+                    Matrix m = new Matrix(true); // determinan isSquare true
+                    double d = m.det(m.getMat());
+                    obj.displayMenu1();
+                    menu1 = sc.next().charAt(0);
+                    while (menu1 != 'a' || menu1 != 'b' || menu1 != 'c' || menu1 != 'd') {
+                        System.out.println("Invalid Input, please input the correct number");
+                        menu1 = sc.next().charAt(0);
+                    }
+                    switch (menu1) {
+                        case 'a' -> {
+                            System.out.println("Menu 1a");
+                        }
+                        case 'b' -> {
+                            System.out.println("Menu 1b");
+                        }
+                        case 'c' -> {
+                            System.out.println("Menu 1c");
+                        }
+                        case 'd' -> {
+                            System.out.println("Menu 1d");
+                        }
+                    }
+
                 }
-                case 2 ->
-                {
+                case 2 -> {
                     System.out.println("Menu 2");
                     Matrix m = new Matrix(true); // determinan
                     double d = m.det(m.getMat());
                     m.DisplayMatriksDet();
                     System.out.println(d);
                 }
-                case 3 -> 
-                {
+                case 3 -> {
                     System.out.println("Menu 3");
                 }
-                case 4 -> 
-                {
+                case 4 -> {
                     System.out.println("Menu 4");
                 }
-                case 5 -> 
-                {
+                case 5 -> {
                     System.out.println("Menu 5");
                 }
                 case 6 -> {
@@ -57,8 +87,6 @@ public class Main {
                 }
                 case 7 -> System.out.println("Terima Kasih");
             }
-
-            
 
             // menu=sc.nextInt();
         }
