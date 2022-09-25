@@ -36,7 +36,7 @@ public class Main {
                 {
                     System.out.println("Menu 2");
                     Matrix m = new Matrix(true); // determinan
-                    double d = m.det(m.getM());
+                    double d = m.det(m.getMat());
                     m.DisplayMatriksDet();
                     System.out.println(d);
                 }

@@ -29,7 +29,7 @@ public class Matrix {
             nCols=nC;
         }
         mat = new double[nR][nC];
-    
+        
         for (i = 0; i < nRows; i++) {
             for (j = 0; j < nCols; j++) {
                 mat[i][j] = sc.nextDouble();
@@ -38,29 +38,43 @@ public class Matrix {
     }
     // public Matrix(int nR, int nC){
         
-    //     // perlu inisialisasi 0 setiap elemen?
-    //     // this.mat=mat;
-    //     // this.nR=nR;
-    // }
+        //     // perlu inisialisasi 0 setiap elemen?
+        //     // this.mat=mat;
+        //     // this.nR=nR;
+        // }
+        
+        // getter
+        public double[][] getMat() {
+            return mat;
+        }
+    
+        public int getnRows() {
+            return nRows;
+        }
+    
+        public int getnCols() {
+            return nCols;
+        }
 
-
-    // Selector
-    public int getR(){
-        return nRows;
-    }
-    public int getC(){
-        return nCols;
-    }
-    public double[][] getM(){
-        return mat;
-    }
-    // private int getLengthSquare(){
-    //     return mat.;
+        // setter
+        public void setMat(double[][] mat) {
+            this.mat = mat;
+        }
+        
+        public void setnRows(int nRows) {
+            this.nRows = nRows;
+        }
+        
+        public void setnCols(int nCols) {
+            this.nCols = nCols;
+        }
+        // private int getLengthSquare(){
+            //     return mat.;
     // }
 
     // Method
     public boolean isSquare(){
-        return getC()==getR();
+        return nCols==nRows;  // belum diuji
     }
 
     public void DisplayMatriksDet() {
@@ -112,4 +126,5 @@ public class Matrix {
         }
         return d;
     }
+
 }
