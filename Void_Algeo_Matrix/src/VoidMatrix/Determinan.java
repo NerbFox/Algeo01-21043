@@ -1,5 +1,7 @@
 package VoidMatrix;
 
-public class Determinan {
-    
+import VoidAlgeo.matrix;
+
+public class Determinan extends matrix{
+
 }
