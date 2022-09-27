@@ -2,6 +2,8 @@ package VoidMatrix;
 
 import java.util.Scanner;
 
+import javax.sound.sampled.SourceDataLine;
+
 // import javax.sound.midi.Soundbank;
 // import javax.sound.sampled.SourceDataLine;
 
@@ -28,28 +30,32 @@ public class Main {
     // SAMA baca txt atau apa tuh di spek
     public static void main(String[] args) {
         int menu = 1;
-        char menu1 = 'a';
+        // char menu1 ;
         Main obj = new Main();
         Scanner sc = new Scanner(System.in);
         while (menu != 7) {
             System.out.println("");
             obj.display();
+            System.out.print("Input menu: ");
             menu = sc.nextInt();
             while (menu > 7 || menu < 1) {
                 System.out.println("Invalid Input, please input the correct number");
                 menu = sc.nextInt();
             }
+            System.out.println();
             switch (menu) {
                 case 1 -> {
                     System.out.println("Menu 1");
-                    Matrix m = new Matrix(true); // determinan isSquare true
-                    double d = m.det(m.getMat());
                     obj.displayMenu1();
+                    char menu1;
+                    System.out.print("Input: ");
                     menu1 = sc.next().charAt(0);
-                    while (menu1 != 'a' || menu1 != 'b' || menu1 != 'c' || menu1 != 'd') {
-                        System.out.println("Invalid Input, please input the correct number");
+                    while (menu1 != 'a' && menu1 != 'b' && menu1 != 'c' && menu1 != 'd') {
+                        System.out.println("Invalid Input, please input the correct option");
+                        System.out.print("Input: ");
                         menu1 = sc.next().charAt(0);
                     }
+                    System.out.println();
                     switch (menu1) {
                         case 'a' -> {
                             System.out.println("Menu 1a");
@@ -85,9 +91,13 @@ public class Main {
                 case 6 -> {
                     System.out.println("Menu 6");
                 }
-                case 7 -> System.out.println("Terima Kasih");
+                case 7 -> 
+                {
+                    System.out.println("Terima Kasih");
+                    System.out.println();
+            
+                }
             }
-
             // menu=sc.nextInt();
         }
 

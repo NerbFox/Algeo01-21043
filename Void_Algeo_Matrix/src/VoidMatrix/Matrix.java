@@ -91,7 +91,7 @@ public class Matrix {
                 }
             }
         }
-        System.out.println("selesai");
+        System.out.println("Selesai");
         // Determinan
     }
     
