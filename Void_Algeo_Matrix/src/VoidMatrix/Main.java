@@ -116,8 +116,10 @@ public class Main {
                 case 4 -> {
                     System.out.println("Menu 4");
                 }
-                case 5 -> {
+
+                case 5 -> { // Interpolasi Bicubic
                     System.out.println("Menu 5");
+                    BicubicInterpolation b = new BicubicInterpolation();
                 }
                 case 6 -> {
                     System.out.println("Menu 6");

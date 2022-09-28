@@ -202,6 +202,7 @@ public class Matrix {
             }
         }
         else {
+            System.out.println("Matriks tidak memilki balikan");
             // matriks tidak punya balikan
         }
 
