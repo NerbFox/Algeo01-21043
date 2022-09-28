@@ -77,14 +77,14 @@ public class Matrix {
         return nCols == nRows; // belum diuji
     }
 
-    public void DisplayMatriksDet() {
-        int i, j, n;
-        n = nRows;
+    public void DisplayMatriks() {
+        int i, j;
+        // n = nRows;
         /* M<enampilkan Matriks */
         System.out.println();
-        for (i = 0; i < n; i++) {
-            for (j = 0; j < n; j++) {
-                if (j == n - 1) {
+        for (i = 0; i < nRows; i++) {
+            for (j = 0; j < nCols; j++) {
+                if (j == nCols - 1) {
                     System.out.println(mat[i][j] + " ");
                     // System.out.println("");
                 } else {
@@ -127,19 +127,85 @@ public class Matrix {
         return d;
     }
 
-    public double[][] invers(double[][] mat) {
+    public void invers(double[][] mat) {
         int i, j, k, u, ba;
-        double d = 0;
+        double d = det(mat);
         int n = mat.length;
         double[][] mAdj = new double[n][n];
         double[][] inv;
         // copy matrix mat ke mAdj
 
-        // Matrix inv = new Matrix(true);
-        // Matrix mAdj = new Matrix(true);
-        // asumsi matriks Square
-        inv = mat;
-        return inv;
+        for (i = 0; i < n; i++)
+        {
+           for (j = 0; j < n; j++)
+           {
+              mAdj[i][j] = mat[i][j];
+           }
+        }
+
+        // membuat adjoin
+        for (ba=0; ba<n; ba++){
+            for (k = 0; k < n; k++)
+            {
+                int a = 0, b = 0; // deklarasi harus di dalam
+                // copyMatrix(m, &temp);
+                u = n - 1;
+                double[][] temp = new double[u][u];
+                for (i = 0; i < n; i++)
+                {
+                    if (i != ba) // 
+                    {
+                    b = 0;  //
+                    for (j = 0; j < n; j++)
+                    {
+                        if (j != k) //
+                        {
+                            temp[a][b] = mat[i][j];
+                            // printf("\nelmt %d %d\n", a, b);
+                            b++;
+                        }
+                    }
+                    a++;
+                    }
+                }
+    
+                // displayMatrix(temp);
+                // printf("\n");
+                mAdj[ba][k]= (Math.pow(-1, ba+k)) * det(temp);
+            }
+        }
+
+
+        // Transpose matrix sehingga menjadi matriks Adjoin
+        double[][] Mtemp = new double[n][n];
+        // copy matriks Mtemp dengan Madj
+
+        for (i = 0; i < n; i++)
+        {
+           for (j = 0; j < n; j++)
+           {
+              Mtemp[i][j] = mat[i][j];
+           }
+        }
+        
+                // int i, j, nCol = ROW_EFF(Mtemp), nRow = COL_EFF(Mtemp);
+                // ROW_EFF(*m) = nRow;
+                // COL_EFF(*m) = nCol;
+        // di transpose dan dikali 1/det
+        if (d != 0){
+            for (i = 0; i < n; i++)
+            {
+               for (j = 0; j < n; j++)
+               {
+                  mat[i][j] = (1/d) * Mtemp[j][i];  // memasukan ke mat 
+               }
+            }
+        }
+        else {
+            // matriks tidak punya balikan
+        }
+
+        // return mAdj;
     }
 
 }

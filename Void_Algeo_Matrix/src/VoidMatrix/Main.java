@@ -2,8 +2,6 @@ package VoidMatrix;
 
 import java.util.Scanner;
 
-import javax.sound.sampled.SourceDataLine;
-
 // import javax.sound.midi.Soundbank;
 // import javax.sound.sampled.SourceDataLine;
 
@@ -79,7 +77,7 @@ public class Main {
 
                             Matrix m = new Matrix(true); // determinan
                             double d = m.det(m.getMat());
-                            m.DisplayMatriksDet();
+                            m.DisplayMatriks();
                             System.out.print("Determinan matriks: ");
                             System.out.println(d);
                         }
@@ -105,6 +103,10 @@ public class Main {
                     switch (SubMenu) {
                         case 'a' -> {
                             System.out.println("Menu 3a");
+                            Matrix m = new Matrix(true);
+                            m.invers(m.getMat());
+                            m.DisplayMatriks();
+
                         }
                         case 'b' -> {
                             System.out.println("Menu 3b");
