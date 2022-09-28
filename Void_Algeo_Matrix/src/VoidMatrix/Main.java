@@ -8,32 +8,10 @@ import javax.sound.sampled.SourceDataLine;
 // import javax.sound.sampled.SourceDataLine;
 
 public class Main {
-    void display() {
-        System.out.println("1. Sistem Persamaaan Linier");
-        System.out.println("2. Determinan");
-        System.out.println("3. Matriks balikan");
-        System.out.println("4. Interpolasi Polinom");
-        System.out.println("5. Interpolasi Bicubic");
-        System.out.println("6. Regresi linier berganda");
-        System.out.println("7. Keluar");
-    }
-
-    void displayMenu1() {
-        System.out.println("a. Metode eliminasi Gauss");
-        System.out.println("b. Metode eliminasi Gauss-Jordan");
-        System.out.println("c. Metode matriks balikan");
-        System.out.println("d. Kaidah Cramer");
-
-    }
-
-    void displayMenu2(){
-        System.out.println("a. Matriks Kofaktor");
-        System.out.println("b. ");
-    }
 
     void displayMenu3(){
-        System.out.println("a. Menggunakan Matriks Adjoin ");
-        System.out.println("b. Menggunakan ");
+        System.out.println("a. Metode Matriks Adjoin ");
+        System.out.println("b. Metode OBE"); // nunggu gauss-jordan
     }
 
     // NANTI BUAT SATU KELAS BUAT isi, fungsi matriks is square dll.
@@ -42,10 +20,11 @@ public class Main {
         int menu = 1;
         // char SubMenu ;
         Main obj = new Main();
+        DisplayPengguna disp = new DisplayPengguna();
         Scanner sc = new Scanner(System.in);
         while (menu != 7) {
             System.out.println("");
-            obj.display();
+            disp.display();
             System.out.print("Input menu: ");
             menu = sc.nextInt();
             while (menu > 7 || menu < 1) {
@@ -57,7 +36,7 @@ public class Main {
             switch (menu) {
                 case 1 -> {
                     System.out.println("Menu 1");
-                    obj.displayMenu1();
+                    disp.displayMenu1();
                     System.out.print("Input: ");
                     SubMenu = sc.next().charAt(0);
                     while (SubMenu != 'a' && SubMenu != 'b' && SubMenu != 'c' && SubMenu != 'd') {
@@ -85,7 +64,7 @@ public class Main {
                 case 2 -> {
                     System.out.println("Menu 2");
                     // ada pilihannya 
-                    obj.displayMenu2();
+                    disp.displayMenu2();
                     System.out.println("Input: ");
                     SubMenu = sc.next().charAt(0);
                     while (SubMenu != 'a' && SubMenu != 'b' ) {
