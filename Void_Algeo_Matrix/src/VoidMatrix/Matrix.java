@@ -135,73 +135,54 @@ public class Matrix {
         double[][] inv;
         // copy matrix mat ke mAdj
 
-        for (i = 0; i < n; i++)
-        {
-           for (j = 0; j < n; j++)
-           {
-              mAdj[i][j] = mat[i][j];
-           }
+        for (i = 0; i < n; i++) {
+            for (j = 0; j < n; j++) {
+                mAdj[i][j] = mat[i][j];
+            }
         }
 
         // membuat adjoin
-        for (ba=0; ba<n; ba++){
-            for (k = 0; k < n; k++)
-            {
+        for (ba = 0; ba < n; ba++) {
+            for (k = 0; k < n; k++) {
                 int a = 0, b = 0; // deklarasi harus di dalam
                 // copyMatrix(m, &temp);
                 u = n - 1;
                 double[][] temp = new double[u][u];
-                for (i = 0; i < n; i++)
-                {
-                    if (i != ba) // 
+                for (i = 0; i < n; i++) {
+                    if (i != ba) //
                     {
-                    b = 0;  //
-                    for (j = 0; j < n; j++)
-                    {
-                        if (j != k) //
-                        {
-                            temp[a][b] = mat[i][j];
-                            // printf("\nelmt %d %d\n", a, b);
-                            b++;
+                        b = 0; //
+                        for (j = 0; j < n; j++) {
+                            if (j != k) //
+                            {
+                                temp[a][b] = mat[i][j];
+                                // printf("\nelmt %d %d\n", a, b);
+                                b++;
+                            }
                         }
-                    }
-                    a++;
+                        a++;
                     }
                 }
-    
+
                 // displayMatrix(temp);
                 // printf("\n");
-                mAdj[ba][k]= (Math.pow(-1, ba+k)) * det(temp);
+                mAdj[ba][k] = (Math.pow(-1, ba + k)) * det(temp);
             }
         }
-
 
         // Transpose matrix sehingga menjadi matriks Adjoin
-        double[][] Mtemp = new double[n][n];
-        // copy matriks Mtemp dengan Madj
 
-        for (i = 0; i < n; i++)
-        {
-           for (j = 0; j < n; j++)
-           {
-              Mtemp[i][j] = mat[i][j];
-           }
-        }
-        
-                // int i, j, nCol = ROW_EFF(Mtemp), nRow = COL_EFF(Mtemp);
-                // ROW_EFF(*m) = nRow;
-                // COL_EFF(*m) = nCol;
+        // int i, j, nCol = ROW_EFF(Mtemp), nRow = COL_EFF(Mtemp);
+        // ROW_EFF(*m) = nRow;
+        // COL_EFF(*m) = nCol;
         // di transpose dan dikali 1/det
-        if (d != 0){
-            for (i = 0; i < n; i++)
-            {
-               for (j = 0; j < n; j++)
-               {
-                  mat[i][j] = (1/d) * Mtemp[j][i];  // memasukan ke mat 
-               }
+        if (d != 0) {
+            for (i = 0; i < n; i++) {
+                for (j = 0; j < n; j++) {
+                    mat[i][j] = (1 / d) * mAdj[j][i]; // memasukan ke mat
+                }
             }
-        }
-        else {
+        } else {
             System.out.println("Matriks tidak memilki balikan");
             // matriks tidak punya balikan
         }
