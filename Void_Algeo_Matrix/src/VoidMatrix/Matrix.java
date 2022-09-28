@@ -1,15 +1,16 @@
 package VoidMatrix;
+
 import java.util.Scanner;
 import java.lang.Math;
 
 public class Matrix {
     // private int n;
     private double[][] mat;
-    private int nRows; 
+    private int nRows;
     private int nCols;
-    
+
     // constructor
-    public Matrix(boolean Sq){
+    public Matrix(boolean Sq) {
         int i, j, n, nR, nC;
         /**
          * Proses Deklarasi matriks dan assignment setiap
@@ -17,19 +18,18 @@ public class Matrix {
          */
         Scanner sc = new Scanner(System.in);
         nR = sc.nextInt();
-        if (Sq){
-            nC=nR;
-            n=nR;
-            nRows=n;
-            nCols=n;
-        }
-        else{
-            nC=sc.nextInt();
-            nRows=nR;
-            nCols=nC;
+        if (Sq) {
+            nC = nR;
+            n = nR;
+            nRows = n;
+            nCols = n;
+        } else {
+            nC = sc.nextInt();
+            nRows = nR;
+            nCols = nC;
         }
         mat = new double[nR][nC];
-        
+
         for (i = 0; i < nRows; i++) {
             for (j = 0; j < nCols; j++) {
                 mat[i][j] = sc.nextDouble();
@@ -37,50 +37,51 @@ public class Matrix {
         }
     }
     // public Matrix(int nR, int nC){
-        
-        //     // perlu inisialisasi 0 setiap elemen?
-        //     // this.mat=mat;
-        //     // this.nR=nR;
-        // }
-        
-        // getter
-        public double[][] getMat() {
-            return mat;
-        }
-    
-        public int getnRows() {
-            return nRows;
-        }
-    
-        public int getnCols() {
-            return nCols;
-        }
 
-        // setter
-        public void setMat(double[][] mat) {
-            this.mat = mat;
-        }
-        
-        public void setnRows(int nRows) {
-            this.nRows = nRows;
-        }
-        
-        public void setnCols(int nCols) {
-            this.nCols = nCols;
-        }
-        // private int getLengthSquare(){
-            //     return mat.;
+    // // perlu inisialisasi 0 setiap elemen?
+    // // this.mat=mat;
+    // // this.nR=nR;
+    // }
+
+    // getter
+    public double[][] getMat() {
+        return mat;
+    }
+
+    public int getnRows() {
+        return nRows;
+    }
+
+    public int getnCols() {
+        return nCols;
+    }
+
+    // setter
+    public void setMat(double[][] mat) {
+        this.mat = mat;
+    }
+
+    public void setnRows(int nRows) {
+        this.nRows = nRows;
+    }
+
+    public void setnCols(int nCols) {
+        this.nCols = nCols;
+    }
+    // private int getLengthSquare(){
+    // return mat.;
     // }
 
     // Method
-    public boolean isSquare(){
-        return nCols==nRows;  // belum diuji
+    public boolean isSquare() {
+        return nCols == nRows; // belum diuji
     }
 
     public void DisplayMatriksDet() {
         int i, j, n;
-        n=nRows;
+        n = nRows;
         /* M<enampilkan Matriks */
+        System.out.println();
         for (i = 0; i < n; i++) {
             for (j = 0; j < n; j++) {
                 if (j == n - 1) {
@@ -91,11 +92,10 @@ public class Matrix {
                 }
             }
         }
-        System.out.println("Selesai");
+        System.out.println();
         // Determinan
     }
-    
-    
+
     public double det(double[][] mat) {
         // Pre kondisi matriks berbentuk square
         double d = 0.0;
@@ -125,6 +125,21 @@ public class Matrix {
             d = mat[0][0];
         }
         return d;
+    }
+
+    public double[][] invers(double[][] mat) {
+        int i, j, k, u, ba;
+        double d = 0;
+        int n = mat.length;
+        double[][] mAdj = new double[n][n];
+        double[][] inv;
+        // copy matrix mat ke mAdj
+
+        // Matrix inv = new Matrix(true);
+        // Matrix mAdj = new Matrix(true);
+        // asumsi matriks Square
+        inv = mat;
+        return inv;
     }
 
 }

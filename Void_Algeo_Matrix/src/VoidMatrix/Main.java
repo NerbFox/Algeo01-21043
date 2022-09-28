@@ -26,11 +26,21 @@ public class Main {
 
     }
 
+    void displayMenu2(){
+        System.out.println("a. Matriks Kofaktor");
+        System.out.println("b. ");
+    }
+
+    void displayMenu3(){
+        System.out.println("a. Menggunakan Matriks Adjoin ");
+        System.out.println("b. Menggunakan ");
+    }
+
     // NANTI BUAT SATU KELAS BUAT isi, fungsi matriks is square dll.
     // SAMA baca txt atau apa tuh di spek
     public static void main(String[] args) {
         int menu = 1;
-        // char menu1 ;
+        // char SubMenu ;
         Main obj = new Main();
         Scanner sc = new Scanner(System.in);
         while (menu != 7) {
@@ -43,20 +53,20 @@ public class Main {
                 menu = sc.nextInt();
             }
             System.out.println();
+            char SubMenu;
             switch (menu) {
                 case 1 -> {
                     System.out.println("Menu 1");
                     obj.displayMenu1();
-                    char menu1;
                     System.out.print("Input: ");
-                    menu1 = sc.next().charAt(0);
-                    while (menu1 != 'a' && menu1 != 'b' && menu1 != 'c' && menu1 != 'd') {
+                    SubMenu = sc.next().charAt(0);
+                    while (SubMenu != 'a' && SubMenu != 'b' && SubMenu != 'c' && SubMenu != 'd') {
                         System.out.println("Invalid Input, please input the correct option");
                         System.out.print("Input: ");
-                        menu1 = sc.next().charAt(0);
+                        SubMenu = sc.next().charAt(0);
                     }
                     System.out.println();
-                    switch (menu1) {
+                    switch (SubMenu) {
                         case 'a' -> {
                             System.out.println("Menu 1a");
                         }
@@ -70,17 +80,57 @@ public class Main {
                             System.out.println("Menu 1d");
                         }
                     }
-
+                    
                 }
                 case 2 -> {
                     System.out.println("Menu 2");
-                    Matrix m = new Matrix(true); // determinan
-                    double d = m.det(m.getMat());
-                    m.DisplayMatriksDet();
-                    System.out.println(d);
+                    // ada pilihannya 
+                    obj.displayMenu2();
+                    System.out.println("Input: ");
+                    SubMenu = sc.next().charAt(0);
+                    while (SubMenu != 'a' && SubMenu != 'b' ) {
+                        System.out.println("Invalid Input, please input the correct option");
+                        System.out.print("Input: ");
+                        SubMenu = sc.next().charAt(0);
+                    }
+                    System.out.println();
+                    switch (SubMenu) {
+                        case 'a' -> {
+                            System.out.println("Menu 2a");
+
+                            Matrix m = new Matrix(true); // determinan
+                            double d = m.det(m.getMat());
+                            m.DisplayMatriksDet();
+                            System.out.print("Determinan matriks: ");
+                            System.out.println(d);
+                        }
+                        case 'b' -> {
+                            System.out.println("Menu 2b");
+                        }
+
+                    }
                 }
                 case 3 -> {
                     System.out.println("Menu 3");
+                    // ada pilihannya 
+                    obj.displayMenu3();
+                    System.out.println("Input: ");
+                    
+                    SubMenu = sc.next().charAt(0);
+                    while (SubMenu != 'a' && SubMenu != 'b' ) {
+                        System.out.println("Invalid Input, please input the correct option");
+                        System.out.print("Input: ");
+                        SubMenu = sc.next().charAt(0);
+                    }
+                    System.out.println();
+                    switch (SubMenu) {
+                        case 'a' -> {
+                            System.out.println("Menu 3a");
+                        }
+                        case 'b' -> {
+                            System.out.println("Menu 3b");
+                        }
+                    }
                 }
                 case 4 -> {
                     System.out.println("Menu 4");
