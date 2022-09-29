@@ -1,8 +1,8 @@
 /* PROGRAM JAVA UNTUK MELAKUKAN ELIMINASI GAUSS */
-
+package VoidMatrix;
 import java.util.*;
 
-public class Main {
+public class EliminasiGauss {
     public void GaussElimination (double[][] matrix) {
         /* KETERANGAN : Melakukan elminasi Gauss untuk matrix augmented berukuran baris*(kolom+1) */
         
@@ -99,56 +99,56 @@ public class Main {
     
     
     /* PROGRAM UTAMA */
-    public static void main (String[] args) {
-        Main ge = new Main();
-        double[][] arr = new double[4][5];
+    // public static void main (String[] args) {
+    //      ge = new Main();
+    //     double[][] arr = new double[4][5];
 
-        arr[0][0] = 2;
-        arr[1][0] = 1;
-        arr[2][0] = 3;
-        arr[3][0] = 2;
+    //     arr[0][0] = 2;
+    //     arr[1][0] = 1;
+    //     arr[2][0] = 3;
+    //     arr[3][0] = 2;
         
-        arr[0][1] = -1;
-        arr[1][1] = 0;
-        arr[2][1] = -3;
-        arr[3][1] = 1;
+    //     arr[0][1] = -1;
+    //     arr[1][1] = 0;
+    //     arr[2][1] = -3;
+    //     arr[3][1] = 1;
         
-        arr[0][2] = 3;
-        arr[1][2] = -2;
-        arr[2][2] = 1;
-        arr[3][2] = 4;
+    //     arr[0][2] = 3;
+    //     arr[1][2] = -2;
+    //     arr[2][2] = 1;
+    //     arr[3][2] = 4;
         
-        arr[0][3] = 4;
-        arr[1][3] = 7;
-        arr[2][3] = 5;
-        arr[3][3] = 4;
+    //     arr[0][3] = 4;
+    //     arr[1][3] = 7;
+    //     arr[2][3] = 5;
+    //     arr[3][3] = 4;
         
-        arr[0][4] = 9;
-        arr[1][4] = 11;
-        arr[2][4] = 8;
-        arr[3][4] = 10;
+    //     arr[0][4] = 9;
+    //     arr[1][4] = 11;
+    //     arr[2][4] = 8;
+    //     arr[3][4] = 10;
         
-        ge.GaussElimination(arr);
+    //     ge.GaussElimination(arr);
         
-        int x, y;
-        for (x = 0; x <= 3; x++) {
-            for (y = 0; y <= 4; y++) {
-                if (y == 4) {
-                    System.out.printf("%f\n", arr[x][y]);
-                } else {
-                    System.out.printf("%f ", arr[x][y]);       
-                }
-            }
-        }
-        System.out.printf("\n");
+    //     int x, y;
+    //     for (x = 0; x <= 3; x++) {
+    //         for (y = 0; y <= 4; y++) {
+    //             if (y == 4) {
+    //                 System.out.printf("%f\n", arr[x][y]);
+    //             } else {
+    //                 System.out.printf("%f ", arr[x][y]);       
+    //             }
+    //         }
+    //     }
+    //     System.out.printf("\n");
         
-        double[] hasil = new double [4];
-        ge.SubstitusiMundur(arr, hasil);
+    //     double[] hasil = new double [4];
+    //     ge.SubstitusiMundur(arr, hasil);
         
-        System.out.printf("SOLUSI SISTEM PERSAMAAN LINIER ANDA:\n");
-        for (x = 0; x <= 3; x++) {
-            System.out.printf("%f ", hasil[x]);
-        }
-        System.out.printf("\n");
-    }
+    //     System.out.printf("SOLUSI SISTEM PERSAMAAN LINIER ANDA:\n");
+    //     for (x = 0; x <= 3; x++) {
+    //         System.out.printf("%f ", hasil[x]);
+    //     }
+    //     System.out.printf("\n");
+    // }
 }

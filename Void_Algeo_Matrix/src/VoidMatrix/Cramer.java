@@ -1,4 +1,5 @@
 /* PROGRAM JAVA UNTUK MENEMUKAN SOLUSI SPL DENGAN KAIDAH CRAMER */
+package VoidMatrix;
 
 import java.util.*;
 
