@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    void displayMenu3(){
+    void displayMenu3() {
         System.out.println("a. Metode Matriks Adjoin ");
         System.out.println("b. Metode OBE"); // nunggu gauss-jordan
     }
@@ -55,17 +55,28 @@ public class Main {
                         }
                         case 'd' -> {
                             System.out.println("Menu 1d");
+                            Cramer cm = new Cramer();
+                            Matrix mat = new Matrix(false);
+                            double[] hasil = new double[mat.getnRows()];
+                            int x;
+                            cm.CramerRule(mat.getMat(), hasil);
+                            System.out.printf("SOLUSI SISTEM PERSAMAAN LINIER ANDA:\n");
+                            for (x = 0; x < mat.getnRows(); x++) {
+                                System.out.printf("%f ", hasil[x]);
+                            }
+                            System.out.printf("\n");
+
                         }
                     }
-                    
+
                 }
                 case 2 -> {
                     System.out.println("Menu 2");
-                    // ada pilihannya 
+                    // ada pilihannya
                     disp.displayMenu2();
                     System.out.println("Input: ");
                     SubMenu = sc.next().charAt(0);
-                    while (SubMenu != 'a' && SubMenu != 'b' ) {
+                    while (SubMenu != 'a' && SubMenu != 'b') {
                         System.out.println("Invalid Input, please input the correct option");
                         System.out.print("Input: ");
                         SubMenu = sc.next().charAt(0);
@@ -89,12 +100,12 @@ public class Main {
                 }
                 case 3 -> {
                     System.out.println("Menu 3");
-                    // ada pilihannya 
+                    // ada pilihannya
                     obj.displayMenu3();
                     System.out.println("Input: ");
-                    
+
                     SubMenu = sc.next().charAt(0);
-                    while (SubMenu != 'a' && SubMenu != 'b' ) {
+                    while (SubMenu != 'a' && SubMenu != 'b') {
                         System.out.println("Invalid Input, please input the correct option");
                         System.out.print("Input: ");
                         SubMenu = sc.next().charAt(0);
@@ -115,6 +126,7 @@ public class Main {
                 }
                 case 4 -> {
                     System.out.println("Menu 4");
+                    PolynomialInterpolation p = new PolynomialInterpolation();
                 }
 
                 case 5 -> { // Interpolasi Bicubic
@@ -124,11 +136,10 @@ public class Main {
                 case 6 -> {
                     System.out.println("Menu 6");
                 }
-                case 7 -> 
-                {
+                case 7 -> {
                     System.out.println("Terima Kasih");
                     System.out.println();
-            
+
                 }
             }
             // menu=sc.nextInt();

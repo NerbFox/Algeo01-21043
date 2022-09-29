@@ -88,43 +88,43 @@ public class Cramer {
     
     
     /* PROGRAM UTAMA */
-    public static void main (String[] args) {
-        Cramer ge = new Cramer();
-        double[][] arr = new double[4][5];
-        double[] hasil = new double[4];
+    // public static void main (String[] args) {
+    //     Cramer ge = new Cramer();
+    //     double[][] arr = new double[4][5];
+    //     double[] hasil = new double[4];
 
-        arr[0][0] = 2;
-        arr[1][0] = 1;
-        arr[2][0] = 3;
-        arr[3][0] = 2;
+    //     arr[0][0] = 2;
+    //     arr[1][0] = 1;
+    //     arr[2][0] = 3;
+    //     arr[3][0] = 2;
         
-        arr[0][1] = -1;
-        arr[1][1] = 0;
-        arr[2][1] = -3;
-        arr[3][1] = 1;
+    //     arr[0][1] = -1;
+    //     arr[1][1] = 0;
+    //     arr[2][1] = -3;
+    //     arr[3][1] = 1;
         
-        arr[0][2] = 3;
-        arr[1][2] = -2;
-        arr[2][2] = 1;
-        arr[3][2] = 4;
+    //     arr[0][2] = 3;
+    //     arr[1][2] = -2;
+    //     arr[2][2] = 1;
+    //     arr[3][2] = 4;
         
-        arr[0][3] = 4;
-        arr[1][3] = 7;
-        arr[2][3] = 5;
-        arr[3][3] = 4;
+    //     arr[0][3] = 4;
+    //     arr[1][3] = 7;
+    //     arr[2][3] = 5;
+    //     arr[3][3] = 4;
         
-        arr[0][4] = 9;
-        arr[1][4] = 11;
-        arr[2][4] = 8;
-        arr[3][4] = 10;
+    //     arr[0][4] = 9;
+    //     arr[1][4] = 11;
+    //     arr[2][4] = 8;
+    //     arr[3][4] = 10;
         
-        ge.CramerRule (arr, hasil);
+    //     ge.CramerRule (arr, hasil);
         
-        System.out.printf("SOLUSI SISTEM PERSAMAAN LINIER ANDA:\n");
-        for (int x = 0; x <= 3; x++) {
-            System.out.printf("%f ", hasil[x]);
-        }
-        System.out.printf("\n");
-    }
+    //     System.out.printf("SOLUSI SISTEM PERSAMAAN LINIER ANDA:\n");
+    //     for (int x = 0; x <= 3; x++) {
+    //         System.out.printf("%f ", hasil[x]);
+    //     }
+    //     System.out.printf("\n");
+    // }
 }
 
