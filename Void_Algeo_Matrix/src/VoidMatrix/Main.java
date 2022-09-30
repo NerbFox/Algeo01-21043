@@ -2,6 +2,7 @@ package VoidMatrix;
 
 import java.util.Scanner;
 
+import java.lang.Math;
 import javax.sound.midi.Soundbank;
 import javax.swing.GroupLayout;
 
@@ -14,6 +15,13 @@ public class Main {
     // NANTI BUAT SATU KELAS BUAT isi, fungsi matriks is square dll.
     // SAMA baca txt atau apa tuh di spek
     public static void main(String[] args) {
+        // ReadFile re = new ReadFile();
+        // double f = (-1)*0;
+        // double f = (Math.pow(0, 1))*(Math.pow(-1, 1));
+        // if (f==0){
+        //     System.out.printf("%f",f);
+        // }
+        
         int menu = 1;
         // char SubMenu ;
         Main obj = new Main();
@@ -171,7 +179,10 @@ public class Main {
                 case 5 -> { // Interpolasi Bicubic
                     System.out.println("Menu 5");
                     System.out.println("Interpolasi Bicubic");
+                    // Matrix m = new Matrix(true);
+
                     BicubicInterpolation b = new BicubicInterpolation();
+                
                 }
                 case 6 -> {
                     System.out.println("Menu 6");
