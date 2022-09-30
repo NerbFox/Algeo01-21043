@@ -2,6 +2,7 @@ package VoidMatrix;
 
 import java.util.Scanner;
 
+import javax.sound.midi.Soundbank;
 import javax.swing.GroupLayout;
 
 // import javax.sound.midi.Soundbank;
@@ -102,7 +103,8 @@ public class Main {
                     switch (SubMenu) {
                         case 'a' -> {
                             System.out.println("Menu 2a");
-
+                            System.out.println("Metode ekspansi kofaktor");
+                            
                             Matrix m = new Matrix(true); // determinan
                             double d = m.det(m.getMat());
                             m.DisplayMatriks();
@@ -111,6 +113,19 @@ public class Main {
                         }
                         case 'b' -> {
                             System.out.println("Menu 2b");
+                            System.out.println("Metode reduksi baris");
+                            Matrix m = new Matrix(true);
+                            // m.DisplayMatriks();
+                            // System.out.println();
+                            
+                            GaussJordan gj = new GaussJordan();
+                            double d;
+                            d = gj.GaussJordanForDet(m.getMat());
+                            m.DisplayMatriks();
+                            System.out.print("Determinan matriks: ");
+                            System.out.println(d);
+                            
+
                         }
 
                     }

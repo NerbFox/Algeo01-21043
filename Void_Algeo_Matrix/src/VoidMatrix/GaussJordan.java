@@ -90,10 +90,10 @@ public class GaussJordan {
         int x, y;
         for (x = 0; x < matrix.length; x++) {
             for (y = 0; y <= kolom + 1; y++) {
-                if (y == kolom+1) {
-                    System.out.printf("%f\n", matrix[x][y]);
+                if (y == kolom + 1) {
+                    System.out.printf("%.2f\n", matrix[x][y]);
                 } else {
-                    System.out.printf("%f ", matrix[x][y]);
+                    System.out.printf("%.2f ", matrix[x][y]);
                 }
             }
         }
@@ -102,10 +102,95 @@ public class GaussJordan {
 
         System.out.printf("SOLUSI SISTEM PERSAMAAN LINIER ANDA: \n");
         for (x = 0; x < matrix.length; x++) {
-            System.out.printf("x%d: %f ", x, HASIL[x]);
+            System.out.printf("x%d: %.3f ", x, HASIL[x]);
             System.out.printf("\n");
         }
+
     }
+
+    public double GaussJordanForDet(double[][] matrix) {
+        /*
+         * KETERANGAN : Melakukan elminasi Gauss untuk matrix augmented berukuran
+         * baris*(kolom+1)
+         */
+
+        /* KAMUS LOKAL */
+        int baris, kolom;
+        int b, k, k2, index_nilai_maks, i;
+        double elmt_datang, elmt_banding, faktor, pembagi;
+
+        /*  */
+        baris = (matrix.length) - 1;
+        kolom = baris;
+
+        /* Mencacah kolom untuk melakukan operasi */
+        for (k = 0; k <= kolom; k++) {
+
+            /* Mencari baris acuan dari indeks [i+1..baris] untuk pertukaran */
+            index_nilai_maks = k;
+            for (b = k + 1; b <= baris; b++) {
+                elmt_datang = matrix[b][k];
+                if (elmt_datang < 0) {
+                    elmt_datang = elmt_datang * -1;
+                }
+
+                elmt_banding = matrix[index_nilai_maks][k];
+                if (elmt_banding < 0) {
+                    elmt_banding = elmt_banding * -1;
+                }
+
+                if (elmt_datang > elmt_banding) {
+                    index_nilai_maks = b;
+                }
+            }
+
+
+            /* Melakukan operasi baris elementer */
+            for (b = k + 1; b <= baris; b++) {
+                faktor = matrix[b][k] / matrix[k][k];
+                for (k2 = k; k2 <= kolom ; k2++) {
+                    matrix[b][k2] = matrix[b][k2] - faktor * matrix[k][k2];
+                }
+            }
+        }
+        double det=1;
+        for(i=0; i<=baris; i++){
+            det*=matrix[i][i];
+        }
+        return det;
+    }
+}
+
+
+        
+        /* Membuat LEADING ONE untuk setiap baris */
+        // i = -1;
+
+        // for (b = 0; b <= baris; b++) {
+        //     i = i + 1;
+        //     pembagi = matrix[b][i];
+        //     for (k = 0; k <= kolom + 1; k++) {
+        //         matrix[b][k] = matrix[b][k] / pembagi;
+        //     }
+        // } /* SAMPAI SINI, ELIMINASI GAUSS TELAH SELESAI DILAKUKAN */
+
+        /* Membuat nilai di atas dan bawah LEADING ONE menjadi 0 */
+        // int jumlah_operasi;
+        // double nilai_acuan;
+
+        // for (b = 0; b < baris; b++) {
+        //     jumlah_operasi = 1;
+        //     while (jumlah_operasi < (baris + 1) - b) {
+        //         i = b + jumlah_operasi;
+        //         nilai_acuan = matrix[b][i];
+        //         for (k = 0; k <= kolom + 1; k++) {
+        //             matrix[b][k] = matrix[b][k] - nilai_acuan * matrix[i][k];
+        //         }
+        //         jumlah_operasi = jumlah_operasi + 1;
+        //     }
+        // }
+
+        // display
 
     /* PROGRAM UTAMA */
     // public static void main (String[] args) {
@@ -141,4 +226,4 @@ public class GaussJordan {
     // ge.GaussJordanElimination(arr, hasil);
 
     // }
-}
+

@@ -102,7 +102,7 @@ public class EliminasiGauss {
         int x;
         System.out.printf("SOLUSI SISTEM PERSAMAAN LINIER ANDA:\n");
         for (x = 0; x < matrix.length; x++) {
-            System.out.printf("a%d: %f ", x, HASIL[x]);
+            System.out.printf("a%d: %.3f ", x, HASIL[x]);
             System.out.printf("\n");
         }
 

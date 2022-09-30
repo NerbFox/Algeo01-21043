@@ -7,7 +7,7 @@ public class DisplayPengguna extends Main{
     }
     void display() {
         System.out.println("1. Sistem Persamaaan Linier"); //
-        System.out.println("2. Determinan"); // 
+        System.out.println("2. Determinan"); // done
         System.out.println("3. Matriks balikan"); // done
         System.out.println("4. Interpolasi Polinom"); // done
         System.out.println("5. Interpolasi Bicubic"); // nigel
@@ -25,10 +25,10 @@ public class DisplayPengguna extends Main{
 
     void displayMenu2(){
         System.out.println("a. Metode ekspansi kofaktor"); // done
-        System.out.println("b. Metode reduksi baris"); // belummmmmm
+        System.out.println("b. Metode reduksi baris"); // done
     }
     void displayMenu3() {
         System.out.println("a. Metode Matriks Adjoin "); //done
-        System.out.println("b. Metode OBE"); // done tinggal disesuaikan
+        System.out.println("b. Metode OBE"); // done 
     }
 }
