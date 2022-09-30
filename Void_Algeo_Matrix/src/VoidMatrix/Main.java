@@ -9,10 +9,6 @@ import javax.swing.GroupLayout;
 
 public class Main {
 
-    void displayMenu3() {
-        System.out.println("a. Metode Matriks Adjoin ");
-        System.out.println("b. Metode OBE"); // nunggu gauss-jordan
-    }
 
     // NANTI BUAT SATU KELAS BUAT isi, fungsi matriks is square dll.
     // SAMA baca txt atau apa tuh di spek
@@ -120,7 +116,7 @@ public class Main {
                 case 3 -> {
                     System.out.println("Menu 3");
                     // ada pilihannya
-                    obj.displayMenu3();
+                    disp.displayMenu3();
                     System.out.println("Input: ");
 
                     SubMenu = sc.next().charAt(0);

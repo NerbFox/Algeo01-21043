@@ -16,15 +16,19 @@ public class DisplayPengguna extends Main{
     }
     
     void displayMenu1() {
-        System.out.println("a. Metode eliminasi Gauss");
-        System.out.println("b. Metode eliminasi Gauss-Jordan");
-        System.out.println("c. Metode matriks balikan");
-        System.out.println("d. Kaidah Cramer");
+        System.out.println("a. Metode eliminasi Gauss");  //done
+        System.out.println("b. Metode eliminasi Gauss-Jordan"); //done
+        System.out.println("c. Metode matriks balikan");  // belum
+        System.out.println("d. Kaidah Cramer"); //done
 
     }
 
     void displayMenu2(){
-        System.out.println("a. Metode ekspansi kofaktor");
-        System.out.println("b. Metode reduksi baris"); // nunggu gauss 
+        System.out.println("a. Metode ekspansi kofaktor"); // done
+        System.out.println("b. Metode reduksi baris"); // belummmmmm
+    }
+    void displayMenu3() {
+        System.out.println("a. Metode Matriks Adjoin "); //done
+        System.out.println("b. Metode OBE"); // done tinggal disesuaikan
     }
 }
