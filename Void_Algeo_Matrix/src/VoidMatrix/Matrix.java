@@ -85,10 +85,10 @@ public class Matrix {
         for (i = 0; i < nRows; i++) {
             for (j = 0; j < nCols; j++) {
                 if (j == nCols - 1) {
-                    System.out.println(mat[i][j] + " ");
-                    // System.out.println("");
+                    System.out.printf("%.2f ", mat[i][j]);
+                    System.out.println();
                 } else {
-                    System.out.print(mat[i][j] + " ");
+                    System.out.printf("%.2f ", mat[i][j]);
                 }
             }
         }
