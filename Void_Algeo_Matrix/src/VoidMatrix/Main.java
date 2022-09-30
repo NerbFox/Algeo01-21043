@@ -2,6 +2,8 @@ package VoidMatrix;
 
 import java.util.Scanner;
 
+import javax.swing.GroupLayout;
+
 // import javax.sound.midi.Soundbank;
 // import javax.sound.sampled.SourceDataLine;
 
@@ -46,15 +48,32 @@ public class Main {
                     switch (SubMenu) {
                         case 'a' -> {
                             System.out.println("Menu 1a");
+                            System.out.println("Metode eliminasi Gauss");
+                            Matrix m = new Matrix(false);
+                            double[] hasil = new double[m.getnRows()];
+                            EliminasiGauss GE = new EliminasiGauss();
+                            GE.GaussElimination(m.getMat());
+                            m.DisplayMatriks();
+                            GE.SubstitusiMundur(m.getMat(), hasil);
+
                         }
                         case 'b' -> {
                             System.out.println("Menu 1b");
+                            System.out.println("Metode Eliminasi Gauss-Jordan");
+                            Matrix m = new Matrix(false);
+                            double[] hasil = new double[m.getnRows()];
+                            GaussJordan GE = new GaussJordan();
+                            GE.GaussJordanElimination(m.getMat(), hasil);
+                            // m.DisplayMatriks();
+
                         }
                         case 'c' -> {
                             System.out.println("Menu 1c");
+                            System.out.println("Metode Matriks Balikan");
                         }
                         case 'd' -> {
                             System.out.println("Menu 1d");
+                            System.out.println("Kaidah Cramer");
                             Cramer cm = new Cramer();
                             Matrix mat = new Matrix(false);
                             double[] hasil = new double[mat.getnRows()];
