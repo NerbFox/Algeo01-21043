@@ -32,6 +32,7 @@ public class Main {
             switch (menu) {
                 case 1 -> {
                     System.out.println("Menu 1");
+                    System.out.println("Sistem Persamaaan Linier");
                     disp.displayMenu1();
                     System.out.print("Input: ");
                     SubMenu = sc.next().charAt(0);
@@ -87,6 +88,7 @@ public class Main {
                 }
                 case 2 -> {
                     System.out.println("Menu 2");
+                    System.out.println("Determinan");
                     // ada pilihannya
                     disp.displayMenu2();
                     System.out.println("Input: ");
@@ -115,6 +117,7 @@ public class Main {
                 }
                 case 3 -> {
                     System.out.println("Menu 3");
+                    System.out.println("Matriks balikan");
                     // ada pilihannya
                     disp.displayMenu3();
                     System.out.println("Input: ");
@@ -129,6 +132,7 @@ public class Main {
                     switch (SubMenu) {
                         case 'a' -> {
                             System.out.println("Menu 3a");
+                            System.out.println("Metode Matriks Adjoin ");
                             Matrix m = new Matrix(true);
                             m.invers(m.getMat());
                             m.DisplayMatriks();
@@ -136,20 +140,27 @@ public class Main {
                         }
                         case 'b' -> {
                             System.out.println("Menu 3b");
+                            System.out.println("Metode OBE");
+                            Matrix m = new Matrix(true);
+                            InversOBE IO = new InversOBE(m.getMat());
+                            m.DisplayMatriks();
                         }
                     }
                 }
                 case 4 -> {
                     System.out.println("Menu 4");
+                    System.out.println("Interpolasi Polinom");
                     PolynomialInterpolation p = new PolynomialInterpolation();
                 }
 
                 case 5 -> { // Interpolasi Bicubic
                     System.out.println("Menu 5");
+                    System.out.println("Interpolasi Bicubic");
                     BicubicInterpolation b = new BicubicInterpolation();
                 }
                 case 6 -> {
                     System.out.println("Menu 6");
+                    System.out.println("Regresi linier berganda");
                 }
                 case 7 -> {
                     System.out.println("Terima Kasih");

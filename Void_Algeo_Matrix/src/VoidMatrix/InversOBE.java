@@ -4,7 +4,7 @@ import java.util.*;
 public class InversOBE {
     /* PROGRAM JAVA UNTUK MENCARI INVERS MATRIKS DENGAN METODE REDUKSI BARIS */
 
-    public void InversOBE (double[][] matrix) {
+    public InversOBE (double[][] matrix) {
         /* KETERANGAN : mengubah matrix menjadi inversnya dengan metode reduksi baris (OBE) */
         /* PREKONDISI : matrix berukuran NxN */
         
