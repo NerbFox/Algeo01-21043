@@ -109,54 +109,65 @@ public class GaussJordan {
     }
 
     public double GaussJordanForDet(double[][] matrix) {
-        /*
-         * KETERANGAN : Melakukan elminasi Gauss untuk matrix augmented berukuran
-         * baris*(kolom+1)
-         */
-
+        /* KETERANGAN : mengembalikan nilai determinan matrix berukuran N*N */
+        /* Perhitungan menggunakan reduksi baris (OBE) */
+    
         /* KAMUS LOKAL */
         int baris, kolom;
-        int b, k, k2, index_nilai_maks, i;
+        int b, k, k2, index_nilai_maks, i, p;
         double elmt_datang, elmt_banding, faktor, pembagi;
-
-        /*  */
+    
+        /* Mengambil indeks maksimal baris dan kolom matrix */
         baris = (matrix.length) - 1;
         kolom = baris;
-
+        
+        /* Inisialisasi */
+        p = 0;
+        
         /* Mencacah kolom untuk melakukan operasi */
         for (k = 0; k <= kolom; k++) {
-
+            
             /* Mencari baris acuan dari indeks [i+1..baris] untuk pertukaran */
             index_nilai_maks = k;
-            for (b = k + 1; b <= baris; b++) {
+            for (b = k+1; b <= baris; b++) {
                 elmt_datang = matrix[b][k];
                 if (elmt_datang < 0) {
                     elmt_datang = elmt_datang * -1;
                 }
-
+                
                 elmt_banding = matrix[index_nilai_maks][k];
                 if (elmt_banding < 0) {
                     elmt_banding = elmt_banding * -1;
-                }
-
+                } 
+                
                 if (elmt_datang > elmt_banding) {
                     index_nilai_maks = b;
                 }
             }
-
-
-            /* Melakukan operasi baris elementer */
-            for (b = k + 1; b <= baris; b++) {
+            
+            /* Menukar baris pada matrix */
+            double[] temp = matrix[k];
+            matrix[k] = matrix[index_nilai_maks];
+            matrix[index_nilai_maks] = temp;
+            
+            if (index_nilai_maks != k) {
+                p = p + 1;
+            }
+            
+        /* Melakukan operasi baris elementer */
+            for (b = k+1; b <= baris; b++) {
                 faktor = matrix[b][k] / matrix[k][k];
-                for (k2 = k; k2 <= kolom ; k2++) {
+                for (k2 = k; k2 <= kolom; k2++) {
                     matrix[b][k2] = matrix[b][k2] - faktor * matrix[k][k2];
                 }
             }
         }
-        double det=1;
-        for(i=0; i<=baris; i++){
-            det*=matrix[i][i];
+        
+        double det = 1;
+        for(i = 0; i <= baris; i++){
+            det = det*matrix[i][i];
         }
+        det = Math.pow(-1, p) * det;
         return det;
     }
 }

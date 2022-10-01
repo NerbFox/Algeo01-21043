@@ -57,7 +57,7 @@ public class Main {
                                 System.out.println("Menu 1a");
                                 System.out.println("Metode eliminasi Gauss");
                                 
-                                    Matrix m = new Matrix(false, true);
+                                    Matrix m = new Matrix(false, true, false);
                                     double[] hasil = new double[m.getnRows()];
                                     EliminasiGauss GE = new EliminasiGauss();
                                     GE.GaussElimination(m.getMat());
@@ -68,7 +68,7 @@ public class Main {
                             case 'b' -> {
                                 System.out.println("Menu 1b");
                                 System.out.println("Metode Eliminasi Gauss-Jordan");
-                                Matrix m = new Matrix(false, true);
+                                Matrix m = new Matrix(false, true, false);
                                 double[] hasil = new double[m.getnRows()];
                                 GaussJordan GE = new GaussJordan();
                                 GE.GaussJordanElimination(m.getMat(), hasil);
@@ -78,14 +78,14 @@ public class Main {
                             case 'c' -> {
                                 System.out.println("Menu 1c");
                                 System.out.println("Metode Matriks Balikan");
-                                Matrix m = new Matrix(false, true);
+                                Matrix m = new Matrix(false, true, false);
                                 m.inversSPL();
                             }
                             case 'd' -> {
                                 System.out.println("Menu 1d");
                                 System.out.println("Kaidah Cramer");
                                 Cramer cm = new Cramer();
-                                Matrix mat = new Matrix(false, true);
+                                Matrix mat = new Matrix(false, true, false);
                                 double[] hasil = new double[mat.getnRows()];
                                 int x;
                                 cm.CramerRule(mat.getMat(), hasil);
@@ -112,33 +112,42 @@ public class Main {
                     }
                     while (SubMenu != 'c'){
                         System.out.println();
+                        
                         switch (SubMenu) {
                             case 'a' -> {
                                 System.out.println("Menu 2a");
                                 System.out.println("Metode ekspansi kofaktor");
                                 
-                                Matrix m = new Matrix(true, false); // determinan
+                                Matrix m = new Matrix(true, false, false); // determinan
                                 double d = m.det(m.getMat());
-                                m.DisplayMatriks();
+                                // m.DisplayMatriks();
                                 System.out.print("Determinan matriks: ");
                                 System.out.println(d);
                             }
                             case 'b' -> {
                                 System.out.println("Menu 2b");
                                 System.out.println("Metode reduksi baris");
-                                Matrix m = new Matrix(true, false);
+                                Matrix m = new Matrix(true, false, false);
                                 // m.DisplayMatriks();
                                 // System.out.println();
                                 
                                 GaussJordan gj = new GaussJordan();
                                 double d;
                                 d = gj.GaussJordanForDet(m.getMat());
-                                m.DisplayMatriks();
+                                // m.DisplayMatriks();
                                 System.out.print("Determinan matriks: ");
                                 System.out.println(d);
                             }
                         }
-
+                        disp.displayMenu2();
+                        System.out.println("Input: ");
+                        SubMenu = sc.next().charAt(0);
+                        while (SubMenu != 'a' && SubMenu != 'b' && SubMenu != 'c') {
+                            System.out.println("Invalid Input, please input the correct option");
+                            System.out.print("Input: ");
+                            SubMenu = sc.next().charAt(0);
+                        }
+                        
                     }
                 }
                 case 3 -> {
@@ -160,7 +169,7 @@ public class Main {
                             case 'a' -> {
                                 System.out.println("Menu 3a");
                                 System.out.println("Metode Matriks Adjoin ");
-                                Matrix m = new Matrix(true, false);
+                                Matrix m = new Matrix(true, false, false);
                                 m.invers(m.getMat());
                                 m.DisplayMatriks();
 
@@ -168,7 +177,7 @@ public class Main {
                             case 'b' -> {
                                 System.out.println("Menu 3b");
                                 System.out.println("Metode OBE");
-                                Matrix m = new Matrix(true, false);
+                                Matrix m = new Matrix(true, false, false);
                                 InversOBE IO = new InversOBE(m.getMat());
                                 m.DisplayMatriks();
                             }
