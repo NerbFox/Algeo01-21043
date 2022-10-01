@@ -8,6 +8,7 @@ public class BicubicInterpolation {
         int i, j, n=4, v, w, m=n*n;
         Scanner sc = new Scanner(System.in);
         double[][] f = new double[n][n];
+        double[][] fL = new double[m][1];
         double[][] a = new double[n][n];
         double[][] X = new double[m][m];
         
@@ -58,19 +59,48 @@ public class BicubicInterpolation {
         
         // Invers matriks X
         invers(X);
-        // Mengalikan dengan matriks f dan memasukkan ke dalam matriks a
-        for (i=0;i<4;i++){
-            for (j=0; j<4; j++){ // baris y dan kolom x
-                
-                a[i][j] = 1;
-                // System.out.println();
+        int o = 0;
+        for (i=0; i<n; i++){
+            for (j=0; j<n; j++){
+                fL[o][0]=f[i][j];
+                o++;
             }
         }
+
+        // Mengalikan invers X dengan matriks fL dan memasukkan ke dalam matriks a
+        // m . m  x m . 1   
+        a = multiplyMatrix(X, fL, m, 1, m);
+        
         
         
         
     }
-
+    public double[][] multiplyMatrix(double[][] m1, double[][] m2, int Row, int Col, int In)
+    {
+        /* Prekondisi : Ukuran kolom efektif m1 = ukuran baris efektif m2 */
+        /* Mengirim hasil perkalian matriks: salinan m1 * m2 */
+        double[][] m = new double[Row][Col];
+        int i, j, k, nRow1 = Row, nCol1 = In, nRow2 = In, nCol2 = Col;
+        int n = nCol1; // ncol1 = nrow2
+        for (i = 0; i < nRow1; i++)
+        {
+            for (j = 0; j < nCol2; j++)
+            {
+                for (k = 0; k < n; k++)
+                {
+                    if (k == 0)
+                    {
+                        m[i][j] = (m1[i][k]) * (m2[k][j]);
+                    }
+                    else
+                    {
+                        m[i][j] += (m1[i][k]) * (m2[k][j]);
+                    }
+                }
+            }
+        }
+        return m;
+    }
     public void invers(double[][] mat) {
         int i, j, k, u, ba;
         double d = det(mat);

@@ -2,6 +2,7 @@ package VoidMatrix;
 
 import java.util.Scanner;
 import java.lang.Math;
+import java.security.Principal;
 
 public class Matrix {
     // private int n;
@@ -10,25 +11,34 @@ public class Matrix {
     private int nCols;
 
     // constructor
-    public Matrix(boolean Sq) {
+    public Matrix(boolean Sq, boolean spl) {
         int i, j, n, nR, nC;
         /**
          * Proses Deklarasi matriks dan assignment setiap
          * eklemen-elemen matriks
          */
         Scanner sc = new Scanner(System.in);
-        nR = sc.nextInt();
-        if (Sq) {
-            nC = nR;
-            n = nR;
-            nRows = n;
-            nCols = n;
+        if (spl == false) {
+            nR = sc.nextInt();
+            if (Sq) {
+                nC = nR;
+                n = nR;
+                nRows = n;
+                nCols = n;
+            } else {
+                nC = sc.nextInt();
+                nRows = nR;
+                nCols = nC;
+            }
         } else {
-            nC = sc.nextInt();
-            nRows = nR;
-            nCols = nC;
+            System.out.printf("Masukkan banyak variabel(kolom): ");
+            nCols = sc.nextInt() + 1;
+            System.out.printf("Masukkan banyak persamaan(baris): ");
+            nRows = sc.nextInt();
+
         }
-        mat = new double[nR][nC];
+
+        mat = new double[nRows][nCols];
 
         for (i = 0; i < nRows; i++) {
             for (j = 0; j < nCols; j++) {
@@ -188,6 +198,87 @@ public class Matrix {
         }
 
         // return mAdj;
+    }
+
+    public void inversSPL() {
+        int nRVar = nRows;
+        int nCVar = nCols - 1;
+        int i, j;
+        double[][] var = new double[nRVar][nCVar];
+        double[][] hasil = new double[nRows][1];
+        double[][] ai = new double[nRows][1];
+        // DisplayMatriks();
+        for (i = 0; i < nRVar; i++) {
+            for (j = 0; j < nCVar; j++) {
+                var[i][j] = mat[i][j];
+                // System.out.print(var[i][j]);
+            }
+            // System.out.println();
+        }
+
+        // System.out.println();
+
+        // hasil[i][0]=mat[nRows-1][0];
+        /// kolom jadi 3, row jadi 2
+        // j=nRows-1;
+        // hasil[nRows-1][0]=1;
+        // System.out.println(hasil[nRows-1][0]);
+        for (i = 0; i < nRows; i++) {
+            hasil[i][0] = mat[i][nCols - 1];
+            // System.out.println(hasil[i][0]);
+        }
+
+        invers(var);
+
+        // nRVar . nCVar x nRows . 1 = nRVar . 1
+        // Mengalikan var invers dengan hasil untuk mendapatkan hasil
+        // int a = nCols-1; // banyak variabel
+        System.out.println();
+        // int k;
+        // double sum = 0;
+        // for (i = 0; i < nRows; i++) {
+        //     sum = 0;
+        //     for (k = 0; k < nCVar; k++) // asumsi nCVar = nRows
+        //     {
+        //         sum += var[i][k] * hasil[k][0];
+        //     }
+        //     ai[i][0] = sum;
+        //     System.out.printf("a%d: %.2f", i, ai[i][0]);
+        //     System.out.println();
+        // }
+        ai = multiplyMatrix(var, hasil, nRVar, 1, nCVar);
+        for (i=0;i<nRVar;i++){
+            // for(j=0;j<1)
+            System.out.printf("a%d: %.2f", i, ai[i][0]);
+            System.out.println();
+        }
+
+    }
+    public double[][] multiplyMatrix(double[][] m1, double[][] m2, int Row, int Col, int In)
+    {
+        /* Prekondisi : Ukuran kolom efektif m1 = ukuran baris efektif m2 */
+        /* Mengirim hasil perkalian matriks: salinan m1 * m2 */
+        double[][] m = new double[Row][Col];
+        int i, j, k, nRow1 = Row, nCol1 = In, nRow2 = In, nCol2 = Col;
+        int n = nCol1; // ncol1 = nrow2
+        for (i = 0; i < nRow1; i++)
+        {
+            for (j = 0; j < nCol2; j++)
+            {
+                for (k = 0; k < n; k++)
+                {
+                    if (k == 0)
+                    {
+                        m[i][j] = (m1[i][k]) * (m2[k][j]);
+                    }
+                    else
+                    {
+                        m[i][j] += (m1[i][k]) * (m2[k][j]);
+                    }
+                }
+            }
+        }
+        return m;
     }
 
 }

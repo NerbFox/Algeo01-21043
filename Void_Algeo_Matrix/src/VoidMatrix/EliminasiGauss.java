@@ -14,7 +14,7 @@ public class EliminasiGauss {
         int baris, kolom;
         int b, k, k2, index_nilai_maks, i;
         double elmt_datang, elmt_banding, faktor, pembagi;
-
+        //4 4 4 2 4 1 1 0 -1 3 0 -3 1 6 14 3 6
         /* Mengambil indeks maksimum baris dan kolom matrix tanpa kolom solusi */
         baris = (matrix.length) - 1;
         kolom = (matrix[0].length) - 2;
