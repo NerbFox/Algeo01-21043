@@ -238,8 +238,9 @@ public class Matrix {
                     mat[i][j] = (1 / d) * mAdj[j][i]; // memasukan ke mat
                 }
             }
+            DisplayMatriks();
         } else {
-            System.out.println("Matriks tidak memilki balikan");
+            System.out.println("\nMatriks tidak memilki balikan\n");
             // matriks tidak punya balikan
         }
 

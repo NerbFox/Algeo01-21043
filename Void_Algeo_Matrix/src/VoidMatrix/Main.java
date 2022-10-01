@@ -8,15 +8,14 @@ import javax.swing.GroupLayout;
 
 public class Main {
 
-
     public static void main(String[] args) {
         // ReadFile re = new ReadFile();
         // double f = (-1)*0;
         // double f = (Math.pow(0, 1))*(Math.pow(-1, 1));
         // if (f==0){
-        //     System.out.printf("%f",f);
+        // System.out.printf("%f",f);
         // }
-        
+
         int menu = 1;
         Main obj = new Main();
         DisplayPengguna disp = new DisplayPengguna();
@@ -46,22 +45,22 @@ public class Main {
                         System.out.print("Input: ");
                         SubMenu = sc.next().charAt(0);
                     }
-                    while (SubMenu != 'e'){
+                    while (SubMenu != 'e') {
                         System.out.println();
                         switch (SubMenu) {
                             case 'a' -> {
                                 System.out.println("Menu 1a");
                                 System.out.println("Metode eliminasi Gauss");
-                                
+
                                 disp.displayPilihan();
                                 Masukan = sc.nextInt();
-                                while(Masukan!=1 && Masukan!=2){
+                                while (Masukan != 1 && Masukan != 2) {
                                     System.out.println("Masukan salah");
                                     disp.displayPilihan();
                                     Masukan = sc.nextInt();
                                 }
-                                read=false;
-                                if(Masukan==2){
+                                read = false;
+                                if (Masukan == 2) {
                                     read = true;
                                 }
 
@@ -72,8 +71,7 @@ public class Main {
                                 m.DisplayMatriks();
                                 GE.SubstitusiMundur(m.getMat(), hasil);
                                 System.out.println();
-                            
-                                
+
                             }
                             case 'b' -> {
                                 System.out.println("Menu 1b");
@@ -81,13 +79,13 @@ public class Main {
 
                                 disp.displayPilihan();
                                 Masukan = sc.nextInt();
-                                while(Masukan!=1 && Masukan!=2){
+                                while (Masukan != 1 && Masukan != 2) {
                                     System.out.println("Masukan salah");
                                     disp.displayPilihan();
                                     Masukan = sc.nextInt();
                                 }
-                                read=false;
-                                if(Masukan==2){
+                                read = false;
+                                if (Masukan == 2) {
                                     read = true;
                                 }
 
@@ -96,7 +94,7 @@ public class Main {
                                 GaussJordan GE = new GaussJordan();
                                 GE.GaussJordanElimination(m.getMat(), hasil);
                                 // m.DisplayMatriks();
-                                
+
                             }
                             case 'c' -> {
                                 System.out.println("Menu 1c");
@@ -104,13 +102,13 @@ public class Main {
 
                                 disp.displayPilihan();
                                 Masukan = sc.nextInt();
-                                while(Masukan!=1 && Masukan!=2){
+                                while (Masukan != 1 && Masukan != 2) {
                                     System.out.println("Masukan salah");
                                     disp.displayPilihan();
                                     Masukan = sc.nextInt();
                                 }
-                                read=false;
-                                if(Masukan==2){
+                                read = false;
+                                if (Masukan == 2) {
                                     read = true;
                                 }
 
@@ -123,13 +121,13 @@ public class Main {
 
                                 disp.displayPilihan();
                                 Masukan = sc.nextInt();
-                                while(Masukan!=1 && Masukan!=2){
+                                while (Masukan != 1 && Masukan != 2) {
                                     System.out.println("Masukan salah");
                                     disp.displayPilihan();
                                     Masukan = sc.nextInt();
                                 }
-                                read=false;
-                                if(Masukan==2){
+                                read = false;
+                                if (Masukan == 2) {
                                     read = true;
                                 }
 
@@ -158,7 +156,7 @@ public class Main {
                 case 2 -> {
                     System.out.println("Menu 2");
                     System.out.println("Determinan");
-            
+
                     disp.displayMenu2();
                     System.out.println("Input: ");
                     SubMenu = sc.next().charAt(0);
@@ -167,23 +165,23 @@ public class Main {
                         System.out.print("Input: ");
                         SubMenu = sc.next().charAt(0);
                     }
-                    while (SubMenu != 'c'){
+                    while (SubMenu != 'c') {
                         System.out.println();
-                        
+
                         switch (SubMenu) {
                             case 'a' -> {
                                 System.out.println("Menu 2a");
                                 System.out.println("Metode ekspansi kofaktor");
-                                
+
                                 disp.displayPilihan();
                                 Masukan = sc.nextInt();
-                                while(Masukan!=1 && Masukan!=2){
+                                while (Masukan != 1 && Masukan != 2) {
                                     System.out.println("Masukan salah");
                                     disp.displayPilihan();
                                     Masukan = sc.nextInt();
                                 }
-                                read=false;
-                                if(Masukan==2){
+                                read = false;
+                                if (Masukan == 2) {
                                     read = true;
                                 }
 
@@ -199,20 +197,20 @@ public class Main {
 
                                 disp.displayPilihan();
                                 Masukan = sc.nextInt();
-                                while(Masukan!=1 && Masukan!=2){
+                                while (Masukan != 1 && Masukan != 2) {
                                     System.out.println("Masukan salah");
                                     disp.displayPilihan();
                                     Masukan = sc.nextInt();
                                 }
-                                read=false;
-                                if(Masukan==2){
+                                read = false;
+                                if (Masukan == 2) {
                                     read = true;
                                 }
 
                                 Matrix m = new Matrix(true, false, read);
                                 // m.DisplayMatriks();
                                 // System.out.println();
-                                
+
                                 GaussJordan gj = new GaussJordan();
                                 double d;
                                 d = gj.GaussJordanForDet(m.getMat());
@@ -229,7 +227,7 @@ public class Main {
                             System.out.print("Input: ");
                             SubMenu = sc.next().charAt(0);
                         }
-                        
+
                     }
                 }
                 case 3 -> {
@@ -245,7 +243,7 @@ public class Main {
                         System.out.print("Input: ");
                         SubMenu = sc.next().charAt(0);
                     }
-                    while (SubMenu != 'c'){
+                    while (SubMenu != 'c') {
                         System.out.println();
                         switch (SubMenu) {
                             case 'a' -> {
@@ -254,19 +252,19 @@ public class Main {
 
                                 disp.displayPilihan();
                                 Masukan = sc.nextInt();
-                                while(Masukan!=1 && Masukan!=2){
+                                while (Masukan != 1 && Masukan != 2) {
                                     System.out.println("Masukan salah");
                                     disp.displayPilihan();
                                     Masukan = sc.nextInt();
                                 }
-                                read=false;
-                                if(Masukan==2){
+                                read = false;
+                                if (Masukan == 2) {
                                     read = true;
                                 }
 
                                 Matrix m = new Matrix(true, false, read);
                                 m.invers(m.getMat());
-                                m.DisplayMatriks();
+                                // m.DisplayMatriks();
 
                             }
                             case 'b' -> {
@@ -275,24 +273,29 @@ public class Main {
 
                                 disp.displayPilihan();
                                 Masukan = sc.nextInt();
-                                while(Masukan!=1 && Masukan!=2){
+                                while (Masukan != 1 && Masukan != 2) {
                                     System.out.println("Masukan salah");
                                     disp.displayPilihan();
                                     Masukan = sc.nextInt();
                                 }
-                                read=false;
-                                if(Masukan==2){
+                                read = false;
+                                if (Masukan == 2) {
                                     read = true;
                                 }
 
                                 Matrix m = new Matrix(true, false, read);
+                                double d = m.det(m.getMat());
                                 InversOBE IO = new InversOBE(m.getMat());
-                                m.DisplayMatriks();
+                                if (d != 0) {
+                                    m.DisplayMatriks();
+                                } else {
+                                    System.out.println("\nMatriks tidak memilki balikan\n");
+                                }
                             }
                         }
                         disp.displayMenu3();
                         System.out.println("Input: ");
-    
+
                         SubMenu = sc.next().charAt(0);
                         while (SubMenu != 'a' && SubMenu != 'b' && SubMenu != 'c') {
                             System.out.println("Invalid Input, please input the correct option");
@@ -304,7 +307,7 @@ public class Main {
                 case 4 -> {
                     System.out.println("Menu 4");
                     System.out.println("Interpolasi Polinom");
-                
+
                     PolynomialInterpolation p = new PolynomialInterpolation();
                 }
 
@@ -314,7 +317,7 @@ public class Main {
                     // Matrix m = new Matrix(true);
 
                     BicubicInterpolation b = new BicubicInterpolation();
-                
+
                 }
                 case 6 -> {
                     System.out.println("Menu 6");
@@ -326,7 +329,7 @@ public class Main {
 
                 }
             }
-           
+
         }
     }
 }

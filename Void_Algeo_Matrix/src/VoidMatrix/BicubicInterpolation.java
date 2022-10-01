@@ -16,12 +16,12 @@ public class BicubicInterpolation {
         double[][] xk = new double[1][n];
         double[][] yk = new double[n][1];
 
-        for (i=0;i<4;i++){
-        for (j=0; j<4; j++){ // baris y dan kolom x
-            System.out.printf("f(%d,%d) = ", j-1, i-1);
-            f[i][j] = sc.nextDouble();
-            // System.out.println();
-        }
+        for (i = 0; i < 4; i++) {
+            for (j = 0; j < 4; j++) { // baris y dan kolom x
+                System.out.printf("f(%d,%d) = ", j - 1, i - 1);
+                f[i][j] = sc.nextDouble();
+                // System.out.println();
+            }
         }
 
         // DisplayMatriks(f, 4, 4);
@@ -72,14 +72,15 @@ public class BicubicInterpolation {
         // g = det(X);
         // System.out.printf("%f", g);
         // Invers matriks X
-        invers(X);
+        // invers(X);
+        InversOBE(X);
         DisplayMatriks(X, m, m);
         // menjadikan
         int o = 0;
-        for (i=0; i<n; i++){
-            for (j=0; j<n; j++){
-            fL[o][0]=f[i][j];
-            o++;
+        for (i = 0; i < n; i++) {
+            for (j = 0; j < n; j++) {
+                fL[o][0] = f[i][j];
+                o++;
             }
         }
 
@@ -90,10 +91,10 @@ public class BicubicInterpolation {
 
         //
         o = 0;
-        for (i=0; i<n; i++){
-            for (j=0; j<n; j++){
-                    a[i][j]=aL[o][0];
-                    o++;
+        for (i = 0; i < n; i++) {
+            for (j = 0; j < n; j++) {
+                a[i][j] = aL[o][0];
+                o++;
             }
         }
 
@@ -105,9 +106,9 @@ public class BicubicInterpolation {
         inputY = sc.nextDouble();
 
         // Inisiasi xk dan yk
-        for (j=0; j<n; j++){
-            xk[0][j]=Math.pow(inputX,j);
-            yk[j][0]=Math.pow(inputY,j);
+        for (j = 0; j < n; j++) {
+            xk[0][j] = Math.pow(inputY, j);
+            yk[j][0] = Math.pow(inputX, j); // kebalik ?
         }
         // DisplayMatriks(yk, n, 1);
         // menghasilkan f(x,y)
@@ -116,7 +117,7 @@ public class BicubicInterpolation {
         double fxy[][] = new double[1][1];
         fxy = multiplyMatrix(temp, yk, 1, 1, 4);
         System.out.println();
-        System.out.printf("f(%.2f,%.2f) : %f", inputX, inputY, fxy[0][0]);
+        System.out.printf("f(%.2f,%.2f) : %.3f", inputX, inputY, fxy[0][0]);
         System.out.println();
 
     }
@@ -200,34 +201,34 @@ public class BicubicInterpolation {
     }
 
     // public double det(double[][] mat) {
-    //     // Pre kondisi matriks berbentuk square
-    //     double d = 0.0;
-    //     int i, j, a, b, k, u;
-    //     int num = mat.length;
-    //     if (num != 1) {
-    //         for (k = 0; k < num; k++) {
-    //             a = 0;
-    //             b = 0;
-    //             u = num - 1;
-    //             double[][] temp = new double[u][u];
-    //             for (i = 0; i < num; i++) {
-    //                 if (i != 0) {
-    //                     b = 0;
-    //                     for (j = 0; j < num; j++) {
-    //                         if (j != k) {
-    //                             temp[a][b] = mat[i][j];
-    //                             b++;
-    //                         }
-    //                     }
-    //                     a++;
-    //                 }
-    //             }
-    //             d += (Math.pow(-1, k) * mat[0][k] * det(temp));
-    //         }
-    //     } else {
-    //         d = mat[0][0];
-    //     }
-    //     return d;
+    // // Pre kondisi matriks berbentuk square
+    // double d = 0.0;
+    // int i, j, a, b, k, u;
+    // int num = mat.length;
+    // if (num != 1) {
+    // for (k = 0; k < num; k++) {
+    // a = 0;
+    // b = 0;
+    // u = num - 1;
+    // double[][] temp = new double[u][u];
+    // for (i = 0; i < num; i++) {
+    // if (i != 0) {
+    // b = 0;
+    // for (j = 0; j < num; j++) {
+    // if (j != k) {
+    // temp[a][b] = mat[i][j];
+    // b++;
+    // }
+    // }
+    // a++;
+    // }
+    // }
+    // d += (Math.pow(-1, k) * mat[0][k] * det(temp));
+    // }
+    // } else {
+    // d = mat[0][0];
+    // }
+    // return d;
     // }
 
     public double det(double[][] matrix) {
@@ -291,6 +292,115 @@ public class BicubicInterpolation {
         }
         det = Math.pow(-1, p) * det;
         return det;
+    }
+
+    public void InversOBE(double[][] matrix) {
+        /*
+         * KETERANGAN : mengubah matrix menjadi inversnya dengan metode reduksi baris
+         * (OBE)
+         */
+        /* PREKONDISI : matrix berukuran NxN */
+
+        /* KAMUS LOKAL */
+        int idxMax;
+        int b, k, k2, index_nilai_maks, i;
+        double elmt_datang, elmt_banding, faktor, pembagi;
+        double[][] matriks_identitas;
+
+        /* Mengambil indeks maksimum baris dan kolom matrix dan matriks_identitas */
+        idxMax = (matrix.length) - 1;
+
+        /* Membuat matriks identitas berukuran NxN */
+        matriks_identitas = new double[idxMax + 1][idxMax + 1];
+        for (b = 0; b <= idxMax; b++) {
+            for (k = 0; k <= idxMax; k++) {
+                if (b == k) {
+                    matriks_identitas[b][k] = 1;
+                } else {
+                    matriks_identitas[b][k] = 0;
+                }
+            }
+        }
+
+        /* Mencacah kolom untuk melakukan operasi */
+        for (k = 0; k <= idxMax; k++) {
+
+            /* Mencari baris acuan pada matrix dari indeks [i+1..idxMax] untuk pertukaran */
+            index_nilai_maks = k;
+            for (b = k + 1; b <= idxMax; b++) {
+                elmt_datang = matrix[b][k];
+                if (elmt_datang < 0) {
+                    elmt_datang = elmt_datang * -1;
+                }
+
+                elmt_banding = matrix[index_nilai_maks][k];
+                if (elmt_banding < 0) {
+                    elmt_banding = elmt_banding * -1;
+                }
+
+                if (elmt_datang > elmt_banding) {
+                    index_nilai_maks = b;
+                }
+            }
+
+            /* Menukar baris pada matrix dan matriks_identitas */
+            double[] temp = matrix[k];
+            double[] temp2 = matriks_identitas[k];
+
+            matrix[k] = matrix[index_nilai_maks];
+            matriks_identitas[k] = matriks_identitas[index_nilai_maks];
+
+            matrix[index_nilai_maks] = temp;
+            matriks_identitas[index_nilai_maks] = temp2;
+
+            /* Melakukan operasi baris elementer */
+            for (b = k + 1; b <= idxMax; b++) {
+                faktor = matrix[b][k] / matrix[k][k];
+                for (k2 = 0; k2 <= idxMax; k2++) {
+                    matrix[b][k2] = matrix[b][k2] - faktor * matrix[k][k2];
+                    matriks_identitas[b][k2] = matriks_identitas[b][k2] - faktor * matriks_identitas[k][k2];
+                }
+            }
+        }
+
+        /* Membuat LEADING ONE untuk setiap baris matrix */
+        /* matriks_identitas ikut dioperasikan */
+        i = -1;
+
+        for (b = 0; b <= idxMax; b++) {
+            i = i + 1;
+            pembagi = matrix[b][i];
+            for (k = 0; k <= idxMax; k++) {
+                matrix[b][k] = matrix[b][k] / pembagi;
+                matriks_identitas[b][k] = matriks_identitas[b][k] / pembagi;
+            }
+        }
+
+        /* Membuat nilai di atas dan bawah LEADING ONE pada matriks menjadi 0 */
+        /* matriks_identitas ikut dioperasikan */
+        int jumlah_operasi;
+        double nilai_acuan;
+
+        for (b = 0; b < idxMax; b++) {
+            jumlah_operasi = 1;
+            while (jumlah_operasi < (idxMax + 1) - b) {
+                i = b + jumlah_operasi;
+                nilai_acuan = matrix[b][i];
+                for (k = 0; k <= idxMax; k++) {
+                    matrix[b][k] = matrix[b][k] - nilai_acuan * matrix[i][k];
+                    matriks_identitas[b][k] = matriks_identitas[b][k] - nilai_acuan * matriks_identitas[i][k];
+                }
+                jumlah_operasi = jumlah_operasi + 1;
+            }
+        }
+
+        /* KETERANGAN : isi matrix_identitas sudah berupa invers dari matrix awal */
+        /* Memindahkan matriks_identitas ke matrix */
+        for (b = 0; b <= idxMax; b++) {
+            for (k = 0; k <= idxMax; k++) {
+                matrix[b][k] = matriks_identitas[b][k];
+            }
+        }
     }
 
     public void DisplayMatriks(double[][] mat, int nRows, int nCols) {
