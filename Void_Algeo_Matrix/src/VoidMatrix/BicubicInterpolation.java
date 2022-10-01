@@ -14,15 +14,15 @@ public class BicubicInterpolation {
         double[][] aL = new double[m][1];
         double[][] X = new double[m][m];
         double[][] xk = new double[1][n];
-        double[][] yk = new double[1][n];
+        double[][] yk = new double[n][1];
 
-        // for (i=0;i<4;i++){
-        // for (j=0; j<4; j++){ // baris y dan kolom x
-        // System.out.printf("f(%d,%d) = ", j-1, i-1);
-        // f[i][j] = sc.nextDouble();
-        // // System.out.println();
-        // }
-        // }
+        for (i=0;i<4;i++){
+        for (j=0; j<4; j++){ // baris y dan kolom x
+            System.out.printf("f(%d,%d) = ", j-1, i-1);
+            f[i][j] = sc.nextDouble();
+            // System.out.println();
+        }
+        }
 
         // DisplayMatriks(f, 4, 4);
 
@@ -69,54 +69,55 @@ public class BicubicInterpolation {
         // a = X^-1 f(x,y)
         double g;
         DisplayMatriks(X, m, m);
-        g = det(X);
-        System.out.printf("%f", g);
+        // g = det(X);
+        // System.out.printf("%f", g);
         // Invers matriks X
         invers(X);
         DisplayMatriks(X, m, m);
         // menjadikan
-        // int o = 0;
-        // for (i=0; i<n; i++){
-        // for (j=0; j<n; j++){
-        // fL[o][0]=f[i][j];
-        // o++;
-        // }
-        // }
+        int o = 0;
+        for (i=0; i<n; i++){
+            for (j=0; j<n; j++){
+            fL[o][0]=f[i][j];
+            o++;
+            }
+        }
 
         // Mengalikan invers X dengan matriks fL dan memasukkan ke dalam matriks a
         // m . m x m . 1
 
-        // aL = multiplyMatrix(X, fL, m, 1, m);
+        aL = multiplyMatrix(X, fL, m, 1, m);
 
-        // //
-        // o = 0;
-        // for (i=0; i<n; i++){
-        // for (j=0; j<n; j++){
-        // a[i][j]=aL[o][0];
-        // o++;
-        // }
-        // }
+        //
+        o = 0;
+        for (i=0; i<n; i++){
+            for (j=0; j<n; j++){
+                    a[i][j]=aL[o][0];
+                    o++;
+            }
+        }
 
-        int inputX, inputY;
+        double inputX, inputY;
         System.out.print("Masukkan nilai X: ");
-        inputX = sc.nextInt();
+        inputX = sc.nextDouble();
         System.out.println();
         System.out.print("Masukkan nilai Y: ");
-        inputY = sc.nextInt();
+        inputY = sc.nextDouble();
 
         // Inisiasi xk dan yk
-        // for (j=0; j<n; j++){
-        // xk[0][j]=Math.pow(inputX,j);
-        // yk[j][0]=Math.pow(inputY,j);
-        // }
-        // // menghasilkan f(x,y)
-        // double temp[][] = new double[1][n];
-        // temp = multiplyMatrix(xk, a, 1, n, n);
-        // double fxy[][] = new double[1][1];
-        // fxy = multiplyMatrix(temp, yk, 1, 1, 4);
-        // System.out.println();
-        // System.out.printf("f(%f,%f) : %f", inputX, inputY, fxy[0][0]);
-        // System.out.println();
+        for (j=0; j<n; j++){
+            xk[0][j]=Math.pow(inputX,j);
+            yk[j][0]=Math.pow(inputY,j);
+        }
+        // DisplayMatriks(yk, n, 1);
+        // menghasilkan f(x,y)
+        double temp[][] = new double[1][n];
+        temp = multiplyMatrix(xk, a, 1, n, n);
+        double fxy[][] = new double[1][1];
+        fxy = multiplyMatrix(temp, yk, 1, 1, 4);
+        System.out.println();
+        System.out.printf("f(%.2f,%.2f) : %f", inputX, inputY, fxy[0][0]);
+        System.out.println();
 
     }
 
@@ -199,34 +200,34 @@ public class BicubicInterpolation {
     }
 
     // public double det(double[][] mat) {
-    // // Pre kondisi matriks berbentuk square
-    // double d = 0.0;
-    // int i, j, a, b, k, u;
-    // int num = mat.length;
-    // if (num != 1) {
-    // for (k = 0; k < num; k++) {
-    // a = 0;
-    // b = 0;
-    // u = num - 1;
-    // double[][] temp = new double[u][u];
-    // for (i = 0; i < num; i++) {
-    // if (i != 0) {
-    // b = 0;
-    // for (j = 0; j < num; j++) {
-    // if (j != k) {
-    // temp[a][b] = mat[i][j];
-    // b++;
-    // }
-    // }
-    // a++;
-    // }
-    // }
-    // d += (Math.pow(-1, k) * mat[0][k] * det(temp));
-    // }
-    // } else {
-    // d = mat[0][0];
-    // }
-    // return d;
+    //     // Pre kondisi matriks berbentuk square
+    //     double d = 0.0;
+    //     int i, j, a, b, k, u;
+    //     int num = mat.length;
+    //     if (num != 1) {
+    //         for (k = 0; k < num; k++) {
+    //             a = 0;
+    //             b = 0;
+    //             u = num - 1;
+    //             double[][] temp = new double[u][u];
+    //             for (i = 0; i < num; i++) {
+    //                 if (i != 0) {
+    //                     b = 0;
+    //                     for (j = 0; j < num; j++) {
+    //                         if (j != k) {
+    //                             temp[a][b] = mat[i][j];
+    //                             b++;
+    //                         }
+    //                     }
+    //                     a++;
+    //                 }
+    //             }
+    //             d += (Math.pow(-1, k) * mat[0][k] * det(temp));
+    //         }
+    //     } else {
+    //         d = mat[0][0];
+    //     }
+    //     return d;
     // }
 
     public double det(double[][] matrix) {

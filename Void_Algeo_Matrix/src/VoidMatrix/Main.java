@@ -1,19 +1,14 @@
 package VoidMatrix;
 
 import java.util.Scanner;
-
+import java.util.regex.MatchResult;
 import java.lang.Math;
 import javax.sound.midi.Soundbank;
 import javax.swing.GroupLayout;
 
-// import javax.sound.midi.Soundbank;
-// import javax.sound.sampled.SourceDataLine;
-
 public class Main {
 
 
-    // NANTI BUAT SATU KELAS BUAT isi, fungsi matriks is square dll.
-    // SAMA baca txt atau apa tuh di spek
     public static void main(String[] args) {
         // ReadFile re = new ReadFile();
         // double f = (-1)*0;
@@ -23,7 +18,6 @@ public class Main {
         // }
         
         int menu = 1;
-        // char SubMenu ;
         Main obj = new Main();
         DisplayPengguna disp = new DisplayPengguna();
         Scanner sc = new Scanner(System.in);
@@ -38,6 +32,8 @@ public class Main {
             }
             System.out.println();
             char SubMenu;
+            int Masukan;
+            boolean read;
             switch (menu) {
                 case 1 -> {
                     System.out.println("Menu 1");
@@ -57,35 +53,88 @@ public class Main {
                                 System.out.println("Menu 1a");
                                 System.out.println("Metode eliminasi Gauss");
                                 
-                                    Matrix m = new Matrix(false, true, false);
-                                    double[] hasil = new double[m.getnRows()];
-                                    EliminasiGauss GE = new EliminasiGauss();
-                                    GE.GaussElimination(m.getMat());
-                                    m.DisplayMatriks();
-                                    GE.SubstitusiMundur(m.getMat(), hasil);
+                                disp.displayPilihan();
+                                Masukan = sc.nextInt();
+                                while(Masukan!=1 && Masukan!=2){
+                                    System.out.println("Masukan salah");
+                                    disp.displayPilihan();
+                                    Masukan = sc.nextInt();
+                                }
+                                read=false;
+                                if(Masukan==2){
+                                    read = true;
+                                }
 
+                                Matrix m = new Matrix(false, false, read);
+                                double[] hasil = new double[m.getnRows()];
+                                EliminasiGauss GE = new EliminasiGauss();
+                                GE.GaussElimination(m.getMat());
+                                m.DisplayMatriks();
+                                GE.SubstitusiMundur(m.getMat(), hasil);
+                                System.out.println();
+                            
+                                
                             }
                             case 'b' -> {
                                 System.out.println("Menu 1b");
                                 System.out.println("Metode Eliminasi Gauss-Jordan");
-                                Matrix m = new Matrix(false, true, false);
+
+                                disp.displayPilihan();
+                                Masukan = sc.nextInt();
+                                while(Masukan!=1 && Masukan!=2){
+                                    System.out.println("Masukan salah");
+                                    disp.displayPilihan();
+                                    Masukan = sc.nextInt();
+                                }
+                                read=false;
+                                if(Masukan==2){
+                                    read = true;
+                                }
+
+                                Matrix m = new Matrix(false, true, read);
                                 double[] hasil = new double[m.getnRows()];
                                 GaussJordan GE = new GaussJordan();
                                 GE.GaussJordanElimination(m.getMat(), hasil);
                                 // m.DisplayMatriks();
-
+                                
                             }
                             case 'c' -> {
                                 System.out.println("Menu 1c");
                                 System.out.println("Metode Matriks Balikan");
-                                Matrix m = new Matrix(false, true, false);
+
+                                disp.displayPilihan();
+                                Masukan = sc.nextInt();
+                                while(Masukan!=1 && Masukan!=2){
+                                    System.out.println("Masukan salah");
+                                    disp.displayPilihan();
+                                    Masukan = sc.nextInt();
+                                }
+                                read=false;
+                                if(Masukan==2){
+                                    read = true;
+                                }
+
+                                Matrix m = new Matrix(false, true, read);
                                 m.inversSPL();
                             }
                             case 'd' -> {
                                 System.out.println("Menu 1d");
                                 System.out.println("Kaidah Cramer");
+
+                                disp.displayPilihan();
+                                Masukan = sc.nextInt();
+                                while(Masukan!=1 && Masukan!=2){
+                                    System.out.println("Masukan salah");
+                                    disp.displayPilihan();
+                                    Masukan = sc.nextInt();
+                                }
+                                read=false;
+                                if(Masukan==2){
+                                    read = true;
+                                }
+
                                 Cramer cm = new Cramer();
-                                Matrix mat = new Matrix(false, true, false);
+                                Matrix mat = new Matrix(false, true, read);
                                 double[] hasil = new double[mat.getnRows()];
                                 int x;
                                 cm.CramerRule(mat.getMat(), hasil);
@@ -96,12 +145,20 @@ public class Main {
                                 System.out.printf("\n");
                             }
                         }
+                        disp.displayMenu1();
+                        System.out.print("Input: ");
+                        SubMenu = sc.next().charAt(0);
+                        while (SubMenu != 'a' && SubMenu != 'b' && SubMenu != 'c' && SubMenu != 'd' && SubMenu != 'e') {
+                            System.out.println("Invalid Input, please input the correct option");
+                            System.out.print("Input: ");
+                            SubMenu = sc.next().charAt(0);
+                        }
                     }
                 }
                 case 2 -> {
                     System.out.println("Menu 2");
                     System.out.println("Determinan");
-                    // ada pilihannya
+            
                     disp.displayMenu2();
                     System.out.println("Input: ");
                     SubMenu = sc.next().charAt(0);
@@ -118,7 +175,19 @@ public class Main {
                                 System.out.println("Menu 2a");
                                 System.out.println("Metode ekspansi kofaktor");
                                 
-                                Matrix m = new Matrix(true, false, false); // determinan
+                                disp.displayPilihan();
+                                Masukan = sc.nextInt();
+                                while(Masukan!=1 && Masukan!=2){
+                                    System.out.println("Masukan salah");
+                                    disp.displayPilihan();
+                                    Masukan = sc.nextInt();
+                                }
+                                read=false;
+                                if(Masukan==2){
+                                    read = true;
+                                }
+
+                                Matrix m = new Matrix(true, false, read); // determinan
                                 double d = m.det(m.getMat());
                                 // m.DisplayMatriks();
                                 System.out.print("Determinan matriks: ");
@@ -127,7 +196,20 @@ public class Main {
                             case 'b' -> {
                                 System.out.println("Menu 2b");
                                 System.out.println("Metode reduksi baris");
-                                Matrix m = new Matrix(true, false, false);
+
+                                disp.displayPilihan();
+                                Masukan = sc.nextInt();
+                                while(Masukan!=1 && Masukan!=2){
+                                    System.out.println("Masukan salah");
+                                    disp.displayPilihan();
+                                    Masukan = sc.nextInt();
+                                }
+                                read=false;
+                                if(Masukan==2){
+                                    read = true;
+                                }
+
+                                Matrix m = new Matrix(true, false, read);
                                 // m.DisplayMatriks();
                                 // System.out.println();
                                 
@@ -169,7 +251,20 @@ public class Main {
                             case 'a' -> {
                                 System.out.println("Menu 3a");
                                 System.out.println("Metode Matriks Adjoin ");
-                                Matrix m = new Matrix(true, false, false);
+
+                                disp.displayPilihan();
+                                Masukan = sc.nextInt();
+                                while(Masukan!=1 && Masukan!=2){
+                                    System.out.println("Masukan salah");
+                                    disp.displayPilihan();
+                                    Masukan = sc.nextInt();
+                                }
+                                read=false;
+                                if(Masukan==2){
+                                    read = true;
+                                }
+
+                                Matrix m = new Matrix(true, false, read);
                                 m.invers(m.getMat());
                                 m.DisplayMatriks();
 
@@ -177,16 +272,39 @@ public class Main {
                             case 'b' -> {
                                 System.out.println("Menu 3b");
                                 System.out.println("Metode OBE");
-                                Matrix m = new Matrix(true, false, false);
+
+                                disp.displayPilihan();
+                                Masukan = sc.nextInt();
+                                while(Masukan!=1 && Masukan!=2){
+                                    System.out.println("Masukan salah");
+                                    disp.displayPilihan();
+                                    Masukan = sc.nextInt();
+                                }
+                                read=false;
+                                if(Masukan==2){
+                                    read = true;
+                                }
+
+                                Matrix m = new Matrix(true, false, read);
                                 InversOBE IO = new InversOBE(m.getMat());
                                 m.DisplayMatriks();
                             }
+                        }
+                        disp.displayMenu3();
+                        System.out.println("Input: ");
+    
+                        SubMenu = sc.next().charAt(0);
+                        while (SubMenu != 'a' && SubMenu != 'b' && SubMenu != 'c') {
+                            System.out.println("Invalid Input, please input the correct option");
+                            System.out.print("Input: ");
+                            SubMenu = sc.next().charAt(0);
                         }
                     }
                 }
                 case 4 -> {
                     System.out.println("Menu 4");
                     System.out.println("Interpolasi Polinom");
+                
                     PolynomialInterpolation p = new PolynomialInterpolation();
                 }
 
@@ -208,13 +326,7 @@ public class Main {
 
                 }
             }
-            // menu=sc.nextInt();
+           
         }
-
-        // -Main
-        // -MAtriks , tampil matriks
-        // -determinan extend matriks
-
     }
-
 }

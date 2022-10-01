@@ -33,4 +33,9 @@ public class DisplayPengguna extends Main{
         System.out.println("b. Metode OBE"); // done 
         System.out.println("c. Main Menu"); //back to main menu
     }
+    void displayPilihan(){
+        System.out.println("1. Masukan Keyboard");
+        System.out.println("2. Masukan File ");
+        System.out.print("Input : ");
+    }
 }
