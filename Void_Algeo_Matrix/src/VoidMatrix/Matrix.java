@@ -54,43 +54,43 @@ public class Matrix {
 
         else {
             File fIn = new File(sc.nextLine());
-            Scanner SIn = null;
+            Scanner Sca = null;
             try {
-                SIn = new Scanner(fIn);
+                Sca = new Scanner(fIn);
             } catch (Exception ex) {
                 System.out.println("File tidak ditemui");
             }
             int rows = 0;
             int cols = 0;
-            ArrayList<ArrayList<Double>> Isi = new ArrayList<ArrayList<Double>>();
+            ArrayList<ArrayList<Double>> Inside = new ArrayList<ArrayList<Double>>();
             String baris;
-            while (SIn.hasNextLine()) {
-                baris = SIn.nextLine();
+            while (Sca.hasNextLine()) {
+                baris = Sca.nextLine();
                 Scanner SBar = new Scanner(baris);
                 cols = 0;
-                Isi.add(new ArrayList<Double>());
+                Inside.add(new ArrayList<Double>());
                 while(SBar.hasNextDouble()) {
-                    Isi.get(rows).add(cols,SBar.nextDouble());
+                    Inside.get(rows).add(cols,SBar.nextDouble());
                     cols++;
                 }
                 rows++;
             }
-            nRows = Isi.size();
-            nCols = Isi.get(0).size();
+            nRows = Inside.size();
+            nCols = Inside.get(0).size();
             mat = new double[nRows][nCols];
             for( i =0; i < nRows; i++) {
                 for( j = 0; j < nCols;j++) {
-                    mat[i][j] = Isi.get(i).get(j);
+                    mat[i][j] = Inside.get(i).get(j);
                 }
             }
-            // Matrix M = new MatrixR(Isi);
+            // Matrix M = new MatrixR(Inside);
             // return M;
         }
     }
         // // ArrayList<ArrayList<Double>> M =;
 		// // this.Row = li.size();
 		// this.Col = li.get(0).size();
-		// this.Isi = new double[Row][Col];
+		// this.Inside = new double[Row][Col];
     
     // public Matrix(int nR, int nC){
 

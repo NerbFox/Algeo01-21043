@@ -1,10 +1,12 @@
 package VoidMatrix;
 
+import java.io.File;
 import java.lang.Math;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class BicubicInterpolation {
-    public BicubicInterpolation() {
+    public BicubicInterpolation(boolean read) {
         // Matrix m = new Matrix(true);
         int i, j, n = 4, v, w, m = n * n;
         Scanner sc = new Scanner(System.in);
@@ -15,15 +17,56 @@ public class BicubicInterpolation {
         double[][] X = new double[m][m];
         double[][] xk = new double[1][n];
         double[][] yk = new double[n][1];
+        double inputX = 0, inputY = 0;
 
-        for (i = 0; i < 4; i++) {
-            for (j = 0; j < 4; j++) { // baris y dan kolom x
-                System.out.printf("f(%d,%d) = ", j - 1, i - 1);
-                f[i][j] = sc.nextDouble();
-                // System.out.println();
+        if (read == false) {
+            for (i = 0; i < n; i++) {
+                for (j = 0; j < n; j++) { // baris y dan kolom x
+                    System.out.printf("f(%d,%d) = ", j - 1, i - 1);
+                    f[i][j] = sc.nextDouble();
+                    // System.out.println();
+                }
             }
+            System.out.print("Masukkan nilai X: ");
+            inputX = sc.nextDouble();
+            System.out.println();
+            System.out.print("Masukkan nilai Y: ");
+            inputY = sc.nextDouble();
+        } else {
+            int nCols, nRows;
+            File fIn = new File(sc.nextLine());
+            Scanner Sca = null;
+            try {
+                Sca = new Scanner(fIn);
+            } catch (Exception ex) {
+                System.out.println("File tidak ditemui");
+            }
+            int rows = 0;
+            int cols = 0;
+            ArrayList<ArrayList<Double>> Inside = new ArrayList<ArrayList<Double>>();
+            String baris;
+            while (Sca.hasNextLine()) {
+                baris = Sca.nextLine();
+                Scanner bar = new Scanner(baris);
+                cols = 0;
+                Inside.add(new ArrayList<Double>());
+                while (bar.hasNextDouble()) {
+                    Inside.get(rows).add(cols, bar.nextDouble());
+                    cols++;
+                }
+                rows++;
+            }
+            nRows = 4;// Inside.size();
+            nCols = 4;// Inside.get(0).size();
+            f = new double[nRows][nCols];
+            for (i = 0; i < nRows; i++) {
+                for (j = 0; j < nCols; j++) {
+                    f[i][j] = Inside.get(i).get(j);
+                }
+            }
+            inputX = Inside.get(n).get(0);
+            inputY = Inside.get(n).get(1);
         }
-
         // DisplayMatriks(f, 4, 4);
 
         // Pembuatan Matriks X
@@ -97,13 +140,6 @@ public class BicubicInterpolation {
                 o++;
             }
         }
-
-        double inputX, inputY;
-        System.out.print("Masukkan nilai X: ");
-        inputX = sc.nextDouble();
-        System.out.println();
-        System.out.print("Masukkan nilai Y: ");
-        inputY = sc.nextDouble();
 
         // Inisiasi xk dan yk
         for (j = 0; j < n; j++) {

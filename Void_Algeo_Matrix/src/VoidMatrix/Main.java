@@ -315,8 +315,20 @@ public class Main {
                     System.out.println("Menu 5");
                     System.out.println("Interpolasi Bicubic");
                     // Matrix m = new Matrix(true);
+                    
+                    disp.displayPilihan();
+                    Masukan = sc.nextInt();
+                    while (Masukan != 1 && Masukan != 2) {
+                        System.out.println("Masukan salah");
+                        disp.displayPilihan();
+                        Masukan = sc.nextInt();
+                    }
+                    read = false;
+                    if (Masukan == 2) {
+                        read = true;
+                    }
 
-                    BicubicInterpolation b = new BicubicInterpolation();
+                    BicubicInterpolation b = new BicubicInterpolation(read);
 
                 }
                 case 6 -> {
