@@ -45,57 +45,58 @@ public class Main {
                     disp.displayMenu1();
                     System.out.print("Input: ");
                     SubMenu = sc.next().charAt(0);
-                    while (SubMenu != 'a' && SubMenu != 'b' && SubMenu != 'c' && SubMenu != 'd') {
+                    while (SubMenu != 'a' && SubMenu != 'b' && SubMenu != 'c' && SubMenu != 'd' && SubMenu != 'e') {
                         System.out.println("Invalid Input, please input the correct option");
                         System.out.print("Input: ");
                         SubMenu = sc.next().charAt(0);
                     }
-                    System.out.println();
-                    switch (SubMenu) {
-                        case 'a' -> {
-                            System.out.println("Menu 1a");
-                            System.out.println("Metode eliminasi Gauss");
-                            Matrix m = new Matrix(false, true);
-                            double[] hasil = new double[m.getnRows()];
-                            EliminasiGauss GE = new EliminasiGauss();
-                            GE.GaussElimination(m.getMat());
-                            m.DisplayMatriks();
-                            GE.SubstitusiMundur(m.getMat(), hasil);
+                    while (SubMenu != 'e'){
+                        System.out.println();
+                        switch (SubMenu) {
+                            case 'a' -> {
+                                System.out.println("Menu 1a");
+                                System.out.println("Metode eliminasi Gauss");
+                                
+                                    Matrix m = new Matrix(false, true);
+                                    double[] hasil = new double[m.getnRows()];
+                                    EliminasiGauss GE = new EliminasiGauss();
+                                    GE.GaussElimination(m.getMat());
+                                    m.DisplayMatriks();
+                                    GE.SubstitusiMundur(m.getMat(), hasil);
 
-                        }
-                        case 'b' -> {
-                            System.out.println("Menu 1b");
-                            System.out.println("Metode Eliminasi Gauss-Jordan");
-                            Matrix m = new Matrix(false, true);
-                            double[] hasil = new double[m.getnRows()];
-                            GaussJordan GE = new GaussJordan();
-                            GE.GaussJordanElimination(m.getMat(), hasil);
-                            // m.DisplayMatriks();
-
-                        }
-                        case 'c' -> {
-                            System.out.println("Menu 1c");
-                            System.out.println("Metode Matriks Balikan");
-                            Matrix m = new Matrix(false, true);
-                            m.inversSPL();
-                        }
-                        case 'd' -> {
-                            System.out.println("Menu 1d");
-                            System.out.println("Kaidah Cramer");
-                            Cramer cm = new Cramer();
-                            Matrix mat = new Matrix(false, true);
-                            double[] hasil = new double[mat.getnRows()];
-                            int x;
-                            cm.CramerRule(mat.getMat(), hasil);
-                            System.out.printf("SOLUSI SISTEM PERSAMAAN LINIER ANDA:\n");
-                            for (x = 0; x < mat.getnRows(); x++) {
-                                System.out.printf("%f ", hasil[x]);
                             }
-                            System.out.printf("\n");
+                            case 'b' -> {
+                                System.out.println("Menu 1b");
+                                System.out.println("Metode Eliminasi Gauss-Jordan");
+                                Matrix m = new Matrix(false, true);
+                                double[] hasil = new double[m.getnRows()];
+                                GaussJordan GE = new GaussJordan();
+                                GE.GaussJordanElimination(m.getMat(), hasil);
+                                // m.DisplayMatriks();
 
+                            }
+                            case 'c' -> {
+                                System.out.println("Menu 1c");
+                                System.out.println("Metode Matriks Balikan");
+                                Matrix m = new Matrix(false, true);
+                                m.inversSPL();
+                            }
+                            case 'd' -> {
+                                System.out.println("Menu 1d");
+                                System.out.println("Kaidah Cramer");
+                                Cramer cm = new Cramer();
+                                Matrix mat = new Matrix(false, true);
+                                double[] hasil = new double[mat.getnRows()];
+                                int x;
+                                cm.CramerRule(mat.getMat(), hasil);
+                                System.out.printf("SOLUSI SISTEM PERSAMAAN LINIER ANDA:\n");
+                                for (x = 0; x < mat.getnRows(); x++) {
+                                    System.out.printf("%f ", hasil[x]);
+                                }
+                                System.out.printf("\n");
+                            }
                         }
                     }
-
                 }
                 case 2 -> {
                     System.out.println("Menu 2");
@@ -104,38 +105,38 @@ public class Main {
                     disp.displayMenu2();
                     System.out.println("Input: ");
                     SubMenu = sc.next().charAt(0);
-                    while (SubMenu != 'a' && SubMenu != 'b') {
+                    while (SubMenu != 'a' && SubMenu != 'b' && SubMenu != 'c') {
                         System.out.println("Invalid Input, please input the correct option");
                         System.out.print("Input: ");
                         SubMenu = sc.next().charAt(0);
                     }
-                    System.out.println();
-                    switch (SubMenu) {
-                        case 'a' -> {
-                            System.out.println("Menu 2a");
-                            System.out.println("Metode ekspansi kofaktor");
-                            
-                            Matrix m = new Matrix(true, false); // determinan
-                            double d = m.det(m.getMat());
-                            m.DisplayMatriks();
-                            System.out.print("Determinan matriks: ");
-                            System.out.println(d);
-                        }
-                        case 'b' -> {
-                            System.out.println("Menu 2b");
-                            System.out.println("Metode reduksi baris");
-                            Matrix m = new Matrix(true, false);
-                            // m.DisplayMatriks();
-                            // System.out.println();
-                            
-                            GaussJordan gj = new GaussJordan();
-                            double d;
-                            d = gj.GaussJordanForDet(m.getMat());
-                            m.DisplayMatriks();
-                            System.out.print("Determinan matriks: ");
-                            System.out.println(d);
-                            
-
+                    while (SubMenu != 'c'){
+                        System.out.println();
+                        switch (SubMenu) {
+                            case 'a' -> {
+                                System.out.println("Menu 2a");
+                                System.out.println("Metode ekspansi kofaktor");
+                                
+                                Matrix m = new Matrix(true, false); // determinan
+                                double d = m.det(m.getMat());
+                                m.DisplayMatriks();
+                                System.out.print("Determinan matriks: ");
+                                System.out.println(d);
+                            }
+                            case 'b' -> {
+                                System.out.println("Menu 2b");
+                                System.out.println("Metode reduksi baris");
+                                Matrix m = new Matrix(true, false);
+                                // m.DisplayMatriks();
+                                // System.out.println();
+                                
+                                GaussJordan gj = new GaussJordan();
+                                double d;
+                                d = gj.GaussJordanForDet(m.getMat());
+                                m.DisplayMatriks();
+                                System.out.print("Determinan matriks: ");
+                                System.out.println(d);
+                            }
                         }
 
                     }
@@ -148,27 +149,29 @@ public class Main {
                     System.out.println("Input: ");
 
                     SubMenu = sc.next().charAt(0);
-                    while (SubMenu != 'a' && SubMenu != 'b') {
+                    while (SubMenu != 'a' && SubMenu != 'b' && SubMenu != 'c') {
                         System.out.println("Invalid Input, please input the correct option");
                         System.out.print("Input: ");
                         SubMenu = sc.next().charAt(0);
                     }
-                    System.out.println();
-                    switch (SubMenu) {
-                        case 'a' -> {
-                            System.out.println("Menu 3a");
-                            System.out.println("Metode Matriks Adjoin ");
-                            Matrix m = new Matrix(true, false);
-                            m.invers(m.getMat());
-                            m.DisplayMatriks();
+                    while (SubMenu != 'c'){
+                        System.out.println();
+                        switch (SubMenu) {
+                            case 'a' -> {
+                                System.out.println("Menu 3a");
+                                System.out.println("Metode Matriks Adjoin ");
+                                Matrix m = new Matrix(true, false);
+                                m.invers(m.getMat());
+                                m.DisplayMatriks();
 
-                        }
-                        case 'b' -> {
-                            System.out.println("Menu 3b");
-                            System.out.println("Metode OBE");
-                            Matrix m = new Matrix(true, false);
-                            InversOBE IO = new InversOBE(m.getMat());
-                            m.DisplayMatriks();
+                            }
+                            case 'b' -> {
+                                System.out.println("Menu 3b");
+                                System.out.println("Metode OBE");
+                                Matrix m = new Matrix(true, false);
+                                InversOBE IO = new InversOBE(m.getMat());
+                                m.DisplayMatriks();
+                            }
                         }
                     }
                 }

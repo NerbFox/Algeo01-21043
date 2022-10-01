@@ -1,6 +1,8 @@
 package VoidMatrix;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
 import java.lang.Math;
 import java.security.Principal;
 
@@ -11,41 +13,85 @@ public class Matrix {
     private int nCols;
 
     // constructor
-    public Matrix(boolean Sq, boolean spl) {
+    public Matrix(boolean Sq, boolean spl, boolean read) {
         int i, j, n, nR, nC;
         /**
          * Proses Deklarasi matriks dan assignment setiap
          * eklemen-elemen matriks
          */
         Scanner sc = new Scanner(System.in);
-        if (spl == false) {
-            nR = sc.nextInt();
-            if (Sq) {
-                nC = nR;
-                n = nR;
-                nRows = n;
-                nCols = n;
-            } else {
-                nC = sc.nextInt();
-                nRows = nR;
-                nCols = nC;
-            }
-        } else {
-            System.out.printf("Masukkan banyak variabel(kolom): ");
-            nCols = sc.nextInt() + 1;
-            System.out.printf("Masukkan banyak persamaan(baris): ");
-            nRows = sc.nextInt();
 
+        if (!read) {
+            if (spl == false) {
+                nR = sc.nextInt();
+                if (Sq) {
+                    nC = nR;
+                    n = nR;
+                    nRows = n;
+                    nCols = n;
+                } else {
+                    nC = sc.nextInt();
+                    nRows = nR;
+                    nCols = nC;
+                }
+            } 
+            else {
+                System.out.printf("Masukkan banyak variabel(kolom): ");
+                nCols = sc.nextInt() + 1;
+                System.out.printf("Masukkan banyak persamaan(baris): ");
+                nRows = sc.nextInt();
+
+            }
+
+            mat = new double[nRows][nCols];
+
+            for (i = 0; i < nRows; i++) {
+                for (j = 0; j < nCols; j++) {
+                    mat[i][j] = sc.nextDouble();
+                }
+            }
         }
 
-        mat = new double[nRows][nCols];
-
-        for (i = 0; i < nRows; i++) {
-            for (j = 0; j < nCols; j++) {
-                mat[i][j] = sc.nextDouble();
+        else {
+            File fIn = new File(sc.nextLine());
+            Scanner SIn = null;
+            try {
+                SIn = new Scanner(fIn);
+            } catch (Exception ex) {
+                System.out.println("File tidak ditemui");
             }
+            int rows = 0;
+            int cols = 0;
+            ArrayList<ArrayList<Double>> Isi = new ArrayList<ArrayList<Double>>();
+            String baris;
+            while (SIn.hasNextLine()) {
+                baris = SIn.nextLine();
+                Scanner SBar = new Scanner(baris);
+                cols = 0;
+                Isi.add(new ArrayList<Double>());
+                while(SBar.hasNextDouble()) {
+                    Isi.get(rows).add(cols,SBar.nextDouble());
+                    cols++;
+                }
+                rows++;
+            }
+            nRows = Isi.size();
+            nCols = Isi.get(0).size();
+            mat = new double[nRows][nCols];
+            for( i =0; i < nRows; i++) {
+                for( j = 0; j < nCols;j++) {
+                    mat[i][j] = Isi.get(i).get(j);
+                }
+            }
+            // Matrix M = new MatrixR(Isi);
+            // return M;
         }
     }
+        // // ArrayList<ArrayList<Double>> M =;
+		// // this.Row = li.size();
+		// this.Col = li.get(0).size();
+		// this.Isi = new double[Row][Col];
+    
     // public Matrix(int nR, int nC){
 
     // // perlu inisialisasi 0 setiap elemen?
