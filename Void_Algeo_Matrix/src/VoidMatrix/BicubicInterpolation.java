@@ -36,6 +36,7 @@ public class BicubicInterpolation {
             inputY = sc.nextDouble();
         } else {
             int nCols, nRows;
+            System.out.println("\nKetik nama alamat file yang diinginkan (contoh test/A.txt) ");
             File file = new File(sc.nextLine());
             Scanner Sca = null;
             try {
@@ -43,7 +44,8 @@ public class BicubicInterpolation {
             } catch (Exception ex) {
                 System.out.println("File tidak ditemukan");
             }
-            while(Sca==null){
+            while (Sca == null) {
+                System.out.println("\nKetik nama alamat file yang diinginkan (contoh test/A.txt) ");
                 file = new File(sc.nextLine());
                 try {
                     Sca = new Scanner(file);
@@ -122,13 +124,15 @@ public class BicubicInterpolation {
         // f(x,y) = X a
         // a = X^-1 f(x,y)
         double g;
-        DisplayMatriks(X, m, m);
+        // DisplayMatriks(X, m, m);
+
         // g = det(X);
         // System.out.printf("%f", g);
         // Invers matriks X
         // invers(X);
         InversOBE(X);
-        DisplayMatriks(X, m, m);
+        // DisplayMatriks(X, m, m);
+
         // menjadikan
         int o = 0;
         for (i = 0; i < n; i++) {
@@ -164,8 +168,17 @@ public class BicubicInterpolation {
         double fxy[][] = new double[1][1];
         fxy = multiplyMatrix(temp, yk, 1, 1, 4);
         System.out.println();
-        System.out.printf("f(%.2f,%.2f) : %.3f", inputX, inputY, fxy[0][0]);
+        System.out.printf("f(%.2f,%.2f) : %.3f\n", inputX, inputY, fxy[0][0]);
         System.out.println();
+        char simpan;
+        System.out.print("Apakah ingin disimpan (y/n) : ");
+        simpan = sc.next().charAt(0);
+        System.out.println();
+        if (simpan == 'y' || simpan == 'Y') {
+            fileKeluaranBicubicIn(fxy[0][0], inputX, inputY);
+        } else {
+            System.out.println("File tidak disimpan");
+        }
 
     }
 
@@ -469,7 +482,7 @@ public class BicubicInterpolation {
         // Determinan
     }
 
-    public void fileKeluaranBicubicIn(double d) {
+    public void fileKeluaranBicubicIn(double d, double inputX, double inputY) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Masukan nama file yang akan disimpan (contoh Det.txt): ");
         String namaFile = sc.nextLine();
@@ -490,13 +503,12 @@ public class BicubicInterpolation {
         // } else {
         try {
             PrintWriter output = new PrintWriter("FileKeluaran/" + namaFile);
-            output.printf("%f\n", d);
+            output.printf("f(%.2f,%.2f) : %.3f", inputX, inputY, d);
             output.close();
         } catch (IOException ex) {
             System.out.printf("error: %s\n\n", ex);
         }
         // }
     }
-    
-}
 
+}

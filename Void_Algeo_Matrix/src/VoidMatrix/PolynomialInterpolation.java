@@ -1,6 +1,8 @@
 package VoidMatrix;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -76,10 +78,22 @@ public class PolynomialInterpolation {
                     }
                     y = y + (numerator / denominator) * arrayy[count];
                 }
-                System.out.println("Saat x = " + x + "," + " y = " + y);
+                System.out.println("x = " + x + "," + " y = " + y);
+
+                char simpan;
+                Scanner sc = new Scanner(System.in);
+                System.out.print("\nApakah ingin disimpan (y/n) : ");
+                simpan = sc.next().charAt(0);
+                System.out.println();
+                if (simpan == 'y' || simpan == 'Y') {
+                    fileKeluaranPolinomIn(x, y);
+                } else {
+                    System.out.println("File tidak disimpan");
+                }
             }
         } else {
             Scanner sc = new Scanner(System.in);
+            System.out.println("\nKetik nama alamat file yang diinginkan (contoh test/A.txt) ");
             File file = new File(sc.nextLine());
             Scanner Inside = null;
             try {
@@ -88,6 +102,7 @@ public class PolynomialInterpolation {
                 System.out.println("File tidak ditemukan");
             }
             while (Inside == null) {
+                System.out.println("\nKetik nama alamat file yang diinginkan (contoh test/A.txt) ");
                 file = new File(sc.nextLine());
                 try {
                     Inside = new Scanner(file);
@@ -145,7 +160,32 @@ public class PolynomialInterpolation {
                 }
                 y = y + (numerator / denominator) * res[count][1];
             }
-            System.out.println("Saat x = " + x + "," + " y = " + y);
+            System.out.println("x = " + x + "," + " y = " + y);
+            char simpan;
+            System.out.print("\nApakah ingin disimpan (y/n) : ");
+            simpan = sc.next().charAt(0);
+            System.out.println();
+            if (simpan == 'y' || simpan == 'Y') {
+                fileKeluaranPolinomIn(x, y);
+            } else {
+                System.out.println("File tidak disimpan");
+            }
+
         }
+    }
+
+    public void fileKeluaranPolinomIn(double x, double y) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Masukan nama file yang akan disimpan (contoh Det.txt): ");
+        String namaFile = sc.nextLine();
+
+        try {
+            PrintWriter output = new PrintWriter("FileKeluaran/" + namaFile);
+            output.printf("x = " + x + "," + " y = " + y);
+            output.close();
+        } catch (IOException ex) {
+            System.out.printf("error: %s\n\n", ex);
+        }
+        // }
     }
 }
