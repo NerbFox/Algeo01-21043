@@ -34,8 +34,7 @@ public class Matrix {
                     nRows = nR;
                     nCols = nC;
                 }
-            } 
-            else {
+            } else {
                 System.out.printf("Masukkan banyak variabel(kolom): ");
                 nCols = sc.nextInt() + 1;
                 System.out.printf("Masukkan banyak persamaan(baris): ");
@@ -53,12 +52,21 @@ public class Matrix {
         }
 
         else {
-            File fIn = new File(sc.nextLine());
+            File file = new File(sc.nextLine());
             Scanner Sca = null;
             try {
-                Sca = new Scanner(fIn);
+                Sca = new Scanner(file);
             } catch (Exception ex) {
-                System.out.println("File tidak ditemui");
+                System.out.println("File tidak ditemukan");
+            }
+            while (Sca == null) {
+                file = new File(sc.nextLine());
+                try {
+                    Sca = new Scanner(file);
+                } catch (Exception ex) {
+                    System.out.println("File tidak ditemukan");
+                }
+
             }
             int rows = 0;
             int cols = 0;
@@ -69,8 +77,8 @@ public class Matrix {
                 Scanner SBar = new Scanner(baris);
                 cols = 0;
                 Inside.add(new ArrayList<Double>());
-                while(SBar.hasNextDouble()) {
-                    Inside.get(rows).add(cols,SBar.nextDouble());
+                while (SBar.hasNextDouble()) {
+                    Inside.get(rows).add(cols, SBar.nextDouble());
                     cols++;
                 }
                 rows++;
@@ -78,8 +86,8 @@ public class Matrix {
             nRows = Inside.size();
             nCols = Inside.get(0).size();
             mat = new double[nRows][nCols];
-            for( i =0; i < nRows; i++) {
-                for( j = 0; j < nCols;j++) {
+            for (i = 0; i < nRows; i++) {
+                for (j = 0; j < nCols; j++) {
                     mat[i][j] = Inside.get(i).get(j);
                 }
             }
@@ -87,11 +95,11 @@ public class Matrix {
             // return M;
         }
     }
-        // // ArrayList<ArrayList<Double>> M =;
-		// // this.Row = li.size();
-		// this.Col = li.get(0).size();
-		// this.Inside = new double[Row][Col];
-    
+    // // ArrayList<ArrayList<Double>> M =;
+    // // this.Row = li.size();
+    // this.Col = li.get(0).size();
+    // this.Inside = new double[Row][Col];
+
     // public Matrix(int nR, int nC){
 
     // // perlu inisialisasi 0 setiap elemen?
@@ -284,42 +292,36 @@ public class Matrix {
         // int k;
         // double sum = 0;
         // for (i = 0; i < nRows; i++) {
-        //     sum = 0;
-        //     for (k = 0; k < nCVar; k++) // asumsi nCVar = nRows
-        //     {
-        //         sum += var[i][k] * hasil[k][0];
-        //     }
-        //     ai[i][0] = sum;
-        //     System.out.printf("a%d: %.2f", i, ai[i][0]);
-        //     System.out.println();
+        // sum = 0;
+        // for (k = 0; k < nCVar; k++) // asumsi nCVar = nRows
+        // {
+        // sum += var[i][k] * hasil[k][0];
+        // }
+        // ai[i][0] = sum;
+        // System.out.printf("a%d: %.2f", i, ai[i][0]);
+        // System.out.println();
         // }
         ai = multiplyMatrix(var, hasil, nRVar, 1, nCVar);
-        for (i=0;i<nRVar;i++){
+        for (i = 0; i < nRVar; i++) {
             // for(j=0;j<1)
             System.out.printf("a%d: %.2f", i, ai[i][0]);
             System.out.println();
         }
 
     }
-    public double[][] multiplyMatrix(double[][] m1, double[][] m2, int Row, int Col, int In)
-    {
+
+    public double[][] multiplyMatrix(double[][] m1, double[][] m2, int Row, int Col, int In) {
         /* Prekondisi : Ukuran kolom efektif m1 = ukuran baris efektif m2 */
         /* Mengirim hasil perkalian matriks: salinan m1 * m2 */
         double[][] m = new double[Row][Col];
         int i, j, k, nRow1 = Row, nCol1 = In, nRow2 = In, nCol2 = Col;
         int n = nCol1; // ncol1 = nrow2
-        for (i = 0; i < nRow1; i++)
-        {
-            for (j = 0; j < nCol2; j++)
-            {
-                for (k = 0; k < n; k++)
-                {
-                    if (k == 0)
-                    {
+        for (i = 0; i < nRow1; i++) {
+            for (j = 0; j < nCol2; j++) {
+                for (k = 0; k < n; k++) {
+                    if (k == 0) {
                         m[i][j] = (m1[i][k]) * (m2[k][j]);
-                    }
-                    else
-                    {
+                    } else {
                         m[i][j] += (m1[i][k]) * (m2[k][j]);
                     }
                 }

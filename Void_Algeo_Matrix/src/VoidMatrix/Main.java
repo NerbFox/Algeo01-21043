@@ -189,8 +189,9 @@ public class Main {
                                 Matrix m = new Matrix(true, false, read); // determinan
                                 double d = m.det(m.getMat());
                                 // m.DisplayMatriks();
-                                System.out.print("Determinan matriks: ");
+                                System.out.print("\nDeterminan matriks: ");
                                 System.out.println(d);
+                                System.out.println();
                             }
                             case 'b' -> {
                                 System.out.println("Menu 2b");
@@ -216,8 +217,10 @@ public class Main {
                                 double d;
                                 d = gj.GaussJordanForDet(m.getMat());
                                 // m.DisplayMatriks();
-                                System.out.print("Determinan matriks: ");
+                                // Void_algeo_matrix/test/determinan.txt
+                                System.out.print("\nDeterminan matriks: ");
                                 System.out.println(d);
+                                System.out.println();
                             }
                         }
                         disp.displayMenu2();
@@ -328,7 +331,7 @@ public class Main {
                     System.out.println("Menu 5");
                     System.out.println("Interpolasi Bicubic");
                     // Matrix m = new Matrix(true);
-                    
+
                     disp.displayPilihan();
                     Masukan = sc.nextInt();
                     while (Masukan != 1 && Masukan != 2) {

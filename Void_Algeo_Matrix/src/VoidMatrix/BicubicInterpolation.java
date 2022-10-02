@@ -34,12 +34,21 @@ public class BicubicInterpolation {
             inputY = sc.nextDouble();
         } else {
             int nCols, nRows;
-            File fIn = new File(sc.nextLine());
+            File file = new File(sc.nextLine());
             Scanner Sca = null;
             try {
-                Sca = new Scanner(fIn);
+                Sca = new Scanner(file);
             } catch (Exception ex) {
-                System.out.println("File tidak ditemui");
+                System.out.println("File tidak ditemukan");
+            }
+            while(Sca==null){
+                file = new File(sc.nextLine());
+                try {
+                    Sca = new Scanner(file);
+                } catch (Exception ex) {
+                    System.out.println("File tidak ditemukan");
+                }
+
             }
             int rows = 0;
             int cols = 0;
