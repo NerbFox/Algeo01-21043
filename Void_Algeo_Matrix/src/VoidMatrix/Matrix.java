@@ -30,16 +30,26 @@ public class Matrix {
 
         if (!read) {
             if (spl == false) {
-                nR = sc.nextInt();
                 if (Sq) {
+                    System.out.print("\nMasukkan dimensi matriks (dxd): ");
+                    nR = sc.nextInt();
                     nC = nR;
                     n = nR;
                     nRows = n;
                     nCols = n;
+                    if (nR != 0) {
+                        System.out.println("Masukan elemen-elemen matriks : ");
+                    }
                 } else {
+                    System.out.print("\nMasukkan banyak baris (Rows): ");
+                    nR = sc.nextInt();
+                    System.out.print("Masukkan banyak kolom (Cols): ");
                     nC = sc.nextInt();
                     nRows = nR;
                     nCols = nC;
+                    if(nR!=0 || nC!=0){
+                        System.out.println("Masukan elemen-elemen matriks : ");
+                    }
                 }
             } else {
                 System.out.printf("Masukkan banyak variabel(kolom): ");
@@ -315,6 +325,20 @@ public class Matrix {
             System.out.println();
         }
 
+        char simpan;
+            Scanner sc = new Scanner(System.in);
+            System.out.print("Apakah ingin disimpan (y/n) : ");
+            simpan = sc.next().charAt(0);
+            System.out.println();
+            if(simpan=='y'||simpan=='Y'){
+                // m.fileKeluaranDet(d);
+                fileKeluaranSPL(ai);
+
+            }
+            else{
+                System.out.println("File tidak disimpan");
+            }
+
     }
 
     public double[][] multiplyMatrix(double[][] m1, double[][] m2, int Row, int Col, int In) {
@@ -337,7 +361,7 @@ public class Matrix {
         return m;
     }
 
-    public static void fileKeluaranDet(double d) {
+    public void fileKeluaranDet(double d) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Masukan nama file yang akan disimpan (contoh Det.txt): ");
         String namaFile = sc.nextLine();
@@ -345,26 +369,67 @@ public class Matrix {
         // String fy = System.getProperty("fy.name").toLowerCase();
         // Character[] char_invalid = null;
         // if (fy.contains("win")) {
-        //     char_invalid = invalidw;
+        // char_invalid = invalidw;
         // } else if (fy.contains("nix") || fy.contains("nux") || fy.contains("mac")) {
-        //     char_invalid = invalidU;
+        // char_invalid = invalidU;
         // }
         // boolean fCharValid = true;
-        // fCharValid = Arrays.stream(char_invalid).noneMatch(ch -> namaFile.contains(ch.toString()));
-        // if (namaFile.isEmpty() || fCharValid == false || namaFile == null || namaFile.length() > 50) {
-        //     System.out.println("Nama salah, file tidak saat dibuat");
+        // fCharValid = Arrays.stream(char_invalid).noneMatch(ch ->
+        // namaFile.contains(ch.toString()));
+        // if (namaFile.isEmpty() || fCharValid == false || namaFile == null ||
+        // namaFile.length() > 50) {
+        // System.out.println("Nama salah, file tidak saat dibuat");
         // } else {
-            try {
-                PrintWriter output = new PrintWriter("FileKeluaran/" + namaFile);
-                output.printf("%f\n", d);
-                output.close();
-            } catch (IOException ex) {
-                System.out.printf("error: %s\n\n", ex);
-            }
+        try {
+            PrintWriter output = new PrintWriter("FileKeluaran/" + namaFile);
+            output.printf("%f\n", d);
+            output.close();
+        } catch (IOException ex) {
+            System.out.printf("error: %s\n\n", ex);
+        }
         // }
     }
-    public static void fileKeluaranMat(double[][] mat){
 
+    public void fileKeluaranMat(double[][] HASIL) {
+        int x, y;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Masukan nama file yang akan disimpan (contoh Det.txt): ");
+        String namaFile = sc.nextLine();
+
+        try {
+            PrintWriter output = new PrintWriter("FileKeluaran/" + namaFile);
+          
+            for (x = 0; x < HASIL.length; x++) {
+                for (y=0; y < HASIL[0].length; y++){
+                    output.printf("%.3f ", HASIL[x][y]);
+                }
+                output.println();
+            }
+            
+            output.close();
+        } catch (IOException ex) {
+            System.out.printf("error: %s\n\n", ex);
+        }
     }
-    
+
+    public void fileKeluaranSPL(double[][] HASIL){
+        int x;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Masukan nama file yang akan disimpan (contoh Det.txt): ");
+        String namaFile = sc.nextLine();
+
+        try {
+            PrintWriter output = new PrintWriter("FileKeluaran/" + namaFile);
+          
+            for (x = 0; x < HASIL.length; x++) {
+                output.printf("x%d: %.3f ", x, HASIL[x][0]);
+                output.println();
+            }
+            
+            output.close();
+        } catch (IOException ex) {
+            System.out.printf("error: %s\n\n", ex);
+        }
+    }
+
 }

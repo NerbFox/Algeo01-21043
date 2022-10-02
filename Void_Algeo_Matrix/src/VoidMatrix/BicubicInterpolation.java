@@ -1,6 +1,8 @@
 package VoidMatrix;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.Math;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -466,4 +468,35 @@ public class BicubicInterpolation {
         System.out.println();
         // Determinan
     }
+
+    public void fileKeluaranBicubicIn(double d) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Masukan nama file yang akan disimpan (contoh Det.txt): ");
+        String namaFile = sc.nextLine();
+
+        // String fy = System.getProperty("fy.name").toLowerCase();
+        // Character[] char_invalid = null;
+        // if (fy.contains("win")) {
+        // char_invalid = invalidw;
+        // } else if (fy.contains("nix") || fy.contains("nux") || fy.contains("mac")) {
+        // char_invalid = invalidU;
+        // }
+        // boolean fCharValid = true;
+        // fCharValid = Arrays.stream(char_invalid).noneMatch(ch ->
+        // namaFile.contains(ch.toString()));
+        // if (namaFile.isEmpty() || fCharValid == false || namaFile == null ||
+        // namaFile.length() > 50) {
+        // System.out.println("Nama salah, file tidak saat dibuat");
+        // } else {
+        try {
+            PrintWriter output = new PrintWriter("FileKeluaran/" + namaFile);
+            output.printf("%f\n", d);
+            output.close();
+        } catch (IOException ex) {
+            System.out.printf("error: %s\n\n", ex);
+        }
+        // }
+    }
+    
 }
+
