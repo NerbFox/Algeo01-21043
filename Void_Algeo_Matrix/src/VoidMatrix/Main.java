@@ -1,5 +1,6 @@
 package VoidMatrix;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.MatchResult;
 import java.lang.Math;
@@ -432,19 +433,12 @@ public class Main {
                     System.out.println("Menu 6");
                     System.out.println("Regresi linier berganda");
 
-                    disp.displayPilihan();
-                    Masukan = sc.nextInt();
-                    while (Masukan != 1 && Masukan != 2) {
-                        System.out.println("Masukan salah");
-                        disp.displayPilihan();
-                        Masukan = sc.nextInt();
-                    }
-                    read = false;
-                    if (Masukan == 2) {
-                        read = true;
-                    }
-
-                    // MultipleLinearRegression r = new MultipleLinearRegression(read);
+                    ArrayList<Object> tuple = new ArrayList<>();
+                    tuple = MultipleLinearRegression.opsiInputReg();
+                    MultipleLinearRegression mat = (MultipleLinearRegression) tuple.get(0);
+                    double[] toEst = (double[]) tuple.get(1);
+                    tuple = mat.Regresi(toEst);
+                    MultipleLinearRegression.promptOutReg(tuple, "Polinom");
                 }
                 case '7' -> {
                     System.out.println("Terima Kasih");
