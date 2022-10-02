@@ -3,8 +3,11 @@ package VoidMatrix;
 import java.util.Scanner;
 import java.util.regex.MatchResult;
 import java.lang.Math;
+import java.net.SocketTimeoutException;
+
 import javax.sound.midi.Soundbank;
 import javax.swing.GroupLayout;
+import javax.swing.SpinnerModel;
 
 public class Main {
 
@@ -189,9 +192,20 @@ public class Main {
                                 Matrix m = new Matrix(true, false, read); // determinan
                                 double d = m.det(m.getMat());
                                 // m.DisplayMatriks();
+                                char simpan;
                                 System.out.print("\nDeterminan matriks: ");
                                 System.out.println(d);
                                 System.out.println();
+
+                                System.out.print("Apakah ingin disimpan (y/n) : ");
+                                simpan = sc.next().charAt(0);
+                                System.out.println();
+                                if(simpan=='y'||simpan=='Y'){
+                                    m.fileKeluaranDet(d);
+                                }
+                                else{
+                                    System.out.println("File tidak disimpan");
+                                }
                             }
                             case 'b' -> {
                                 System.out.println("Menu 2b");
@@ -363,7 +377,7 @@ public class Main {
                         read = true;
                     }
 
-                    MultipleLinearRegression r = new MultipleLinearRegression(read);
+                    // MultipleLinearRegression r = new MultipleLinearRegression(read);
                 }
                 case 7 -> {
                     System.out.println("Terima Kasih");

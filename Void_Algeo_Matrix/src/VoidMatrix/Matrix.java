@@ -1,16 +1,23 @@
 package VoidMatrix;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.Math;
 import java.security.Principal;
+import java.security.cert.TrustAnchor;
 
 public class Matrix {
     // private int n;
     private double[][] mat;
     private int nRows;
     private int nCols;
+
+    public static final Character[] invalidU = { '\000' };
+    public static final Character[] invalidw = { '"', '*', ':', '<', '>', '?', '\\', '|', 0x7F };
 
     // constructor
     public Matrix(boolean Sq, boolean spl, boolean read) {
@@ -330,4 +337,34 @@ public class Matrix {
         return m;
     }
 
+    public static void fileKeluaranDet(double d) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Masukan nama file yang akan disimpan (contoh Det.txt): ");
+        String namaFile = sc.nextLine();
+
+        // String fy = System.getProperty("fy.name").toLowerCase();
+        // Character[] char_invalid = null;
+        // if (fy.contains("win")) {
+        //     char_invalid = invalidw;
+        // } else if (fy.contains("nix") || fy.contains("nux") || fy.contains("mac")) {
+        //     char_invalid = invalidU;
+        // }
+        // boolean fCharValid = true;
+        // fCharValid = Arrays.stream(char_invalid).noneMatch(ch -> namaFile.contains(ch.toString()));
+        // if (namaFile.isEmpty() || fCharValid == false || namaFile == null || namaFile.length() > 50) {
+        //     System.out.println("Nama salah, file tidak saat dibuat");
+        // } else {
+            try {
+                PrintWriter output = new PrintWriter("FileKeluaran/" + namaFile);
+                output.printf("%f\n", d);
+                output.close();
+            } catch (IOException ex) {
+                System.out.printf("error: %s\n\n", ex);
+            }
+        // }
+    }
+    public static void fileKeluaranMat(double[][] mat){
+
+    }
+    
 }
