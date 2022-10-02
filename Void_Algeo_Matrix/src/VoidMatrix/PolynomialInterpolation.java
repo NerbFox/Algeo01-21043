@@ -22,8 +22,14 @@ public class PolynomialInterpolation {
             double denominator;
 
             // Input banyaknya titik dari user
-            System.out.print("Masukkan total banyaknya titik: ");
-            n = myScanner.nextInt(); // Menyimpan input di n
+            n = 0;
+            while (n <= 0){
+                System.out.print("Masukkan total banyaknya titik: ");
+                n = myScanner.nextInt(); // Menyimpan input di n
+                if (n <= 0){
+                    System.out.println("Invalid Input, please input the correct option");
+                }
+            }
 
             // Input nilai x dari user
             System.out.println("Nilai x");

@@ -27,6 +27,7 @@ public class Main {
             menu = sc.nextInt();
             while (menu > 7 || menu < 1) {
                 System.out.println("Invalid Input, please input the correct number");
+                System.out.print("Input menu: ");
                 menu = sc.nextInt();
             }
             System.out.println();
