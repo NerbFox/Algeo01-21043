@@ -9,10 +9,8 @@ import java.io.PrintWriter;
 
 public class MultipleLinearRegression {
 	public ArrayList<Object> Regresi(double [] toEst) {
-		int i,j,s;
-        double sum1 = 0.0;
-        double sum2 = 0.0;
-        double sum3 = 0.0;
+		int i,j;
+        double val;
 
         ArrayList<Object> ret = new ArrayList<>();
 
@@ -26,34 +24,27 @@ public class MultipleLinearRegression {
 					spl[i][j] = mat.getnRows();
 				}
 				else if ( i==0 ) {
-                    for (s = 0; s < mat.getnRows(); s++) {
-                        sum1 += spl[s][j-1];
-                    }
-					spl[i][j] = sum1;
+                    val = sigma1val(j, spl);
+					spl[i][j] = val;
 				}
 				else if ( j==0 ) {
-                    for (s = 0; s < mat.getnRows(); s++) {
-                        sum2 += spl[s][i-1];
-                    }
-					spl[i][j] = sum2;
+                    val = sigma1val(i, spl);
+					spl[i][j] = val;
 				}
 				else {
-                    for ( s = 0; s < mat.getnRows(); s++) {
-                        sum3 += spl[s][i-1] * spl[s][j-1];
-                    }		
-					spl[i][j] = sum3;
+                    val = sigma2val(i, j, spl);
+					spl[i][j] = val;
 				}
 			}
 		}
-		// 6. Selesaikan Matrix SPL dengan salah satu metode : Gauss || GaussJordan || Cramer
-		//    Disini karena kita membutuhkan nilai-nilai dari Solusi SPL, dipanggil fungsi AnsOfSPL()
+
         double[] beta = new double [mat.getnRows()];
         Cramer cm = new Cramer();
         cm.CramerRule (spl, beta);
-		// 7. Cari rumus Regresi
+
 		String formula = RegresiSolution(beta);
 		
-		// 8. Lakukan penaksiran berdasarkan array nilai X baru (newX)
+
 		double taksiran = 0.0;
 		for(i = 0; i < beta.length; i++) {
 			if ( i == 0 ) {
@@ -66,15 +57,26 @@ public class MultipleLinearRegression {
 		ret.add(formula);
 		ret.add(taksiran);
 		return ret;
-		// return taksiran;
-	}	// End of Regresi*/
-	
-	// REGRESI SOLUTION
-	/*
-	 * 1.	Setelah ditemukan kumpulan nilai beta pembentuk persamaan regresi. Kita membuat bentuk persamaan regresi dari kumpulan nilai tersebut.
-	 * 2.	Mengembalikan rumus tersebut dalam bentuk String.
-	 * Prekondisi : Sudah ada kumpulan nilai solusi dari persoalan Interpolasi
-	 */
+	}
+
+    private double sigma1val (int k, double[][] input) {
+            int i;
+            double sum = 0.0;
+            for (i = 0; i < input.length; i++) {
+                sum += input[i][k-1];
+            }
+            return sum;
+        }
+    
+    private double sigma2val (int j, int k, double[][] input) {
+        int i;
+        double sum = 0.0;
+        for ( i = 0; i < input.length; i++) {
+            sum += input[i][j-1] * input[i][k-1];
+        }		
+        return sum;
+    }
+
 	public String RegresiSolution(double[] ans) {
 		int i;
 		String solution = "Y = ";
