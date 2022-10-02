@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.util.regex.MatchResult;
 import java.lang.Math;
 import java.net.SocketTimeoutException;
+import java.security.InvalidAlgorithmParameterException;
 
 import javax.sound.midi.Soundbank;
 import javax.swing.GroupLayout;
@@ -19,33 +20,54 @@ public class Main {
         // System.out.printf("%f",f);
         // }
 
-        int menu = 1;
+        // int menu = 0;
         char simpan;
+        char menu = '9';
+        boolean invalid = false;
         Main obj = new Main();
         DisplayPengguna disp = new DisplayPengguna();
         Scanner sc = new Scanner(System.in);
-        while (menu != 7) {
+        while (menu != '7') {
+            // menu = 0;
             System.out.println("");
             disp.display();
             System.out.print("Input menu: ");
-            menu = sc.nextInt();
-            while (menu > 7 || menu < 1) {
-                System.out.println("Invalid Input, please input the correct number");
+            menu = sc.next().charAt(0);
+            // invalid = false;
+            // int ins = 999;
+            // while (!invalid) {
+            // try {
+            // menu = sc.nextInt();
+            // invalid = true;
+            // } catch (Exception ex) {
+            // System.out.println("Invalid input, please input a number");
+            // }
+            // menu = sc.nextInt();
+            // }
+            // while (invalid) {
+            // disp.display();
+            // System.out.print("\nInput menu: ");
+            // menu = sc.nextInt();
+            // }
+            while (!(menu == '1' || menu == '2' || menu == '3' || menu == '4' || menu == '5' || menu == '6'
+                    || menu == '7')) {
+                System.out.println("\nInvalid Input, please input the correct number");
+                disp.display();
                 System.out.print("Input menu: ");
-                menu = sc.nextInt();
+                menu = sc.next().charAt(0);
             }
             System.out.println();
             char SubMenu;
             int Masukan;
             boolean read;
             switch (menu) {
-                case 1 -> {
+                case '1' -> {
                     System.out.println("Menu 1");
                     System.out.println("Sistem Persamaaan Linier");
                     disp.displayMenu1();
                     System.out.print("Input: ");
                     SubMenu = sc.next().charAt(0);
-                    while (SubMenu != 'a' && SubMenu != 'b' && SubMenu != 'c' && SubMenu != 'd' && SubMenu != 'e') {
+                    while (SubMenu != '1' && SubMenu != 'b' && SubMenu != 'c' && SubMenu != 'd' && SubMenu != 'e') {
                         System.out.println("Invalid Input, please input the correct option");
                         System.out.print("Input: ");
                         SubMenu = sc.next().charAt(0);
@@ -122,8 +144,6 @@ public class Main {
                                 Matrix m = new Matrix(false, true, read);
                                 m.inversSPL();
 
-
-
                             }
                             case 'd' -> {
                                 System.out.println("Menu 1d");
@@ -158,12 +178,11 @@ public class Main {
                                 System.out.print("Apakah ingin disimpan (y/n) : ");
                                 simpan = sc.next().charAt(0);
                                 System.out.println();
-                                if(simpan=='y'||simpan=='Y'){
+                                if (simpan == 'y' || simpan == 'Y') {
                                     // m.fileKeluaranDet(d);
                                     mat.fileKeluaranSPL(hasilH);
 
-                                }
-                                else{
+                                } else {
                                     System.out.println("File tidak disimpan");
                                 }
 
@@ -179,7 +198,7 @@ public class Main {
                         }
                     }
                 }
-                case 2 -> {
+                case '2' -> {
                     System.out.println("Menu 2");
                     System.out.println("Determinan");
 
@@ -221,17 +240,16 @@ public class Main {
                                 System.out.print("Apakah ingin disimpan (y/n) : ");
                                 simpan = sc.next().charAt(0);
                                 System.out.println();
-                                if(simpan=='y'||simpan=='Y'){
+                                if (simpan == 'y' || simpan == 'Y') {
                                     m.fileKeluaranDet(d);
-                                }
-                                else{
+                                } else {
                                     System.out.println("File tidak disimpan");
                                 }
                             }
                             case 'b' -> {
                                 System.out.println("Menu 2b");
                                 System.out.println("Metode reduksi baris");
-                                
+
                                 disp.displayPilihan();
                                 Masukan = sc.nextInt();
                                 while (Masukan != 1 && Masukan != 2) {
@@ -243,11 +261,11 @@ public class Main {
                                 if (Masukan == 2) {
                                     read = true;
                                 }
-                                
+
                                 Matrix m = new Matrix(true, false, read);
                                 // m.DisplayMatriks();
                                 // System.out.println();
-                                
+
                                 GaussJordan gj = new GaussJordan();
                                 double d;
                                 d = gj.GaussJordanForDet(m.getMat());
@@ -260,10 +278,9 @@ public class Main {
                                 System.out.print("Apakah ingin disimpan (y/n) : ");
                                 simpan = sc.next().charAt(0);
                                 System.out.println();
-                                if(simpan=='y'||simpan=='Y'){
+                                if (simpan == 'y' || simpan == 'Y') {
                                     m.fileKeluaranDet(d);
-                                }
-                                else{
+                                } else {
                                     System.out.println("File tidak disimpan");
                                 }
                             }
@@ -279,7 +296,7 @@ public class Main {
 
                     }
                 }
-                case 3 -> {
+                case '3' -> {
                     System.out.println("Menu 3");
                     System.out.println("Matriks balikan");
                     // ada pilihannya
@@ -318,11 +335,10 @@ public class Main {
                                 System.out.print("Apakah ingin disimpan (y/n) : ");
                                 simpan = sc.next().charAt(0);
                                 System.out.println();
-                                if(simpan=='y'||simpan=='Y'){
+                                if (simpan == 'y' || simpan == 'Y') {
                                     m.fileKeluaranMat(m.getMat());
 
-                                }
-                                else{
+                                } else {
                                     System.out.println("File tidak disimpan");
                                 }
 
@@ -351,11 +367,10 @@ public class Main {
                                     System.out.print("Apakah ingin disimpan (y/n) : ");
                                     simpan = sc.next().charAt(0);
                                     System.out.println();
-                                    if(simpan=='y'||simpan=='Y'){
+                                    if (simpan == 'y' || simpan == 'Y') {
                                         m.fileKeluaranMat(m.getMat());
 
-                                    }
-                                    else{
+                                    } else {
                                         System.out.println("File tidak disimpan");
                                     }
                                 } else {
@@ -374,7 +389,7 @@ public class Main {
                         }
                     }
                 }
-                case 4 -> {
+                case '4' -> {
                     System.out.println("Menu 4");
                     System.out.println("Interpolasi Polinom");
 
@@ -393,8 +408,7 @@ public class Main {
                     PolynomialInterpolation p = new PolynomialInterpolation(read);
 
                 }
-
-                case 5 -> { // Interpolasi Bicubic
+                case '5' -> { // Interpolasi Bicubic
                     System.out.println("Menu 5");
                     System.out.println("Interpolasi Bicubic");
                     // Matrix m = new Matrix(true);
@@ -413,10 +427,8 @@ public class Main {
 
                     BicubicInterpolation b = new BicubicInterpolation(read);
 
-                    
-
                 }
-                case 6 -> {
+                case '6' -> {
                     System.out.println("Menu 6");
                     System.out.println("Regresi linier berganda");
 
@@ -434,7 +446,7 @@ public class Main {
 
                     // MultipleLinearRegression r = new MultipleLinearRegression(read);
                 }
-                case 7 -> {
+                case '7' -> {
                     System.out.println("Terima Kasih");
                     System.out.println();
 
