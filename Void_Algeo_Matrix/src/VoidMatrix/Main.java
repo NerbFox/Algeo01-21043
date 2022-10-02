@@ -347,6 +347,20 @@ public class Main {
                 case 6 -> {
                     System.out.println("Menu 6");
                     System.out.println("Regresi linier berganda");
+
+                    disp.displayPilihan();
+                    Masukan = sc.nextInt();
+                    while (Masukan != 1 && Masukan != 2) {
+                        System.out.println("Masukan salah");
+                        disp.displayPilihan();
+                        Masukan = sc.nextInt();
+                    }
+                    read = false;
+                    if (Masukan == 2) {
+                        read = true;
+                    }
+
+                    MultipleLinearRegression r = new MultipleLinearRegression(read);
                 }
                 case 7 -> {
                     System.out.println("Terima Kasih");
