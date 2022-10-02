@@ -308,7 +308,19 @@ public class Main {
                     System.out.println("Menu 4");
                     System.out.println("Interpolasi Polinom");
 
-                    PolynomialInterpolation p = new PolynomialInterpolation();
+                    disp.displayPilihan();
+                    Masukan = sc.nextInt();
+                    while (Masukan != 1 && Masukan != 2) {
+                        System.out.println("Masukan salah");
+                        disp.displayPilihan();
+                        Masukan = sc.nextInt();
+                    }
+                    read = false;
+                    if (Masukan == 2) {
+                        read = true;
+                    }
+
+                    PolynomialInterpolation p = new PolynomialInterpolation(read);
                 }
 
                 case 5 -> { // Interpolasi Bicubic
@@ -341,7 +353,6 @@ public class Main {
 
                 }
             }
-
         }
     }
 }
