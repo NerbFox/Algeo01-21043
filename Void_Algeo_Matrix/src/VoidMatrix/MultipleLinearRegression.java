@@ -13,28 +13,24 @@ public class MultipleLinearRegression extends Main {
 		double[] toEst;
 		ArrayList<Object> ret = new ArrayList<>();
 		boolean legal = true;
-		int npeubah, msampel;
+		int npeubah;
 		double[][] res;
 
 		if (!read) {
 			// int opsi = sc.nextInt();
-			System.out.print("Masukkan banyak peubah: ");
+			System.out.print("Masukkan jumlah peubah x: ");
 			npeubah = sc.nextInt();
-			System.out.print("Masukkan banyak sampel: ");
-			msampel = sc.nextInt();
 			System.out.println("Masukkan nilai-nilai sampel: ");
-			res = new double[msampel][npeubah + 1];
-			for (int i = 0; i < msampel; i++) {
+			res = new double[npeubah][npeubah + 1];
+			for (int i = 0; i < npeubah; i++) {
 				for (int j = 0; j < npeubah + 1; j++) {
 					res[i][j] = sc.nextDouble();
 				}
 			}
 			toEst = new double[npeubah + 1];
-			System.out.printf("  f %d", toEst.length);
 			System.out.println("Masukkan data taksiran: ");
-			for (int i = 0; i < npeubah; i++) {
+			for (int i = 0; i < npeubah-1; i++) {
 				toEst[i] = sc.nextDouble();
-
 			}
 		} else {
 			System.out.println("\nKetik nama alamat file yang diinginkan (contoh test/A.txt) ");
@@ -71,11 +67,9 @@ public class MultipleLinearRegression extends Main {
 			}
 			int nRows = Isi.size() - 1;
 			int nCols = Isi.get(0).size();
-			toEst = new double[nCols];
-			for (int i = 0; i < nCols - 1; i++) {
+			toEst = new double[nCols-1];
+			for (int i = 0; i < nCols - 2; i++) {
 				toEst[i] = Isi.get(nRows).get(i);
-				System.out.printf("%f ", toEst[i]);
-				System.out.println();
 			}
 			// Isi.remove(rows - 1);
 			// nRows-=1;
@@ -84,15 +78,8 @@ public class MultipleLinearRegression extends Main {
 			for (int i = 0; i < nRows; i++) {
 				for (int j = 0; j < nCols; j++) {
 					res[i][j] = Isi.get(i).get(j);
-					System.out.printf("%f ", res[i][j]);
 				}
-				System.out.println();
 			}
-			System.out.println("jjjjj");
-			System.out.printf("%d %d     res %d  %d  toest %d  %d", nRows, nCols, res.length, res[0].length,
-					toEst.length, 1);
-			System.out.println();
-
 		}
 
 		int i, j;
