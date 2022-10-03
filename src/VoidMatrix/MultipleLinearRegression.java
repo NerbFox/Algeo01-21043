@@ -5,14 +5,15 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+
 @SuppressWarnings("resource")
 
-public class MultipleLinearRegression extends Main {
+public class MultipleLinearRegression {
 	public ArrayList<Object> Regresi(boolean read) {
 		Scanner sc = new Scanner(System.in);
 		double[] toEst;
 		ArrayList<Object> ret = new ArrayList<>();
-		int npeubah,msampel;
+		int npeubah, msampel;
 		double[][] res;
 
 		if (!read) {
@@ -68,7 +69,7 @@ public class MultipleLinearRegression extends Main {
 			}
 			int nRows = Isi.size() - 1;
 			int nCols = Isi.get(0).size();
-			toEst = new double[nCols-1];
+			toEst = new double[nCols - 1];
 			for (int i = 0; i < nCols - 1; i++) {
 				toEst[i] = Isi.get(nRows).get(i);
 			}
@@ -86,7 +87,7 @@ public class MultipleLinearRegression extends Main {
 		int i, j;
 		double val;
 
-		double[][] spl = new double [res[0].length][res[0].length + 1];
+		double[][] spl = new double[res[0].length][res[0].length + 1];
 		for (i = 0; i < spl.length; i++) {
 			for (j = 0; j < spl[0].length; j++) {
 				// Pembagian 4 Kondisi ini bisa dilihat di rumus
@@ -112,15 +113,14 @@ public class MultipleLinearRegression extends Main {
 		String formula = RegresiSolution(beta);
 
 		double taksiran = 0.0;
-		for(i = 0; i < beta.length; i++) {
-			if ( i == 0 ) {
+		for (i = 0; i < beta.length; i++) {
+			if (i == 0) {
 				taksiran += beta[i];
-			}
-			else {
-				taksiran += beta[i] * toEst[i-1];
+			} else {
+				taksiran += beta[i] * toEst[i - 1];
 			}
 		}
-		
+
 		ret.add(formula);
 		ret.add(taksiran);
 		return ret;
@@ -167,20 +167,21 @@ public class MultipleLinearRegression extends Main {
 		char simpan;
 		simpan = sc.next().charAt(0);
 		if (simpan == 'y' || simpan == 'Y') {
-			fileKeluaranReg(hsl);
+			fileKeluaranReg(hsl, typ);
 		} else {
 			System.out.println("File tidak disimpan");
 		}
 	}
 
-	public static void fileKeluaranReg(ArrayList<Object> hasil) {
+	public static void fileKeluaranReg(ArrayList<Object> hasil, String typ) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Masukan nama file yang akan disimpan (contoh Det.txt): ");
 		String namaFile = sc.nextLine();
 		try {
 			PrintWriter output = new PrintWriter("FileKeluaran/" + namaFile);
-			output.println(hasil.get(0));
-			output.println(hasil.get(1));
+			output.printf("Persamaan %s: %s\n", typ, hasil.get(0));
+			output.printf("Taksiran f(x): %f\n", hasil.get(1));
+			output.close();
 		} catch (IOException ex) {
 			System.out.printf("error: %s\n\n", ex);
 		}
