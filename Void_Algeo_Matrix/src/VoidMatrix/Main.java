@@ -67,7 +67,7 @@ public class Main {
                     disp.displayMenu1();
                     System.out.print("Input: ");
                     SubMenu = sc.next().charAt(0);
-                    while (SubMenu != '1' && SubMenu != 'b' && SubMenu != 'c' && SubMenu != 'd' && SubMenu != 'e') {
+                    while (SubMenu != 'a' && SubMenu != 'b' && SubMenu != 'c' && SubMenu != 'd' && SubMenu != 'e') {
                         System.out.println("Invalid Input, please input the correct option");
                         System.out.print("Input: ");
                         SubMenu = sc.next().charAt(0);
@@ -446,7 +446,7 @@ public class Main {
                     ArrayList<Object> tuple = new ArrayList<>();
                     MultipleLinearRegression a = new MultipleLinearRegression();
                     tuple = a.Regresi(read);
-                    
+
                     MultipleLinearRegression.HasilReg(tuple, "Regresi");
                 }
                 case '7' -> {

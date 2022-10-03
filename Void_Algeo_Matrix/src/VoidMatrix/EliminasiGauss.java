@@ -73,6 +73,23 @@ public class EliminasiGauss {
         return (baris_temu);
     }
     
+    public boolean baris_nol_semua (double[] baris) {
+        /* KETERANGAN : mengembalikan true jika elemen pada baris bernilai nol semua */
+        
+        /* KAMUS LOKAL */
+        int i;
+        boolean nol;
+        
+        /* ALGORITMA */
+        nol = true;
+        for (i = 0; i <= baris.length-1; i++) {
+            if (baris[i] != 0) {
+                nol = false;
+            }
+        }
+        return (nol);
+    }
+    
     public double det(double[][] mat) {
         /* Fungsi yang mengembalikan determinan matriks */
         // Prekondisi: matriks berbentuk square
@@ -185,6 +202,9 @@ public class EliminasiGauss {
             pembagi = matrix[b][i];
             for (k = 0; k <= kolom+1; k++) {
                 matrix[b][k] = matrix[b][k] / pembagi;
+                if (Double.isNaN(matrix[b][k]) == true || Double.isInfinite(matrix[b][k]) == true) {
+                    matrix[b][k] = 0;
+                }
             }
         }
         
@@ -194,6 +214,7 @@ public class EliminasiGauss {
             if (NotUniqueElmt != 0) {
                 System.out.printf("Sistem Persamaan Linier Anda tidak punya solusi.\n");
             } else {
+                DisplayMatriks(matrix);
                 SubstitusiParametrik (matrix);
             }
         } else {
@@ -204,7 +225,7 @@ public class EliminasiGauss {
             for (b = 0; b <= baris; b++) {
                 System.out.printf("x%d = %f\n", b+1, hasil[b]);
             }
-            
+
             char simpan;
             Scanner sc = new Scanner(System.in);
             System.out.print("Apakah ingin disimpan (y/n) : ");
@@ -253,33 +274,54 @@ public class EliminasiGauss {
         System.out.printf("Solusi Sistem Persamaan Linier Anda ada banyak, namun harus memenuhi:\n");
         /* Mencacah baris dan kolom dari paling ujung bawah */
         for (b = baris; b >= 0; b--) {
-            for (k = kolom; k >= 0; k--) {
-                if (matrix[b][k] == 0) {
-                    System.out.printf("x%d = 0\n", k+1);
-                }
-            }
-        }
-        
-        for (b = baris; b >= 0; b--) {
-            for (k = kolom; k >= 0; k--) {
+            if (baris_nol_semua(matrix[b]) == false) {
+                boolean ada_solusi_baris = false;
+                boolean kolom_solusi_sudah = false;
+                int var_ke = 0;
                 
-                if (matrix[b][k] != 0 && Double.isNaN(matrix[b][k]) == false && Double.isInfinite(matrix[b][k]) == false) {
-                    if (matrix[b][k] < 0) {
-                        if (k == 0) {
-                            System.out.printf("%f x%d = %f\n", matrix[b][k], k+1, matrix[b][kolom+1]);
+                for (k = kolom; k >= 0; k--) {
+                    if (matrix[b][k] == 0) {
+                        System.out.printf("x%d = 0\n", k+1);
+                    }
+                }
+                    
+                    
+                for (k = kolom; k >= 0; k--) {
+                            
+                    if (matrix[b][k] != 0 && Double.isNaN(matrix[b][k]) == false && Double.isInfinite(matrix[b][k]) == false) {
+                        if (matrix[b][k] < 0) {
+                            if (var_ke == kolom) {
+                                System.out.printf("%f x%d = %f\n", matrix[b][k], k+1, matrix[b][kolom+1]);
+                                ada_solusi_baris = true;
+                                kolom_solusi_sudah = true;
+                            } else {
+                                System.out.printf("%f x%d ", matrix[b][k], k+1);
+                                ada_solusi_baris = true;
+                                var_ke = var_ke + 1;
+                            }
+                                    
                         } else {
-                            System.out.printf("%f x%d ", matrix[b][k], k+1);
-                        }
-                        
-                    } else {
-                        if (k == 0) {
-                            System.out.printf("+ %f x%d = %f\n", matrix[b][k], k+1, matrix[b][kolom+1]);
-                        } else if (k == kolom) {
-                            System.out.printf("%f x%d ", matrix[b][k], k+1);
-                        } else {
-                            System.out.printf("+ %f x%d ", matrix[b][k], k+1);
+                            if (var_ke == kolom) {
+                                System.out.printf("+ %f x%d = %f\n", matrix[b][k], k+1, matrix[b][kolom+1]);
+                                ada_solusi_baris = true;
+                                kolom_solusi_sudah = true;
+                            } else if (var_ke == 0) {
+                                System.out.printf("%f x%d ", matrix[b][k], k+1);
+                                ada_solusi_baris = true;
+                                var_ke = var_ke + 1;
+                            } else {
+                                System.out.printf("+ %f x%d ", matrix[b][k], k+1);
+                                ada_solusi_baris = true;
+                                var_ke = var_ke + 1;
+                            }
                         }
                     }
+                }
+                if (kolom_solusi_sudah == false && ada_solusi_baris == true) {
+                    System.out.printf("= %f\n", matrix[b][kolom+1]);
+                }
+                if (ada_solusi_baris == true && b != 0) {
+                    System.out.printf("\nATAU\n\n");
                 }
             }
         }
@@ -348,8 +390,9 @@ public class EliminasiGauss {
             System.out.printf("error: %s\n\n", ex);
         }
     }
-    
-    public static void fileKeluaranSPLParam(double[][] matrix){
+
+    public void fileKeluaranSPLParam(double[][] matrix){
+
         int x;
         Scanner sc = new Scanner(System.in);
         System.out.println("Masukan nama file yang akan disimpan (contoh Det.txt): ");
@@ -361,25 +404,54 @@ public class EliminasiGauss {
             int baris = (matrix.length)-1;
             int kolom = (matrix[0].length)-2;
             for (b = baris; b >= 0; b--) {
-                for (k = kolom; k >= 0; k--) {
+                if (baris_nol_semua(matrix[b]) == false) {
+                    boolean ada_solusi_baris = false;
+                    boolean kolom_solusi_sudah = false;
+                    int var_ke = 0;
                     
-                    if (matrix[b][k] != 0 && Double.isNaN(matrix[b][k]) == false && Double.isInfinite(matrix[b][k]) == false) {
-                        if (matrix[b][k] < 0) {
-                            if (k == 0) {
-                                output.printf("%f x%d = %f\n", matrix[b][k], k+1, matrix[b][kolom+1]);
+                    for (k = kolom; k >= 0; k--) {
+                        if (matrix[b][k] == 0) {
+                            output.printf("x%d = 0\n", k+1);
+                        }
+                    }
+                        
+                        
+                    for (k = kolom; k >= 0; k--) {
+                                
+                        if (matrix[b][k] != 0 && Double.isNaN(matrix[b][k]) == false && Double.isInfinite(matrix[b][k]) == false) {
+                            if (matrix[b][k] < 0) {
+                                if (var_ke == kolom) {
+                                    output.printf("%f x%d = %f\n", matrix[b][k], k+1, matrix[b][kolom+1]);
+                                    ada_solusi_baris = true;
+                                    kolom_solusi_sudah = true;
+                                } else {
+                                    output.printf("%f x%d ", matrix[b][k], k+1);
+                                    ada_solusi_baris = true;
+                                    var_ke = var_ke + 1;
+                                }
+                                        
                             } else {
-                                output.printf("%f x%d ", matrix[b][k], k+1);
-                            }
-                            
-                        } else {
-                            if (k == 0) {
-                                output.printf("+ %f x%d = %f\n", matrix[b][k], k+1, matrix[b][kolom+1]);
-                            } else if (k == kolom) {
-                                output.printf("%f x%d ", matrix[b][k], k+1);
-                            } else {
-                                output.printf("+ %f x%d ", matrix[b][k], k+1);
+                                if (var_ke == kolom) {
+                                    output.printf("+ %f x%d = %f\n", matrix[b][k], k+1, matrix[b][kolom+1]);
+                                    ada_solusi_baris = true;
+                                    kolom_solusi_sudah = true;
+                                } else if (var_ke == 0) {
+                                    output.printf("%f x%d ", matrix[b][k], k+1);
+                                    ada_solusi_baris = true;
+                                    var_ke = var_ke + 1;
+                                } else {
+                                    output.printf("+ %f x%d ", matrix[b][k], k+1);
+                                    ada_solusi_baris = true;
+                                    var_ke = var_ke + 1;
+                                }
                             }
                         }
+                    }
+                    if (kolom_solusi_sudah == false && ada_solusi_baris == true) {
+                        output.printf("= %f\n", matrix[b][kolom+1]);
+                    }
+                    if (ada_solusi_baris == true && b != 0) {
+                        output.printf("\nATAU\n\n");
                     }
                 }
             }
@@ -389,195 +461,5 @@ public class EliminasiGauss {
         }
     }
     
-    /* PROGRAM UTAMA */
-    // public static void main (String[] args) {
-    //     Main ge = new Main();
-    //     double[][] arr = new double[4][5];
-    //     double[] hasil = new double [4];
 
-    //     arr[0][0] = 2;
-    //     arr[1][0] = -1;
-    //     arr[2][0] = 3;
-    //     arr[3][0] = 2;
-        
-    //     arr[0][1] = -1;
-    //     arr[1][1] = 1;
-    //     arr[2][1] = 1;
-    //     arr[3][1] = 2;
-        
-    //     arr[0][2] = -1;
-    //     arr[1][2] = 2;
-    //     arr[2][2] = -1;
-    //     arr[3][2] = -2;
-        
-    //     arr[0][3] = 1;
-    //     arr[1][3] = 2;
-    //     arr[2][3] = -3;
-    //     arr[3][3] = -1;
-        
-    //     arr[0][4] = -2;
-    //     arr[1][4] = -5;
-    //     arr[2][4] = 8;
-    //     arr[3][4] = 6;
-        
-    //     ge.GaussElimination(arr);
-    // }
 }
-
-
-
-// import java.util.*;
-
-// public class EliminasiGauss {
-//     public void GaussElimination(double[][] matrix) {
-//         /*
-//          * KETERANGAN : Melakukan elminasi Gauss untuk matrix augmented berukuran
-//          * baris*(kolom+1)
-//          */
-
-//         /* KAMUS LOKAL */
-//         int baris, kolom;
-//         int b, k, k2, index_nilai_maks, i;
-//         double elmt_datang, elmt_banding, faktor, pembagi;
-//         //4 4 4 2 4 1 1 0 -1 3 0 -3 1 6 14 3 6
-//         /* Mengambil indeks maksimum baris dan kolom matrix tanpa kolom solusi */
-//         baris = (matrix.length) - 1;
-//         kolom = (matrix[0].length) - 2;
-
-//         /* Mencacah kolom untuk melakukan operasi */
-//         for (k = 0; k <= kolom; k++) {
-
-//             /* Mencari baris acuan dari indeks [i+1..baris] untuk pertukaran */
-//             index_nilai_maks = k;
-//             for (b = k + 1; b <= baris; b++) {
-//                 elmt_datang = matrix[b][k];
-//                 if (elmt_datang < 0) {
-//                     elmt_datang = elmt_datang * -1;
-//                 }
-
-//                 elmt_banding = matrix[index_nilai_maks][k];
-//                 if (elmt_banding < 0) {
-//                     elmt_banding = elmt_banding * -1;
-//                 }
-
-//                 if (elmt_datang > elmt_banding) {
-//                     index_nilai_maks = b;
-//                 }
-//             }
-
-//             /* Menukar baris pada matrix */
-//             double[] temp = matrix[k];
-//             matrix[k] = matrix[index_nilai_maks];
-//             matrix[index_nilai_maks] = temp;
-
-//             /* Melakukan operasi baris elementer */
-//             for (b = k + 1; b <= baris; b++) {
-//                 faktor = matrix[b][k] / matrix[k][k];
-//                 for (k2 = k; k2 <= kolom + 1; k2++) {
-//                     matrix[b][k2] = matrix[b][k2] - faktor * matrix[k][k2];
-//                 }
-//             }
-//         }
-
-//         /* Membuat LEADING ONE untuk setiap baris */
-//         i = -1;
-
-//         for (b = 0; b <= baris; b++) {
-//             i = i + 1;
-//             pembagi = matrix[b][i];
-//             for (k = 0; k <= kolom + 1; k++) {
-//                 matrix[b][k] = matrix[b][k] / pembagi;
-//             }
-//         }
-//     }
-
-//     public void SubstitusiMundur(double[][] matrix, double[] HASIL) {
-//         /*
-//          * KETERANGAN : Membuat array berisi solusi terurut dari SPL berdasarkan matrix
-//          * augmented
-//          */
-//         /* PREKONDISI : GaussElimination(matrix) */
-
-//         /* KAMUS LOKAL */
-//         double[][] tanpa_solusi = new double[matrix.length][(matrix[0].length) - 1];
-//         double[] kolom_solusi = new double[matrix.length];
-//         int b, k;
-//         double jumlah_known;
-
-//         /* ALGORITMA */
-//         /* Memisahkan solusi dari matrix augmented */
-//         for (b = 0; b <= (matrix.length) - 1; b++) {
-//             kolom_solusi[b] = matrix[b][(matrix[0].length) - 1];
-//         }
-
-//         for (b = 0; b <= (matrix.length) - 1; b++) {
-//             for (k = 0; k <= (matrix[0].length) - 2; k++) {
-//                 tanpa_solusi[b][k] = matrix[b][k];
-//             }
-//         }
-
-//         /* Substitusi mundur untuk mendapatkan matrix hasil */
-//         for (b = (kolom_solusi.length) - 1; b >= 0; b--) {
-//             jumlah_known = 0.0;
-//             for (k = b + 1; k < (kolom_solusi.length); k++) {
-//                 jumlah_known = jumlah_known + tanpa_solusi[b][k] * HASIL[k];
-//             }
-//             HASIL[b] = (kolom_solusi[b] - jumlah_known);
-//         }
-//         int x;
-//         System.out.printf("SOLUSI SISTEM PERSAMAAN LINIER ANDA:\n");
-//         for (x = 0; x < matrix.length; x++) {
-//             System.out.printf("a%d: %.3f ", x, HASIL[x]);
-//             System.out.printf("\n");
-//         }
-
-//     }
-
-//     /* PROGRAM UTAMA */
-//     // public static void main (String[] args) {
-//     // ge = new Main();
-//     // double[][] arr = new double[4][5];
-
-//     // arr[0][0] = 2;
-//     // arr[1][0] = 1;
-//     // arr[2][0] = 3;
-//     // arr[3][0] = 2;
-
-//     // arr[0][1] = -1;
-//     // arr[1][1] = 0;
-//     // arr[2][1] = -3;
-//     // arr[3][1] = 1;
-
-//     // arr[0][2] = 3;
-//     // arr[1][2] = -2;
-//     // arr[2][2] = 1;
-//     // arr[3][2] = 4;
-
-//     // arr[0][3] = 4;
-//     // arr[1][3] = 7;
-//     // arr[2][3] = 5;
-//     // arr[3][3] = 4;
-
-//     // arr[0][4] = 9;
-//     // arr[1][4] = 11;
-//     // arr[2][4] = 8;
-//     // arr[3][4] = 10;
-
-//     // ge.GaussElimination(arr);
-
-//     // int x, y;
-//     // for (x = 0; x <= 3; x++) {
-//     // for (y = 0; y <= 4; y++) {
-//     // if (y == 4) {
-//     // System.out.printf("%f\n", arr[x][y]);
-//     // } else {
-//     // System.out.printf("%f ", arr[x][y]);
-//     // }
-//     // }
-//     // }
-//     // System.out.printf("\n");
-
-//     // double[] hasil = new double [4];
-//     // ge.SubstitusiMundur(arr, hasil);
-
-// }
