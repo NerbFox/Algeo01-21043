@@ -438,7 +438,7 @@ public class Main {
                     MultipleLinearRegression mat = (MultipleLinearRegression) tuple.get(0);
                     double[] toEst = (double[]) tuple.get(1);
                     tuple = mat.Regresi(toEst);
-                    MultipleLinearRegression.promptOutReg(tuple, "Polinom");
+                    MultipleLinearRegression.HasilReg(tuple, "Polinom");
                 }
                 case '7' -> {
                     System.out.println("Terima Kasih");
