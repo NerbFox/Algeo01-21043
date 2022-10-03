@@ -1,6 +1,11 @@
 package VoidMatrix;
 
+<<<<<<< Updated upstream:src/VoidMatrix/DisplayPengguna.java
 public class DisplayPengguna extends Main{
+=======
+
+public class DisplayPengguna {
+>>>>>>> Stashed changes:Void_Algeo_Matrix/src/VoidMatrix/DisplayPengguna.java
     public static void display1(){
         
     }
