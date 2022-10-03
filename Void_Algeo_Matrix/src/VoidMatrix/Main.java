@@ -12,7 +12,6 @@ import javax.swing.GroupLayout;
 import javax.swing.SpinnerModel;
 
 public class Main {
-
     public static void main(String[] args) {
         // ReadFile re = new ReadFile();
         // double f = (-1)*0;
@@ -431,14 +430,24 @@ public class Main {
                 }
                 case '6' -> {
                     System.out.println("Menu 6");
-                    System.out.println("Regresi linier berganda");
+                    System.out.println("Regresi Linear Berganda");
 
+                    disp.displayPilihan();
+                    Masukan = sc.nextInt();
+                    while (Masukan != 1 && Masukan != 2) {
+                        System.out.println("Masukan salah");
+                        disp.displayPilihan();
+                        Masukan = sc.nextInt();
+                    }
+                    read = false;
+                    if (Masukan == 2) {
+                        read = true;
+                    }
                     ArrayList<Object> tuple = new ArrayList<>();
-                    tuple = MultipleLinearRegression.opsiInputReg();
-                    MultipleLinearRegression mat = (MultipleLinearRegression) tuple.get(0);
-                    double[] toEst = (double[]) tuple.get(1);
-                    tuple = mat.Regresi(toEst);
-                    MultipleLinearRegression.HasilReg(tuple, "Polinom");
+                    MultipleLinearRegression a = new MultipleLinearRegression();
+                    tuple = a.Regresi(read);
+                    
+                    MultipleLinearRegression.HasilReg(tuple, "Regresi");
                 }
                 case '7' -> {
                     System.out.println("Terima Kasih");
