@@ -1,14 +1,12 @@
 package VoidMatrix;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.Math;
-import java.security.Principal;
-import java.security.cert.TrustAnchor;
+@SuppressWarnings("resource")
 
 public class Matrix {
     // private int n;
@@ -107,8 +105,6 @@ public class Matrix {
                     mat[i][j] = Inside.get(i).get(j);
                 }
             }
-            // Matrix M = new MatrixR(Inside);
-            // return M;
         }
     }
 
@@ -137,13 +133,10 @@ public class Matrix {
     public void setnCols(int nCols) {
         this.nCols = nCols;
     }
-    // private int getLengthSquare(){
-    // return mat.;
-    // }
 
     // Method
     public boolean isSquare() {
-        return nCols == nRows; // belum diuji
+        return nCols == nRows;
     }
 
     public void DisplayMatriks() {
@@ -201,7 +194,6 @@ public class Matrix {
         double d = det(mat);
         int n = mat.length;
         double[][] mAdj = new double[n][n];
-        double[][] inv;
         // copy matrix mat ke mAdj
 
         for (i = 0; i < n; i++) {
@@ -241,9 +233,6 @@ public class Matrix {
 
         // Transpose matrix sehingga menjadi matriks Adjoin
 
-        // int i, j, nCol = ROW_EFF(Mtemp), nRow = COL_EFF(Mtemp);
-        // ROW_EFF(*m) = nRow;
-        // COL_EFF(*m) = nCol;
         // di transpose dan dikali 1/det
         if (d != 0) {
             for (i = 0; i < n; i++) {
@@ -290,22 +279,9 @@ public class Matrix {
 
         invers(var);
 
-        // nRVar . nCVar x nRows . 1 = nRVar . 1
+
         // Mengalikan var invers dengan hasil untuk mendapatkan hasil
-        // int a = nCols-1; // banyak variabel
         System.out.println();
-        // int k;
-        // double sum = 0;
-        // for (i = 0; i < nRows; i++) {
-        // sum = 0;
-        // for (k = 0; k < nCVar; k++) // asumsi nCVar = nRows
-        // {
-        // sum += var[i][k] * hasil[k][0];
-        // }
-        // ai[i][0] = sum;
-        // System.out.printf("a%d: %.2f", i, ai[i][0]);
-        // System.out.println();
-        // }
         ai = multiplyMatrix(var, hasil, nRVar, 1, nCVar);
         for (i = 0; i < nRVar; i++) {
             // for(j=0;j<1)
@@ -319,7 +295,6 @@ public class Matrix {
         simpan = sc.next().charAt(0);
         System.out.println();
         if (simpan == 'y' || simpan == 'Y') {
-            // m.fileKeluaranDet(d);
             fileKeluaranSPL(ai);
 
         } else {
@@ -332,7 +307,7 @@ public class Matrix {
         /* Prekondisi : Ukuran kolom efektif m1 = ukuran baris efektif m2 */
         /* Mengirim hasil perkalian matriks: salinan m1 * m2 */
         double[][] m = new double[Row][Col];
-        int i, j, k, nRow1 = Row, nCol1 = In, nRow2 = In, nCol2 = Col;
+        int i, j, k, nRow1 = Row, nCol1 = In, nCol2 = Col;
         int n = nCol1; // ncol1 = nrow2
         for (i = 0; i < nRow1; i++) {
             for (j = 0; j < nCol2; j++) {

@@ -2,29 +2,14 @@ package VoidMatrix;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.regex.MatchResult;
-import java.lang.Math;
-import java.net.SocketTimeoutException;
-import java.security.InvalidAlgorithmParameterException;
-
-import javax.sound.midi.Soundbank;
-import javax.swing.GroupLayout;
-import javax.swing.SpinnerModel;
+@SuppressWarnings("resource")
 
 public class Main {
     public static void main(String[] args) {
-        // ReadFile re = new ReadFile();
-        // double f = (-1)*0;
-        // double f = (Math.pow(0, 1))*(Math.pow(-1, 1));
-        // if (f==0){
-        // System.out.printf("%f",f);
-        // }
 
         // int menu = 0;
         char simpan;
         char menu = '9';
-        boolean invalid = false;
-        Main obj = new Main();
         DisplayPengguna disp = new DisplayPengguna();
         Scanner sc = new Scanner(System.in);
         while (menu != '7') {
@@ -33,22 +18,6 @@ public class Main {
             disp.display();
             System.out.print("Input menu: ");
             menu = sc.next().charAt(0);
-            // invalid = false;
-            // int ins = 999;
-            // while (!invalid) {
-            // try {
-            // menu = sc.nextInt();
-            // invalid = true;
-            // } catch (Exception ex) {
-            // System.out.println("Invalid input, please input a number");
-            // }
-            // menu = sc.nextInt();
-            // }
-            // while (invalid) {
-            // disp.display();
-            // System.out.print("\nInput menu: ");
-            // menu = sc.nextInt();
-            // }
             while (!(menu == '1' || menu == '2' || menu == '3' || menu == '4' || menu == '5' || menu == '6'
                     || menu == '7')) {
                 System.out.println("\nInvalid Input, please input the correct number");
@@ -92,11 +61,8 @@ public class Main {
                                 }
 
                                 Matrix m = new Matrix(false, true, read);
-                                double[] hasil = new double[m.getnRows()];
                                 EliminasiGauss GE = new EliminasiGauss();
                                 GE.GaussElimination(m.getMat());
-                                // m.DisplayMatriks();
-                                // GE.SubstitusiMundur(m.getMat(), hasil);
                                 System.out.println();
 
                             }
@@ -263,14 +229,9 @@ public class Main {
                                 }
 
                                 Matrix m = new Matrix(true, false, read);
-                                // m.DisplayMatriks();
-                                // System.out.println();
-
                                 GaussJordan gj = new GaussJordan();
                                 double d;
                                 d = gj.GaussJordanForDet(m.getMat());
-                                // m.DisplayMatriks();
-                                // Void_algeo_matrix/test/determinan.txt
                                 System.out.print("\nDeterminan matriks: ");
                                 System.out.println(d);
                                 System.out.println();
@@ -361,7 +322,6 @@ public class Main {
 
                                 Matrix m = new Matrix(true, false, read);
                                 double d = m.det(m.getMat());
-                                InversOBE IO = new InversOBE(m.getMat());
                                 if (d != 0) {
                                     m.DisplayMatriks();
                                     System.out.print("Apakah ingin disimpan (y/n) : ");
@@ -426,8 +386,8 @@ public class Main {
                     }
 
                     BicubicInterpolation b = new BicubicInterpolation(read);
-
                 }
+                
                 case '6' -> {
                     System.out.println("Menu 6");
                     System.out.println("Regresi Linear Berganda");

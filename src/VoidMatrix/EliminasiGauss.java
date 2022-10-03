@@ -1,77 +1,13 @@
-/* PROGRAM JAVA UNTUK MELAKUKAN ELIMINASI GAUSS-JORDAN */
+// /* PROGRAM JAVA UNTUK MELAKUKAN ELIMINASI GAUSS */
 package VoidMatrix;
+/* PROGRAM JAVA UNTUK MELAKUKAN ELIMINASI GAUSS */
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
+@SuppressWarnings("resource")
 
-import javax.net.ssl.HandshakeCompletedListener;
-
-public class GaussJordan {
-    
-    public double GaussJordanForDet(double[][] matrix) {
-        /* KETERANGAN : mengembalikan nilai determinan matrix berukuran N*N */
-        /* Perhitungan menggunakan reduksi baris (OBE) */
-    
-        /* KAMUS LOKAL */
-        int baris, kolom;
-        int b, k, k2, index_nilai_maks, i, p;
-        double elmt_datang, elmt_banding, faktor, pembagi;
-        
-        /* Mengambil indeks maksimal baris dan kolom matrix */
-        baris = (matrix.length) - 1;
-        kolom = baris;
-        
-        /* Inisialisasi */
-        p = 0;
-        
-        /* Mencacah kolom untuk melakukan operasi */
-        for (k = 0; k <= kolom; k++) {
-            
-            /* Mencari baris acuan dari indeks [i+1..baris] untuk pertukaran */
-            index_nilai_maks = k;
-            for (b = k+1; b <= baris; b++) {
-                elmt_datang = matrix[b][k];
-                if (elmt_datang < 0) {
-                    elmt_datang = elmt_datang * -1;
-                }
-                
-                elmt_banding = matrix[index_nilai_maks][k];
-                if (elmt_banding < 0) {
-                    elmt_banding = elmt_banding * -1;
-                } 
-                
-                if (elmt_datang > elmt_banding) {
-                    index_nilai_maks = b;
-                }
-            }
-            
-            /* Menukar baris pada matrix */
-            double[] temp = matrix[k];
-            matrix[k] = matrix[index_nilai_maks];
-            matrix[index_nilai_maks] = temp;
-            
-            if (index_nilai_maks != k) {
-                p = p + 1;
-            }
-            
-            /* Melakukan operasi baris elementer */
-            for (b = k+1; b <= baris; b++) {
-                faktor = matrix[b][k] / matrix[k][k];
-                for (k2 = k; k2 <= kolom; k2++) {
-                    matrix[b][k2] = matrix[b][k2] - faktor * matrix[k][k2];
-                }
-            }
-        }
-        
-        double det = 1;
-        for(i = 0; i <= baris; i++){
-            det = det*matrix[i][i];
-        }
-        det = Math.pow(-1, p) * det;
-        return det;
-    }
-     
+public class EliminasiGauss {
     public boolean NotUniqueSolution (double[][] matrix) {
         /* KETERANGAN : mengembalikan nilai true apabila ada baris pada matrix yang seluruhnya 0 */
         
@@ -187,16 +123,14 @@ public class GaussJordan {
         return d;
     }
 
-    public void GaussJordanElimination (double[][] matrix, double[] HASIL) {
-        /* KETERANGAN : Melakukan elminasi Gauss Jordan untuk matrix augmented berukuran baris*(kolom+1) */
+    public void GaussElimination (double[][] matrix) {
+        /* KETERANGAN : Melakukan elminasi Gauss untuk matrix augmented berukuran baris*(kolom+1) */
         
         /* KAMUS LOKAL */
-        char simpan;
         int baris, kolom;
         int b, k, k2, index_nilai_maks, i;
         double elmt_datang, elmt_banding, faktor, pembagi, determinan, NotUniqueElmt;
         boolean NotUnique;
-        Scanner sc = new Scanner(System.in);
         
         /* Mengambil indeks maksimum baris dan kolom matrix tanpa kolom solusi */
         baris = (matrix.length)-1;
@@ -276,64 +210,31 @@ public class GaussJordan {
         }
         
         
-
         /* MENCETAK SOLUSI SPL BERDASARKAN JENISNYA */
         if (determinan == 0 || NotUnique == true) {
             if (NotUniqueElmt != 0) {
                 System.out.printf("Sistem Persamaan Linier Anda tidak punya solusi.\n");
             } else {
+                DisplayMatriks(matrix);
                 SubstitusiParametrik (matrix);
             }
         } else {
-            
-            /* Membuat nilai di atas dan bawah LEADING ONE menjadi 0 */
-            int jumlah_operasi;
-            double nilai_acuan;
-
-            for (b = 0; b < baris; b++) {
-                jumlah_operasi = 1;
-                while (jumlah_operasi < (baris + 1) - b) {
-                    i = b + jumlah_operasi;
-                    nilai_acuan = matrix[b][i];
-                    for (k = 0; k <= kolom + 1; k++) {
-                        matrix[b][k] = matrix[b][k] - nilai_acuan * matrix[i][k];
-                    }
-                    jumlah_operasi = jumlah_operasi + 1;
-                }
-            }
-
-            /* Memindahkan kolom solusi ke array HASIL */
+            double[] hasil = new double [baris+1];
+            SubstitusiMundur (matrix, hasil);
+            System.out.printf("Solusi Sistem Persamaan Linier Anda:\n");
+            DisplayMatriks(matrix);
             for (b = 0; b <= baris; b++) {
-                HASIL[b] = matrix[b][kolom + 1];
+                System.out.printf("x%d = %f\n", b+1, hasil[b]);
             }
-            
-            // display
-            int x, y;
-            for (x = 0; x < matrix.length; x++) {
-                for (y = 0; y <= kolom + 1; y++) {
-                    if (y == kolom + 1) {
-                        System.out.printf("%.2f\n", matrix[x][y]);
-                    } else {
-                        System.out.printf("%.2f ", matrix[x][y]);
-                    }
-                }
-            }
-            System.out.printf("\n");
-            System.out.printf("\n");
-            
-            System.out.printf("SOLUSI SISTEM PERSAMAAN LINIER ANDA: \n");
-            for (x = 0; x < matrix.length; x++) {
-                System.out.printf("x%d: %.3f ", x, HASIL[x]);
-                System.out.printf("\n");
-            }
-            // double[] hasil = new double [baris+1];
 
+            char simpan;
+            Scanner sc = new Scanner(System.in);
             System.out.print("Apakah ingin disimpan (y/n) : ");
             simpan = sc.next().charAt(0);
             System.out.println();
             if(simpan=='y'||simpan=='Y'){
                 // m.fileKeluaranDet(d);
-                fileKeluaranSPL(HASIL, false);
+                fileKeluaranSPL(hasil, false);
 
             }
             else{
@@ -341,7 +242,7 @@ public class GaussJordan {
             }
         }
     }
-        
+    
     public void DisplayMatriks(double[][] mat) {
         int i, j;
         // n = nRows;
@@ -364,7 +265,7 @@ public class GaussJordan {
         /* KETERANGAN : Membuat array berisi solusi parametrik terurut dari matrix augmented */
         
         /* KAMUS LOKAL */
-        int baris, kolom, b, k, i;
+        int baris, kolom, b, k;
         
         /* ALGORITMA */
         /* Mengambil indeks maksimum baris dan kolom matrix tanpa kolom solusi */
@@ -374,33 +275,54 @@ public class GaussJordan {
         System.out.printf("Solusi Sistem Persamaan Linier Anda ada banyak, namun harus memenuhi:\n");
         /* Mencacah baris dan kolom dari paling ujung bawah */
         for (b = baris; b >= 0; b--) {
-            for (k = kolom; k >= 0; k--) {
-                if (matrix[b][k] == 0) {
-                    System.out.printf("x%d = 0\n", k+1);
-                }
-            }
-        }
-        
-        for (b = baris; b >= 0; b--) {
-            for (k = kolom; k >= 0; k--) {
+            if (baris_nol_semua(matrix[b]) == false) {
+                boolean ada_solusi_baris = false;
+                boolean kolom_solusi_sudah = false;
+                int var_ke = 0;
                 
-                if (matrix[b][k] != 0 && Double.isNaN(matrix[b][k]) == false && Double.isInfinite(matrix[b][k]) == false) {
-                    if (matrix[b][k] < 0) {
-                        if (k == 0) {
-                            System.out.printf("%f x%d = %f\n", matrix[b][k], k+1, matrix[b][kolom+1]);
+                for (k = kolom; k >= 0; k--) {
+                    if (matrix[b][k] == 0) {
+                        System.out.printf("x%d = 0\n", k+1);
+                    }
+                }
+                    
+                    
+                for (k = kolom; k >= 0; k--) {
+                            
+                    if (matrix[b][k] != 0 && Double.isNaN(matrix[b][k]) == false && Double.isInfinite(matrix[b][k]) == false) {
+                        if (matrix[b][k] < 0) {
+                            if (var_ke == kolom) {
+                                System.out.printf("%f x%d = %f\n", matrix[b][k], k+1, matrix[b][kolom+1]);
+                                ada_solusi_baris = true;
+                                kolom_solusi_sudah = true;
+                            } else {
+                                System.out.printf("%f x%d ", matrix[b][k], k+1);
+                                ada_solusi_baris = true;
+                                var_ke = var_ke + 1;
+                            }
+                                    
                         } else {
-                            System.out.printf("%f x%d ", matrix[b][k], k+1);
-                        }
-                        
-                    } else {
-                        if (k == 0) {
-                            System.out.printf("+ %f x%d = %f\n", matrix[b][k], k+1, matrix[b][kolom+1]);
-                        } else if (k == kolom) {
-                            System.out.printf("%f x%d ", matrix[b][k], k+1);
-                        } else {
-                            System.out.printf("+ %f x%d ", matrix[b][k], k+1);
+                            if (var_ke == kolom) {
+                                System.out.printf("+ %f x%d = %f\n", matrix[b][k], k+1, matrix[b][kolom+1]);
+                                ada_solusi_baris = true;
+                                kolom_solusi_sudah = true;
+                            } else if (var_ke == 0) {
+                                System.out.printf("%f x%d ", matrix[b][k], k+1);
+                                ada_solusi_baris = true;
+                                var_ke = var_ke + 1;
+                            } else {
+                                System.out.printf("+ %f x%d ", matrix[b][k], k+1);
+                                ada_solusi_baris = true;
+                                var_ke = var_ke + 1;
+                            }
                         }
                     }
+                }
+                if (kolom_solusi_sudah == false && ada_solusi_baris == true) {
+                    System.out.printf("= %f\n", matrix[b][kolom+1]);
+                }
+                if (ada_solusi_baris == true && b != 0) {
+                    System.out.printf("\nATAU\n\n");
                 }
             }
         }
@@ -417,6 +339,37 @@ public class GaussJordan {
             else{
                 System.out.println("File tidak disimpan");
             }
+    }
+    
+    public void SubstitusiMundur (double[][] matrix, double[] HASIL) {
+        /* KETERANGAN : Membuat array berisi solusi terurut dari SPL berdasarkan matrix augmented */
+        
+        /* KAMUS LOKAL */
+        double[][] tanpa_solusi = new double [matrix.length][(matrix[0].length)-1];
+        double[] kolom_solusi = new double [matrix.length];
+        int b, k;
+        double jumlah_known;
+        
+        /* ALGORITMA */
+        /* Memisahkan solusi dari matrix augmented */
+        for (b = 0; b <= (matrix.length)-1; b++) {
+            kolom_solusi[b] = matrix[b][(matrix[0].length)-1];
+        }
+        
+        for (b = 0; b <= (matrix.length)-1; b++) {
+            for (k = 0; k <= (matrix[0].length)-2; k++) {
+                tanpa_solusi[b][k] = matrix[b][k];
+            }
+        }
+        
+        /* Substitusi mundur untuk mendapatkan matrix hasil */
+        for (b = (kolom_solusi.length)-1; b >= 0; b--) {
+            jumlah_known = 0.0;
+            for (k = b+1; k < (kolom_solusi.length); k++) {
+                jumlah_known = jumlah_known + tanpa_solusi[b][k] * HASIL[k];
+            }
+            HASIL[b] = (kolom_solusi[b] - jumlah_known);
+        }
     }
     
     public static void fileKeluaranSPL(double[] HASIL, boolean param){
@@ -440,8 +393,6 @@ public class GaussJordan {
     }
 
     public void fileKeluaranSPLParam(double[][] matrix){
-
-        int x;
         Scanner sc = new Scanner(System.in);
         System.out.println("Masukan nama file yang akan disimpan (contoh Det.txt): ");
         String namaFile = sc.nextLine();
@@ -508,6 +459,4 @@ public class GaussJordan {
             System.out.printf("error: %s\n\n", ex);
         }
     }
-    
-
 }

@@ -6,10 +6,10 @@ import java.io.PrintWriter;
 import java.lang.Math;
 import java.util.Scanner;
 import java.util.ArrayList;
+@SuppressWarnings("resource")
 
 public class BicubicInterpolation {
     public BicubicInterpolation(boolean read) {
-        // Matrix m = new Matrix(true);
         int i, j, n = 4, v, w, m = n * n;
         Scanner sc = new Scanner(System.in);
         double[][] f = new double[n][n]; // f(x,y)
@@ -26,7 +26,6 @@ public class BicubicInterpolation {
                 for (j = 0; j < n; j++) { // baris y dan kolom x
                     System.out.printf("f(%d,%d) = ", j - 1, i - 1);
                     f[i][j] = sc.nextDouble();
-                    // System.out.println();
                 }
             }
             System.out.print("Masukkan nilai X: ");
@@ -80,7 +79,6 @@ public class BicubicInterpolation {
             inputX = Inside.get(n).get(0);
             inputY = Inside.get(n).get(1);
         }
-        // DisplayMatriks(f, 4, 4);
 
         // Pembuatan Matriks X
         i = 0;
@@ -110,28 +108,10 @@ public class BicubicInterpolation {
                     i++;
                 }
                 X[v][w] = (Math.pow(y, j)) * (Math.pow(x, i));
-                // if(X[v][w]==0){
-                // X[v][w]*=0;
-                // }
-                // System.out.printf("%.1f ",X[v][w]);
-                // System.out.printf("x: %d y: %d i: %d j: %d",x,y,i,j);
-                // System.out.println();
             }
-            // System.out.println();
         }
 
-        // DisplayMatriks(X, 16, 16);
-        // f(x,y) = X a
-        // a = X^-1 f(x,y)
-        double g;
-        // DisplayMatriks(X, m, m);
-
-        // g = det(X);
-        // System.out.printf("%f", g);
-        // Invers matriks X
-        // invers(X);
         InversOBE(X);
-        // DisplayMatriks(X, m, m);
 
         // menjadikan
         int o = 0;
@@ -147,7 +127,6 @@ public class BicubicInterpolation {
 
         aL = multiplyMatrix(X, fL, m, 1, m);
 
-        //
         o = 0;
         for (i = 0; i < n; i++) {
             for (j = 0; j < n; j++) {
@@ -159,7 +138,7 @@ public class BicubicInterpolation {
         // Inisiasi xk dan yk
         for (j = 0; j < n; j++) {
             xk[0][j] = Math.pow(inputY, j);
-            yk[j][0] = Math.pow(inputX, j); // kebalik ?
+            yk[j][0] = Math.pow(inputX, j);
         }
         // DisplayMatriks(yk, n, 1);
         // menghasilkan f(x,y)
@@ -186,7 +165,7 @@ public class BicubicInterpolation {
         /* Prekondisi : Ukuran kolom efektif m1 = ukuran baris efektif m2 */
         /* Mengirim hasil perkalian matriks: salinan m1 * m2 */
         double[][] m = new double[Row][Col];
-        int i, j, k, nRow1 = Row, nCol1 = In, nRow2 = In, nCol2 = Col;
+        int i, j, k, nRow1 = Row, nCol1 = In, nCol2 = Col;
         int n = nCol1; // ncol1 = nrow2
         for (i = 0; i < nRow1; i++) {
             for (j = 0; j < nCol2; j++) {
@@ -207,7 +186,6 @@ public class BicubicInterpolation {
         double d = det(mat);
         int n = mat.length;
         double[][] mAdj = new double[n][n];
-        double[][] inv;
         // copy matrix mat ke mAdj
 
         for (i = 0; i < n; i++) {
@@ -260,37 +238,6 @@ public class BicubicInterpolation {
         }
     }
 
-    // public double det(double[][] mat) {
-    // // Pre kondisi matriks berbentuk square
-    // double d = 0.0;
-    // int i, j, a, b, k, u;
-    // int num = mat.length;
-    // if (num != 1) {
-    // for (k = 0; k < num; k++) {
-    // a = 0;
-    // b = 0;
-    // u = num - 1;
-    // double[][] temp = new double[u][u];
-    // for (i = 0; i < num; i++) {
-    // if (i != 0) {
-    // b = 0;
-    // for (j = 0; j < num; j++) {
-    // if (j != k) {
-    // temp[a][b] = mat[i][j];
-    // b++;
-    // }
-    // }
-    // a++;
-    // }
-    // }
-    // d += (Math.pow(-1, k) * mat[0][k] * det(temp));
-    // }
-    // } else {
-    // d = mat[0][0];
-    // }
-    // return d;
-    // }
-
     public double det(double[][] matrix) {
         /* KETERANGAN : mengembalikan nilai determinan matrix berukuran N*N */
         /* Perhitungan menggunakan reduksi baris (OBE) */
@@ -298,7 +245,7 @@ public class BicubicInterpolation {
         /* KAMUS LOKAL */
         int baris, kolom;
         int b, k, k2, index_nilai_maks, i, p;
-        double elmt_datang, elmt_banding, faktor, pembagi;
+        double elmt_datang, elmt_banding, faktor;
 
         /* Mengambil indeks maksimal baris dan kolom matrix */
         baris = (matrix.length) - 1;
@@ -493,7 +440,5 @@ public class BicubicInterpolation {
         } catch (IOException ex) {
             System.out.printf("error: %s\n\n", ex);
         }
-        // }
     }
-
 }

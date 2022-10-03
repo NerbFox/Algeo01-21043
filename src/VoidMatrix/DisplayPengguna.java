@@ -1,6 +1,5 @@
 package VoidMatrix;
 
-
 public class DisplayPengguna extends Main{
     public static void display1(){
         
@@ -28,11 +27,13 @@ public class DisplayPengguna extends Main{
         System.out.println("b. Metode reduksi baris"); // done
         System.out.println("c. Main Menu"); //back to main menu
     }
+
     void displayMenu3() {
         System.out.println("a. Metode Matriks Adjoin "); //done
         System.out.println("b. Metode OBE"); // done 
         System.out.println("c. Main Menu"); //back to main menu
     }
+
     void displayPilihan(){
         System.out.println("1. Masukan Keyboard");
         System.out.println("2. Masukan File ");

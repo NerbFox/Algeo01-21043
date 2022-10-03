@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+@SuppressWarnings("resource")
 
 public class PolynomialInterpolation {
     public PolynomialInterpolation(boolean read) {

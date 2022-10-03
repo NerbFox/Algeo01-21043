@@ -1,5 +1,4 @@
 package VoidMatrix;
-import java.util.*;
 
 public class InversOBE {
     /* PROGRAM JAVA UNTUK MENCARI INVERS MATRIKS DENGAN METODE REDUKSI BARIS */
@@ -112,46 +111,4 @@ public class InversOBE {
             }
         }
     }
-    
-    
-    
-    /* PROGRAM UTAMA */
-    // public static void main (String[] args) {
-    //     Main ge = new Main();
-    //     double[][] arr = new double[4][4];
-
-    //     arr[0][0] = 4;
-    //     arr[1][0] = 0;
-    //     arr[2][0] = 4;
-    //     arr[3][0] = 4;
-        
-    //     arr[0][1] = -1;
-    //     arr[1][1] = 0;
-    //     arr[2][1] = 1;
-    //     arr[3][1] = 0;
-        
-    //     arr[0][2] = 1;
-    //     arr[1][2] = -3;
-    //     arr[2][2] = 0;
-    //     arr[3][2] = 3;
-        
-    //     arr[0][3] = 6;
-    //     arr[1][3] = 0;
-    //     arr[2][3] = 0;
-    //     arr[3][3] = 2;
-        
-    //     ge.InversOBE(arr);
-        
-    //     int x, y;
-    //     for (x = 0; x <= 3; x++) {
-    //         for (y = 0; y <= 3; y++) {
-    //             if (y == 3) {
-    //                 System.out.printf("%f\n", arr[x][y]);
-    //             } else {
-    //                 System.out.printf("%f ", arr[x][y]);       
-    //             }
-    //         }
-    //     }
-    //     System.out.printf("\n");
-    // }
 }
