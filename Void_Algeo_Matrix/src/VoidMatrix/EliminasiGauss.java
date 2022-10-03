@@ -390,8 +390,9 @@ public class EliminasiGauss {
             System.out.printf("error: %s\n\n", ex);
         }
     }
-    
-    public static void fileKeluaranSPLParam(double[][] matrix){
+
+    public void fileKeluaranSPLParam(double[][] matrix){
+
         int x;
         Scanner sc = new Scanner(System.in);
         System.out.println("Masukan nama file yang akan disimpan (contoh Det.txt): ");
