@@ -6,17 +6,10 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-<<<<<<< Updated upstream:src/VoidMatrix/Main.java
 
         // int menu = 0;
         char simpan;
         char menu = '9';
-=======
-       
-        char simpan;
-        char menu = '9';
-        boolean invalid = false;
->>>>>>> Stashed changes:Void_Algeo_Matrix/src/VoidMatrix/Main.java
         DisplayPengguna disp = new DisplayPengguna();
         Scanner sc = new Scanner(System.in);
         while (menu != '7') {
