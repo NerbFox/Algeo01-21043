@@ -378,12 +378,4 @@ public class Matrix {
             System.out.printf("error: %s\n\n", ex);
         }
     }
-
-    public static void refreshLayar() {
-		Scanner sc = new Scanner(System.in);
-		System.out.print("Continue...");
-		sc.nextLine();
-		sc.nextLine();
-		System.out.flush(); 
-	}
 }
