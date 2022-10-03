@@ -3,7 +3,6 @@ package VoidMatrix;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
-import java.util.Arrays;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -12,24 +11,25 @@ public class MultipleLinearRegression extends Main {
 		Scanner sc = new Scanner(System.in);
 		double[] toEst;
 		ArrayList<Object> ret = new ArrayList<>();
-		boolean legal = true;
-		int npeubah;
+		int npeubah,msampel;
 		double[][] res;
 
 		if (!read) {
 			// int opsi = sc.nextInt();
 			System.out.print("Masukkan jumlah peubah x: ");
 			npeubah = sc.nextInt();
+			System.out.print("Masukkan banyak sampel: ");
+			msampel = sc.nextInt();
 			System.out.println("Masukkan nilai-nilai sampel: ");
-			res = new double[npeubah][npeubah + 1];
-			for (int i = 0; i < npeubah; i++) {
+			res = new double[msampel][npeubah + 1];
+			for (int i = 0; i < msampel; i++) {
 				for (int j = 0; j < npeubah + 1; j++) {
 					res[i][j] = sc.nextDouble();
 				}
 			}
 			toEst = new double[npeubah + 1];
 			System.out.println("Masukkan data taksiran: ");
-			for (int i = 0; i < npeubah-1; i++) {
+			for (int i = 0; i < npeubah; i++) {
 				toEst[i] = sc.nextDouble();
 			}
 		} else {
@@ -68,7 +68,7 @@ public class MultipleLinearRegression extends Main {
 			int nRows = Isi.size() - 1;
 			int nCols = Isi.get(0).size();
 			toEst = new double[nCols-1];
-			for (int i = 0; i < nCols - 2; i++) {
+			for (int i = 0; i < nCols - 1; i++) {
 				toEst[i] = Isi.get(nRows).get(i);
 			}
 			// Isi.remove(rows - 1);
@@ -85,38 +85,41 @@ public class MultipleLinearRegression extends Main {
 		int i, j;
 		double val;
 
-		for (i = 0; i < res.length; i++) {
-			for (j = 0; j < res[0].length; j++) {
+		double[][] spl = new double [res[0].length][res[0].length + 1];
+		for (i = 0; i < spl.length; i++) {
+			for (j = 0; j < spl[0].length; j++) {
 				// Pembagian 4 Kondisi ini bisa dilihat di rumus
 				if (i == 0 && j == 0) {
-					res[i][j] = res.length;
+					spl[i][j] = res.length;
 				} else if (i == 0) {
 					val = sigma1val(j, res);
-					res[i][j] = val;
+					spl[i][j] = val;
 				} else if (j == 0) {
 					val = sigma1val(i, res);
-					res[i][j] = val;
+					spl[i][j] = val;
 				} else {
 					val = sigma2val(i, j, res);
-					res[i][j] = val;
+					spl[i][j] = val;
 				}
 			}
 		}
 
-		double[] beta = new double[res.length];
+		double[] beta = new double[spl.length];
 		Cramer cm = new Cramer();
-		cm.CramerRule(res, beta);
+		cm.CramerRule(spl, beta);
 
 		String formula = RegresiSolution(beta);
 
 		double taksiran = 0.0;
-		for (i = 0; i < beta.length; i++) {
-			if (i == 0) {
+		for(i = 0; i < beta.length; i++) {
+			if ( i == 0 ) {
 				taksiran += beta[i];
-			} else {
-				taksiran += beta[i] * toEst[i - 1];
+			}
+			else {
+				taksiran += beta[i] * toEst[i-1];
 			}
 		}
+		
 		ret.add(formula);
 		ret.add(taksiran);
 		return ret;
