@@ -486,21 +486,6 @@ public class BicubicInterpolation {
         Scanner sc = new Scanner(System.in);
         System.out.println("Masukan nama file yang akan disimpan (contoh Det.txt): ");
         String namaFile = sc.nextLine();
-
-        // String fy = System.getProperty("fy.name").toLowerCase();
-        // Character[] char_invalid = null;
-        // if (fy.contains("win")) {
-        // char_invalid = invalidw;
-        // } else if (fy.contains("nix") || fy.contains("nux") || fy.contains("mac")) {
-        // char_invalid = invalidU;
-        // }
-        // boolean fCharValid = true;
-        // fCharValid = Arrays.stream(char_invalid).noneMatch(ch ->
-        // namaFile.contains(ch.toString()));
-        // if (namaFile.isEmpty() || fCharValid == false || namaFile == null ||
-        // namaFile.length() > 50) {
-        // System.out.println("Nama salah, file tidak saat dibuat");
-        // } else {
         try {
             PrintWriter output = new PrintWriter("FileKeluaran/" + namaFile);
             output.printf("f(%.2f,%.2f) : %.3f", inputX, inputY, d);

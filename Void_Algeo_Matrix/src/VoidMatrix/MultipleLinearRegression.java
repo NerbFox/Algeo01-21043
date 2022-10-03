@@ -205,21 +205,6 @@ public class MultipleLinearRegression {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Masukkan nama file (contoh: file.txt):");
 		String fName = sc.nextLine();
-		//Get OS based valid file name
-		String os = System.getProperty("os.name").toLowerCase();
-		Character[] INVALID_CHARS = null;
-		if (os.contains("win")) {
-			INVALID_CHARS = Matrix.invalidw;
-		}
-		else if (os.contains("nix") || os.contains("nux") || os.contains("mac")) {
-			INVALID_CHARS = Matrix.invalidU;
-		}
-		boolean fCharValid;
-		fCharValid = Arrays.stream(INVALID_CHARS).noneMatch(ch-> fName.contains(ch.toString()));
-		if (fCharValid == false || fName == null || fName.isEmpty() || fName.length() > 255) {
-			System.out.println("Nama File tidak valid, gagal membuat File");
-		}
-		else {
 			try {
 				PrintWriter output = new PrintWriter("outFiles/"+fName);
 				output.println(sols.get(0));
@@ -227,6 +212,5 @@ public class MultipleLinearRegression {
 				} catch (IOException ex) {
 					System.out.printf("ERROR: %s", ex);
 				}
-		}
 	}
 }
