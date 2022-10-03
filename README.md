@@ -9,10 +9,10 @@ Anggota :
 3.  Ryan Samuel Chandra - 13521140
 
 Cara menjalankan :
-1. Buka terminal dengan directory pada folder "....\Void_Algeo_Matrix"
-2. run java pada file Main.java
-3. Untuk membuka file (pembacaan dari file) bisa dengan "test/(nama file dalam folder test)" atau file yang ada di dalam folder Void_Algeo_Matrix
-4. Untuk menyimpan dapat ditulis dengan nama file dan akan tersimpan di dalam folder FileKeluaran
+1. Buka terminal dengan directory pada folder "....\Algeo01-21043".
+2. run java pada file "Main.java" dalam folder src.
+3. Untuk membuka file (pembacaan dari file), ketikkan "test/(nama file)".
+4. Untuk menyimpan file keluaran, ketikkan nama file output yang diinginkan dan file tersebut akan tersimpan di dalam folder FileKeluaran.
 
 Spesifikasi :
 
