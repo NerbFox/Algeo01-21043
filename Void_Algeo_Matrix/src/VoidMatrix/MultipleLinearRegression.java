@@ -7,36 +7,36 @@ import java.util.Arrays;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class MultipleLinearRegression extends Main{
+public class MultipleLinearRegression extends Main {
 	public ArrayList<Object> Regresi(boolean read) {
-        Scanner sc = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);
 		double[] toEst;
 		ArrayList<Object> ret = new ArrayList<>();
 		boolean legal = true;
 		int npeubah, msampel;
 		double[][] res;
-			
-		if (!read){
+
+		if (!read) {
 			// int opsi = sc.nextInt();
-				System.out.print("Masukkan banyak peubah: ");
-				npeubah = sc.nextInt();
-				System.out.print("Masukkan banyak sampel: ");
-				msampel = sc.nextInt();
-				System.out.println("Masukkan nilai-nilai sampel: ");
-				res = new double[msampel][npeubah + 1];
-				for (int i = 0; i < msampel; i++) {
-					for (int j = 0; j < npeubah+1; j++) {
-						res[i][j] = sc.nextDouble();
-					}
+			System.out.print("Masukkan banyak peubah: ");
+			npeubah = sc.nextInt();
+			System.out.print("Masukkan banyak sampel: ");
+			msampel = sc.nextInt();
+			System.out.println("Masukkan nilai-nilai sampel: ");
+			res = new double[msampel][npeubah + 1];
+			for (int i = 0; i < msampel; i++) {
+				for (int j = 0; j < npeubah + 1; j++) {
+					res[i][j] = sc.nextDouble();
 				}
-				toEst = new double[npeubah + 1];
-				System.out.println("Masukkan data taksiran: ");
-				for (int i = 0; i < npeubah; i++) {
-					toEst[i] = sc.nextDouble();
-					
-				}
-		}
-		else{
+			}
+			toEst = new double[npeubah + 1];
+			System.out.printf("  f %d", toEst.length);
+			System.out.println("Masukkan data taksiran: ");
+			for (int i = 0; i < npeubah; i++) {
+				toEst[i] = sc.nextDouble();
+
+			}
+		} else {
 			System.out.println("\nKetik nama alamat file yang diinginkan (contoh test/A.txt) ");
 			File file = new File(sc.nextLine());
 			Scanner Inside = null;
@@ -69,17 +69,15 @@ public class MultipleLinearRegression extends Main{
 				}
 				rows++;
 			}
-			int nRows = Isi.size()-1;
+			int nRows = Isi.size() - 1;
 			int nCols = Isi.get(0).size();
-			toEst = new double[Isi.get(nRows).size()];
-			for (int i = 0; i < nCols-1; i++) {
+			toEst = new double[nCols];
+			for (int i = 0; i < nCols - 1; i++) {
 				toEst[i] = Isi.get(nRows).get(i);
 				System.out.printf("%f ", toEst[i]);
 				System.out.println();
 			}
-			Isi.remove(rows - 1);
-			System.out.printf("%d %d",nRows, nCols);
-			System.out.println();
+			// Isi.remove(rows - 1);
 			// nRows-=1;
 			// nCols;
 			res = new double[nRows][nCols];
@@ -91,7 +89,10 @@ public class MultipleLinearRegression extends Main{
 				System.out.println();
 			}
 			System.out.println("jjjjj");
-			
+			System.out.printf("%d %d     res %d  %d  toest %d  %d", nRows, nCols, res.length, res[0].length,
+					toEst.length, 1);
+			System.out.println();
+
 		}
 
 		int i, j;
