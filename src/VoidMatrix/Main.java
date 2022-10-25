@@ -2,6 +2,7 @@ package VoidMatrix;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
 @SuppressWarnings("resource")
 
 public class Main {
@@ -322,7 +323,9 @@ public class Main {
 
                                 Matrix m = new Matrix(true, false, read);
                                 double d = m.det(m.getMat());
+                                InversOBE Io = new InversOBE();
                                 if (d != 0) {
+                                    Io.InversOBE(m.getMat());
                                     m.DisplayMatriks();
                                     System.out.print("Apakah ingin disimpan (y/n) : ");
                                     simpan = sc.next().charAt(0);
@@ -387,7 +390,7 @@ public class Main {
 
                     BicubicInterpolation b = new BicubicInterpolation(read);
                 }
-                
+
                 case '6' -> {
                     System.out.println("Menu 6");
                     System.out.println("Regresi Linear Berganda");
